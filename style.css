@@ -1,0 +1,11 @@
+/* we need to make the parent
+elements use the whole height
+before the map can do the same*/
+html, body{
+  height: 100%;
+}
+
+#map{
+  width: 100%;
+  height: 98%;
+}
