@@ -17,7 +17,7 @@ var counties = new L.GeoJSON.AJAX("counties.geojson", {
           onEachFeature: function(feature, layer){
               layer.bindPopup(feature.properties.GN);
           }
-       });
+       });//Dette er en test
 
 var mymap = L.map('map', {
     center: [50.938056, 6.956944],
