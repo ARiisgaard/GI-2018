@@ -25,7 +25,7 @@ var mymap = L.map('map', {
     layers: [osm, ortho, counties] // add it here
 });
 
-L.control.scale().addTo(mymap);
+L.control.scale().addTo(mymap);//Dette er en test
 
 var basemaps = {"OpenStreetMap": osm}
 var overlays = {"Orthophoto": ortho,
