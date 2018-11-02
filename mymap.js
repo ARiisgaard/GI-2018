@@ -17,14 +17,19 @@ L.control.scale().addTo(mymap);
 var basemaps = {"OpenStreetMap": osm}
  var overlays = {"Route": control}
 
+var StartLocation = L.latLng(55.650575, 12.541276)
+var EndLocation = L.latLng(55.678437, 12.572282)
+
 var control = L.Routing.control({
   waypoints: [
-    L.latLng(55.650575, 12.541276),
-    L.latLng(55.678437, 12.572282)
+StartLocation,
+EndLocation
   ],
   router: new L.Routing.osrmv1({
-    language: 'en',
-    profile: 'bike'
+serviceUrl: "https://router.project-osrm.org/route/v1",
+    language: 'en', 
+    profile: 'bike', //Method of transport
+    steps: 'true' //Adds a guide for the trip
   })//,
-//  geocoder: L.Control.Geocoder.nominatim({})
+//  geocoder: L.Control.Geocoder.nominatim({}) This code I haven't activated yet, but it should help translating from addresses to latlon
 }).addTo(mymap);
