@@ -2,14 +2,17 @@
 <html>
 
 <head>
-
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--Fixes the favicon 404-->
   <title>GI2018</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <link rel="stylesheet" href="leaflet-routing-machine-3.2.7\dist\leaflet-routing-machine.css" />   <!--Enables the use of leaflet routing commands-->
   <script src="leaflet/leaflet.js"></script>
+
+
   <!--Dette er en kommentar -->
   <script src="leaflet/leaflet.ajax.min.js"></script>
 
@@ -20,6 +23,7 @@
 <body>
   <h2>Bike map</h2>
   <div id="map"></div> <!-- remove it here -->
+<script src="leaflet-routing-machine-3.2.7\dist\leaflet-routing-machine.js"></script>    <!--Enables the use of leaflet routing commands-->
   <script src="mymap.js"></script>
 </body>
 </html>
