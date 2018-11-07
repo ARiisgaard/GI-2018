@@ -5,7 +5,7 @@ var osm = L.tileLayer(
               <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
   });
 
-  map.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
+  mymap.locate({setView: true, watch: true}) /* This will return map so you can do chaining */
           .on('locationfound', function(e){
               var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
               var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
@@ -14,14 +14,14 @@ var osm = L.tileLayer(
                   fillColor: '#cacaca',
                   fillOpacity: 0.2
               });
-              map.addLayer(marker);
-              map.addLayer(circle);
+              mymap.addLayer(marker);
+              mymap.addLayer(circle);
           })
          .on('locationerror', function(e){
               console.log(e);
               alert("Location access denied.");
           });
-  
+
 
 
 var StartLocation = L.latLng(55.650575, 12.541276) //The start of the journey - is later going to be changed to gps coordinates
