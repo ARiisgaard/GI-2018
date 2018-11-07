@@ -24,6 +24,11 @@
       <script src="lrm-openrouteservice-master\lrm-openrouteservice\polyline.min.js"></script>
 <!--Stops here -->
 
+<script src="leaflet-locatecontrol-gh-pages/src/L.Control.Locate.js" ></script>  <!--Enables the use of leaflet gps commands-->
+<script src="leaflet-routing-machine-3.2.7\dist\leaflet-routing-machine.js"></script>    <!--Enables the use of leaflet routing commands-->
+<script src="lrm-openrouteservice-master\lrm-openrouteservice\L.Routing.OpenRouteService.js"></script> <!--Adds the ORS expansion to leaflet routing machine-->
+
+
   <link rel="stylesheet" href="style.css" />
 
 </head>
@@ -31,10 +36,7 @@
 <body>
   <h2>Bike map</h2>
   <div id="map"></div> <!-- remove it here -->
-<script src="leaflet-locatecontrol-gh-pages/src/L.Control.Locate.js" ></script>  <!--Enables the use of leaflet gps commands-->
-<script src="leaflet-routing-machine-3.2.7\dist\leaflet-routing-machine.js"></script>    <!--Enables the use of leaflet routing commands-->
-<script src="lrm-openrouteservice-master\lrm-openrouteservice\L.Routing.OpenRouteService.js"></script> <!--Adds the ORS expansion to leaflet routing machine-->
-
   <script src="mymap.js"></script>
+  <div id="out"></div> <!-- Remove later - to see if it works without it -->
 </body>
 </html>
