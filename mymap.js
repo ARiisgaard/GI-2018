@@ -22,6 +22,7 @@ var route = L.Routing.control({
     StartLocation,
     EndLocation
   ],
+  profile: "cycling-regular",
   routeWhileDragging: true,
   router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf')
 }).addTo(mymap);
@@ -51,6 +52,3 @@ L.control.scale().addTo(mymap);
 // })
 //mymap.getCenter()
 //
-
-// mymap.locate({setView : true})
-// StartLocation = mymap.getCenter()
