@@ -9,7 +9,7 @@ var osm = L.tileLayer(
 
 
 var wind = L.OWM.wind({appId: 'ee67f8f53521d94193aa7d8364b7f5d9'});
-var city = L.OWM.current({intervall: 15, lang: 'en'});
+var city = L.OWM.current({appId: 'ee67f8f53521d94193aa7d8364b7f5d9', intervall: 15, lang: 'en', showWindDirection: 'deg'});
 
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
