@@ -5,42 +5,50 @@ var osm = L.tileLayer(
               <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
   });
 
-  var stations = new ol.layer.Vector({
-    title: 'Stations',
-    source: new ol.source.Vector({
-      format: new ol.format.GeoJSON(),
-      url: 'stations.geojson'
-    }),
+var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
+onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+  }
 });
-      var mymap = L.map('map', {
-        center: [55.676111, 12.568333],
-        zoom: 10,
-        layers: [osm, stations] // add it here
-      })
-    ;
 
-      L.control.scale().addTo(mymap);
+stations.on('click', function(e) {
+    coords2 = [e.latlng.lat, e.latlng.lng];
+    });
 
-      var basemaps = {
-        "OpenStreetMap": osm
-      }
-      var overlays = {
-        "Route": control
-      }
+var mymap = L.map('map', {
+  center: [55.676111, 12.568333],
+  zoom: 10,
+  layers: [osm, stations] // which layers should be shown
+});
 
-      var StartLocation = L.latLng(55.650575, 12.541276) //The start of the journey - is later going to be changed to gps coordinates
-      var EndLocation = L.latLng(55.678437, 12.572282)
+var overlayMaps = {
+  "Stations": stations
+};
 
-      var control = L.Routing.control({
-        waypoints: [
-          StartLocation,
-          EndLocation
-        ],
-        router: new L.Routing.osrmv1({
-          serviceUrl: "https://router.project-osrm.org/route/v1",
-          language: 'en',
-          profile: 'bike', //Method of transport
-          steps: 'true' //Adds a guide for the trip
-        }) //,
-        //  geocoder: L.Control.Geocoder.nominatim({}) This code I haven't activated yet, but it should help translating from addresses to latlon
-      }).addTo(mymap);
+mymap.addLayer(stations);
+
+L.control.scale().addTo(mymap);
+
+var basemaps = {
+  "OpenStreetMap": osm
+}
+var overlays = {
+  "Route": control
+}
+
+var StartLocation = L.latLng(55.650575, 12.541276) //The start of the journey - is later going to be changed to gps coordinates
+var EndLocation = L.latLng(55.678437, 12.572282)
+
+var control = L.Routing.control({
+  waypoints: [
+    StartLocation,
+    EndLocation
+  ],
+  router: new L.Routing.osrmv1({
+    serviceUrl: "https://router.project-osrm.org/route/v1",
+    language: 'en',
+    profile: 'bike', //Method of transport
+    steps: 'true' //Adds a guide for the trip
+  }) //,
+  //  geocoder: L.Control.Geocoder.nominatim({}) This code I haven't activated yet, but it should help translating from addresses to latlon
+}).addTo(mymap);

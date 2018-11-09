@@ -1,3 +1,2515 @@
-
-
-{"type":"FeatureCollection","totalFeatures":168,"features":[{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4333","geometry":{"type":"Point","coordinates":[12.569577674965068,55.67562753235746]},"geometry_name":"wkb_geometry","properties":{"id":1,"navn":"Københavns Stadsarkiv","navnekategori":"14160","navnekategori_txt":"Arkiver"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4334","geometry":{"type":"Point","coordinates":[12.49130887528394,55.68652214248285]},"geometry_name":"wkb_geometry","properties":{"id":1,"navn":"Kulturstationen Vanløse","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4335","geometry":{"type":"Point","coordinates":[12.59212091966293,55.67232124045602]},"geometry_name":"wkb_geometry","properties":{"id":2,"navn":"Christianshavns Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4336","geometry":{"type":"Point","coordinates":[12.57937591294882,55.666467503403034]},"geometry_name":"wkb_geometry","properties":{"id":3,"navn":"Islands Brygge Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4337","geometry":{"type":"Point","coordinates":[12.573653234093157,55.68087610562476]},"geometry_name":"wkb_geometry","properties":{"id":4,"navn":"Hovedbiblioteket","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4338","geometry":{"type":"Point","coordinates":[12.529608007873708,55.64678342318348]},"geometry_name":"wkb_geometry","properties":{"id":5,"navn":"Sydhavnens Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4339","geometry":{"type":"Point","coordinates":[12.54364161452531,55.6990123375313]},"geometry_name":"wkb_geometry","properties":{"id":6,"navn":"Nørrebro Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_433a","geometry":{"type":"Point","coordinates":[12.595484064660932,55.64872227604868]},"geometry_name":"wkb_geometry","properties":{"id":7,"navn":"Solvang Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_433b","geometry":{"type":"Point","coordinates":[12.5131070384209,55.6653427353054]},"geometry_name":"wkb_geometry","properties":{"id":8,"navn":"Valby Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_433c","geometry":{"type":"Point","coordinates":[12.543715195841289,55.66782679418936]},"geometry_name":"wkb_geometry","properties":{"id":9,"navn":"Vesterbro Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_433d","geometry":{"type":"Point","coordinates":[12.47727358588045,55.71083864475739]},"geometry_name":"wkb_geometry","properties":{"id":10,"navn":"Husum Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_433e","geometry":{"type":"Point","coordinates":[12.522916217324196,55.70841203177259]},"geometry_name":"wkb_geometry","properties":{"id":11,"navn":"BIBLIOTEKET Rentemestervej","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_433f","geometry":{"type":"Point","coordinates":[12.499258506620144,55.70414057791254]},"geometry_name":"wkb_geometry","properties":{"id":12,"navn":"Brønshøj Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4340","geometry":{"type":"Point","coordinates":[12.576494590600904,55.70916603955145]},"geometry_name":"wkb_geometry","properties":{"id":13,"navn":"Øbro Jagtvej Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4341","geometry":{"type":"Point","coordinates":[12.613150562287347,55.65034949033002]},"geometry_name":"wkb_geometry","properties":{"id":14,"navn":"Bibliotekshuset","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4342","geometry":{"type":"Point","coordinates":[12.503313355608507,55.6492308208943]},"geometry_name":"wkb_geometry","properties":{"id":15,"navn":"Vigerslev Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4343","geometry":{"type":"Point","coordinates":[12.556770109039634,55.68609122692412]},"geometry_name":"wkb_geometry","properties":{"id":16,"navn":"Blågårdens Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4344","geometry":{"type":"Point","coordinates":[12.48119514014686,55.7188555933771]},"geometry_name":"wkb_geometry","properties":{"id":17,"navn":"Tingbjerg Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4345","geometry":{"type":"Point","coordinates":[12.580964243346905,55.63128647629463]},"geometry_name":"wkb_geometry","properties":{"id":18,"navn":"Ørestad Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4346","geometry":{"type":"Point","coordinates":[12.581745359843794,55.69457326676311]},"geometry_name":"wkb_geometry","properties":{"id":19,"navn":"Østerbro Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4347","geometry":{"type":"Point","coordinates":[12.603936487981368,55.665203677828174]},"geometry_name":"wkb_geometry","properties":{"id":20,"navn":"Sundby Bibliotek","navnekategori":"18145","navnekategori_txt":"Bibliotek"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4348","geometry":{"type":"Point","coordinates":[12.602137159337724,55.67606473553194]},"geometry_name":"wkb_geometry","properties":{"id":1,"navn":"Hal C","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4349","geometry":{"type":"Point","coordinates":[12.514314521646787,55.7060411301821]},"geometry_name":"wkb_geometry","properties":{"id":2,"navn":"Bellahøj Hallerne ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_434a","geometry":{"type":"Point","coordinates":[12.576790073078762,55.69868442846709]},"geometry_name":"wkb_geometry","properties":{"id":3,"navn":"Remisen","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_434b","geometry":{"type":"Point","coordinates":[12.5434838663867,55.699427544279864]},"geometry_name":"wkb_geometry","properties":{"id":4,"navn":"Nørrebrohallen","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_434c","geometry":{"type":"Point","coordinates":[12.48125556315582,55.67231413747788]},"geometry_name":"wkb_geometry","properties":{"id":5,"navn":"Engdraget ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_434d","geometry":{"type":"Point","coordinates":[12.540914655778298,55.66203272023012]},"geometry_name":"wkb_geometry","properties":{"id":6,"navn":"Copenhagen Skatepark","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_434e","geometry":{"type":"Point","coordinates":[12.599955549189753,55.6502299787168]},"geometry_name":"wkb_geometry","properties":{"id":7,"navn":"Sundby Idrætspark ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_434f","geometry":{"type":"Point","coordinates":[12.48329451925535,55.71107398289949]},"geometry_name":"wkb_geometry","properties":{"id":8,"navn":"Husum Idrætspark - Gadelandet","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4350","geometry":{"type":"Point","coordinates":[12.538605691553606,55.659685661799294]},"geometry_name":"wkb_geometry","properties":{"id":9,"navn":"Bavnehøj Idrætsanlæg","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4351","geometry":{"type":"Point","coordinates":[12.518410458454664,55.69997705233909]},"geometry_name":"wkb_geometry","properties":{"id":10,"navn":"Genforeningspladsens Idrætsanlæg","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4352","geometry":{"type":"Point","coordinates":[12.574848907878387,55.70476658967722]},"geometry_name":"wkb_geometry","properties":{"id":11,"navn":"Østerbro Stadion og Idrætshuset ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4353","geometry":{"type":"Point","coordinates":[12.61087444703706,55.666698638070095]},"geometry_name":"wkb_geometry","properties":{"id":12,"navn":"Prismen (Amager)","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4354","geometry":{"type":"Point","coordinates":[12.515352420377448,55.69983427823777]},"geometry_name":"wkb_geometry","properties":{"id":13,"navn":"Grøndal MultiCenter","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4355","geometry":{"type":"Point","coordinates":[12.51650970036497,55.649381381010166]},"geometry_name":"wkb_geometry","properties":{"id":14,"navn":"Valby-Hallen","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4356","geometry":{"type":"Point","coordinates":[12.51374484498654,55.64979875451196]},"geometry_name":"wkb_geometry","properties":{"id":15,"navn":"Valby Idrætspark ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4357","geometry":{"type":"Point","coordinates":[12.510280930532751,55.64777877323623]},"geometry_name":"wkb_geometry","properties":{"id":16,"navn":"Hafnia-Hallen","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4358","geometry":{"type":"Point","coordinates":[12.476963324938016,55.68638759776497]},"geometry_name":"wkb_geometry","properties":{"id":17,"navn":"Vanløse Idrætspark","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4359","geometry":{"type":"Point","coordinates":[12.60832748953277,55.672271291367274]},"geometry_name":"wkb_geometry","properties":{"id":18,"navn":"Kløvermarkens Idrætsanlæg","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_435a","geometry":{"type":"Point","coordinates":[12.55565742648022,55.685735950364375]},"geometry_name":"wkb_geometry","properties":{"id":19,"navn":"Korsgadehallen","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_435b","geometry":{"type":"Point","coordinates":[12.565886590432894,55.64651911224422]},"geometry_name":"wkb_geometry","properties":{"id":20,"navn":"Hekla Park","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_435c","geometry":{"type":"Point","coordinates":[12.558257344618475,55.71730895094678]},"geometry_name":"wkb_geometry","properties":{"id":21,"navn":"Ryparkens Idrætsanlæg ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_435d","geometry":{"type":"Point","coordinates":[12.613257875139738,55.65217223390593]},"geometry_name":"wkb_geometry","properties":{"id":22,"navn":"Sundbyøster Idrætsanlæg ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_435e","geometry":{"type":"Point","coordinates":[12.481191036046816,55.68582132896283]},"geometry_name":"wkb_geometry","properties":{"id":23,"navn":"Vanløsehallerne","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_435f","geometry":{"type":"Point","coordinates":[12.533731221005159,55.72574269628036]},"geometry_name":"wkb_geometry","properties":{"id":24,"navn":"Emdrupparkens Idrætsanlæg","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4360","geometry":{"type":"Point","coordinates":[12.492325606606434,55.71881819886828]},"geometry_name":"wkb_geometry","properties":{"id":25,"navn":"Tingbjerg Idrætspark ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4361","geometry":{"type":"Point","coordinates":[12.539571021489653,55.696709769988864]},"geometry_name":"wkb_geometry","properties":{"id":26,"navn":"Hillerødgade Bad og Hal","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4362","geometry":{"type":"Point","coordinates":[12.552999765914207,55.63588592640248]},"geometry_name":"wkb_geometry","properties":{"id":27,"navn":"Københavns Skyttecenter","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4363","geometry":{"type":"Point","coordinates":[12.563109476970908,55.642136175639486]},"geometry_name":"wkb_geometry","properties":{"id":28,"navn":"Motorbanen","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4364","geometry":{"type":"Point","coordinates":[12.500616875541464,55.64301394486279]},"geometry_name":"wkb_geometry","properties":{"id":29,"navn":"Vigerslevparken ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4365","geometry":{"type":"Point","coordinates":[12.50419474436913,55.65297974873978]},"geometry_name":"wkb_geometry","properties":{"id":30,"navn":"Gl. Køge Landevej ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4366","geometry":{"type":"Point","coordinates":[12.578719482195991,55.71422673580446]},"geometry_name":"wkb_geometry","properties":{"id":31,"navn":"Svanemøllehallen ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4367","geometry":{"type":"Point","coordinates":[12.587911329581212,55.70749322486865]},"geometry_name":"wkb_geometry","properties":{"id":32,"navn":"Østerbrohuset","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4368","geometry":{"type":"Point","coordinates":[12.582784012048961,55.63581895441204]},"geometry_name":"wkb_geometry","properties":{"id":33,"navn":"Ørestad Streethal","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4369","geometry":{"type":"Point","coordinates":[12.572412881365382,55.62504729925764]},"geometry_name":"wkb_geometry","properties":{"id":34,"navn":"Ørestad Skøjtehal","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_436a","geometry":{"type":"Point","coordinates":[12.58305905662809,55.71163343733185]},"geometry_name":"wkb_geometry","properties":{"id":35,"navn":"Østre Skøjtehal ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_436b","geometry":{"type":"Point","coordinates":[12.563813205728543,55.70594642376108]},"geometry_name":"wkb_geometry","properties":{"id":36,"navn":"Fælledklubhuset ","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_436c","geometry":null,"geometry_name":"wkb_geometry","properties":{"id":37,"navn":"Svanemølleanlægget","navnekategori":"17249","navnekategori_txt":"Idrætshaller"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_436d","geometry":{"type":"Point","coordinates":[12.540234495419215,55.71087054231686]},"geometry_name":"wkb_geometry","properties":{"id":1,"navn":"Karens Hus","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_436e","geometry":{"type":"Point","coordinates":[12.556770109039634,55.68609122692412]},"geometry_name":"wkb_geometry","properties":{"id":2,"navn":"Støberiet","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_436f","geometry":{"type":"Point","coordinates":[12.49797241530816,55.70389177835532]},"geometry_name":"wkb_geometry","properties":{"id":3,"navn":"Rytterskolen","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4370","geometry":{"type":"Point","coordinates":[12.498025892355757,55.701865277416005]},"geometry_name":"wkb_geometry","properties":{"id":4,"navn":"Kulturhuset Pilegården","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4371","geometry":{"type":"Point","coordinates":[12.491065844939982,55.68706828063159]},"geometry_name":"wkb_geometry","properties":{"id":5,"navn":"Kulturstationen Vanløse","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4372","geometry":{"type":"Point","coordinates":[12.590967441124645,55.67124804182475]},"geometry_name":"wkb_geometry","properties":{"id":6,"navn":"Christianshavns Beboerhus ","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4373","geometry":{"type":"Point","coordinates":[12.603936487981368,55.665203677828174]},"geometry_name":"wkb_geometry","properties":{"id":7,"navn":"Kvarterhuset","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4374","geometry":{"type":"Point","coordinates":[12.551302695460212,55.686545865333855]},"geometry_name":"wkb_geometry","properties":{"id":8,"navn":"Kulturhuset Kapelvej","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4375","geometry":{"type":"Point","coordinates":[12.576278352730036,55.666836827032874]},"geometry_name":"wkb_geometry","properties":{"id":9,"navn":"Kulturhuset Islands Brygge","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4376","geometry":{"type":"Point","coordinates":[12.543715195841289,55.66782679418936]},"geometry_name":"wkb_geometry","properties":{"id":10,"navn":"Vesterbro Bibliotek og Kulturhus","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4377","geometry":{"type":"Point","coordinates":[12.575391045771307,55.67641847717647]},"geometry_name":"wkb_geometry","properties":{"id":11,"navn":"Huset-KBH","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4378","geometry":{"type":"Point","coordinates":[12.560564378798679,55.69153162939831]},"geometry_name":"wkb_geometry","properties":{"id":12,"navn":"VerdensKulturCentret","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4379","geometry":{"type":"Point","coordinates":[12.522916217324196,55.70841203177259]},"geometry_name":"wkb_geometry","properties":{"id":13,"navn":"BIBLIOTEKET Rentemestervej","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_437a","geometry":{"type":"Point","coordinates":[12.509886321875804,55.66460371015051]},"geometry_name":"wkb_geometry","properties":{"id":14,"navn":"Prøvehallen","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_437b","geometry":{"type":"Point","coordinates":[12.525315488458677,55.709058207547805]},"geometry_name":"wkb_geometry","properties":{"id":15,"navn":"Kulturhuset Tomsgårdsvej","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_437c","geometry":{"type":"Point","coordinates":[12.529608007873708,55.64678342318348]},"geometry_name":"wkb_geometry","properties":{"id":16,"navn":"Karens Minde Kulturhus ","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_437d","geometry":{"type":"Point","coordinates":[12.51855171695037,55.661435388507954]},"geometry_name":"wkb_geometry","properties":{"id":17,"navn":"Kraftwerket","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_437e","geometry":{"type":"Point","coordinates":[12.516649678839181,55.70992860814933]},"geometry_name":"wkb_geometry","properties":{"id":18,"navn":"Børnekulturhuset Sokkelundlille ","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_437f","geometry":{"type":"Point","coordinates":[12.518431031015561,55.660966522877196]},"geometry_name":"wkb_geometry","properties":{"id":19,"navn":"Valby Kulturhus","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4380","geometry":{"type":"Point","coordinates":[12.549520843419455,55.70296754452305]},"geometry_name":"wkb_geometry","properties":{"id":20,"navn":"Osramhuset","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4381","geometry":{"type":"Point","coordinates":[12.609358350951801,55.65794962093013]},"geometry_name":"wkb_geometry","properties":{"id":21,"navn":"Amager Kulturpunkt","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4382","geometry":{"type":"Point","coordinates":[12.592894557749773,55.707247377335065]},"geometry_name":"wkb_geometry","properties":{"id":22,"navn":"Havnekulturkontoret","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4383","geometry":{"type":"Point","coordinates":[12.561006414426359,55.66999390796001]},"geometry_name":"wkb_geometry","properties":{"id":23,"navn":"Onkel Dannys Plads","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4384","geometry":{"type":"Point","coordinates":[12.575089528495852,55.70520565869524]},"geometry_name":"wkb_geometry","properties":{"id":24,"navn":"Krudttønden","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4385","geometry":{"type":"Point","coordinates":[12.5301666118678,55.71624182668981]},"geometry_name":"wkb_geometry","properties":{"id":25,"navn":"Dansekapellet","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4386","geometry":{"type":"Point","coordinates":[12.609796103755324,55.65782747851631]},"geometry_name":"wkb_geometry","properties":{"id":26,"navn":"Børnekulturhus Amar'","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4387","geometry":{"type":"Point","coordinates":[12.563648387169117,55.68361060197746]},"geometry_name":"wkb_geometry","properties":{"id":27,"navn":"Kulturhuset Indre By ","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4388","geometry":{"type":"Point","coordinates":[12.537701583947365,55.701582687172746]},"geometry_name":"wkb_geometry","properties":{"id":28,"navn":"Lygten Station","navnekategori":"18147","navnekategori_txt":"Medborger-, Kulturhus"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4389","geometry":{"type":"Point","coordinates":[12.57828311124926,55.676532830461234]},"geometry_name":"wkb_geometry","properties":{"id":1,"navn":"Thorvaldsens Museum","navnekategori":"18148","navnekategori_txt":"Museum, Udstilling"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_438a","geometry":{"type":"Point","coordinates":[12.581474418386874,55.678790927330944]},"geometry_name":"wkb_geometry","properties":{"id":2,"navn":"Nikolaj Kunsthal","navnekategori":"18148","navnekategori_txt":"Museum, Udstilling"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_438b","geometry":{"type":"Point","coordinates":[12.569577674965068,55.67562753235746]},"geometry_name":"wkb_geometry","properties":{"id":3,"navn":"Købehavns Stadsarkiv","navnekategori":"18148","navnekategori_txt":"Museum, Udstilling"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_438c","geometry":{"type":"Point","coordinates":[12.572613979301401,55.67426478391609]},"geometry_name":"wkb_geometry","properties":{"id":4,"navn":"Københavns Museum","navnekategori":"18148","navnekategori_txt":"Museum, Udstilling"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_438d","geometry":{"type":"MultiPoint","coordinates":[[12.601908818398794,55.64645057655745]]},"geometry_name":"wkb_geometry","properties":{"id":1,"navn":"Sundby Bad","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_438e","geometry":{"type":"MultiPoint","coordinates":[[12.64003338145373,55.663694179810506]]},"geometry_name":"wkb_geometry","properties":{"id":2,"navn":"Helgoland Badeanstalt","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_438f","geometry":{"type":"MultiPoint","coordinates":[[12.58330530184618,55.72050044648887]]},"geometry_name":"wkb_geometry","properties":{"id":3,"navn":"Svanemøllestranden","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4390","geometry":{"type":"MultiPoint","coordinates":[[12.574515400565923,55.66621002718775]]},"geometry_name":"wkb_geometry","properties":{"id":4,"navn":"Halfdansgade badezone","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4391","geometry":{"type":"MultiPoint","coordinates":[[12.514314523455413,55.70604126223107]]},"geometry_name":"wkb_geometry","properties":{"id":5,"navn":"Bellahøj Svømmestadion","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4392","geometry":{"type":"MultiPoint","coordinates":[[12.514314523455413,55.70604126223107]]},"geometry_name":"wkb_geometry","properties":{"id":6,"navn":"Bellahøj Friluftsbad","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4393","geometry":{"type":"MultiPoint","coordinates":[[12.5386058265266,55.65968582053321]]},"geometry_name":"wkb_geometry","properties":{"id":7,"navn":"Bavnehøj Friluftsbad","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4394","geometry":{"type":"MultiPoint","coordinates":[[12.609794635865047,55.66289894297421]]},"geometry_name":"wkb_geometry","properties":{"id":8,"navn":"Frankrigsgade Svømmehal","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4395","geometry":{"type":"MultiPoint","coordinates":[[12.565402699902135,55.663461101827856]]},"geometry_name":"wkb_geometry","properties":{"id":9,"navn":"Havnebadet Fisketorvet","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4396","geometry":{"type":"MultiPoint","coordinates":[[12.577869310677192,55.66860888257773]]},"geometry_name":"wkb_geometry","properties":{"id":10,"navn":"Havnebadet Islands Brygge","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4397","geometry":{"type":"MultiPoint","coordinates":[[12.553926127573828,55.646364577541284]]},"geometry_name":"wkb_geometry","properties":{"id":11,"navn":"Havnebadet Sluseholmen","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4398","geometry":{"type":"MultiPoint","coordinates":[[12.64922257742978,55.65454851341293]]},"geometry_name":"wkb_geometry","properties":{"id":12,"navn":"Amager Strandpark","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_4399","geometry":{"type":"MultiPoint","coordinates":[[12.539571087023372,55.696709806374244]]},"geometry_name":"wkb_geometry","properties":{"id":13,"navn":"Hillerødgade Bad og Hal","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_439a","geometry":{"type":"MultiPoint","coordinates":[[12.484466744519672,55.7190873971022]]},"geometry_name":"wkb_geometry","properties":{"id":14,"navn":"Tingbjerg Svømmehal","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_439b","geometry":{"type":"MultiPoint","coordinates":[[12.538757375947688,55.664562258068536]]},"geometry_name":"wkb_geometry","properties":{"id":15,"navn":"Vesterbro Svømmehal","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_439c","geometry":{"type":"MultiPoint","coordinates":[[12.515266883349383,55.64897591363164]]},"geometry_name":"wkb_geometry","properties":{"id":16,"navn":"Valby Vandkulturhus","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_439d","geometry":{"type":"MultiPoint","coordinates":[[12.576293022867121,55.70475643400615]]},"geometry_name":"wkb_geometry","properties":{"id":17,"navn":"Øbro-Hallen","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_439e","geometry":{"type":"MultiPoint","coordinates":[[12.547187002484652,55.71834207367829]]},"geometry_name":"wkb_geometry","properties":{"id":18,"navn":"Emdrup Bad","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_439f","geometry":{"type":"MultiPoint","coordinates":[[12.596389027440798,55.706318651508184]]},"geometry_name":"wkb_geometry","properties":{"id":19,"navn":"Badezone Sandkaj","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a0","geometry":{"type":"MultiPoint","coordinates":[[12.608987732014254,55.69508911557121]]},"geometry_name":"wkb_geometry","properties":{"id":20,"navn":"Halvandet badezone","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a1","geometry":{"type":"MultiPoint","coordinates":[[12.565559283638908,55.65453110754235]]},"geometry_name":"wkb_geometry","properties":{"id":21,"navn":"Havnevigen","navnekategori":"17237","navnekategori_txt":"Svømmehal/Bad"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a2","geometry":{"type":"MultiPoint","coordinates":[[12.646822177590394,55.635821860424315]]},"geometry_name":"wkb_geometry","properties":{"id":1,"navn":"Kastrup","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a3","geometry":{"type":"MultiPoint","coordinates":[[12.503985639108704,55.66718308046223]]},"geometry_name":"wkb_geometry","properties":{"id":2,"navn":"Langgade","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a4","geometry":{"type":"MultiPoint","coordinates":[[12.503343020635267,55.67817189737545]]},"geometry_name":"wkb_geometry","properties":{"id":3,"navn":"Peter Bangs Vej","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a5","geometry":{"type":"MultiPoint","coordinates":[[12.492160770691216,55.67791235316916]]},"geometry_name":"wkb_geometry","properties":{"id":4,"navn":"KB Hallen","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a6","geometry":{"type":"MultiPoint","coordinates":[[12.499082899528844,55.65973381653242]]},"geometry_name":"wkb_geometry","properties":{"id":5,"navn":"Vigerslev Allé","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a7","geometry":{"type":"MultiPoint","coordinates":[[12.498358619148766,55.68532663348152]]},"geometry_name":"wkb_geometry","properties":{"id":6,"navn":"Flintholm","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a8","geometry":{"type":"MultiPoint","coordinates":[[12.552502528319485,55.68183658102229]]},"geometry_name":"wkb_geometry","properties":{"id":7,"navn":"Forum","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43a9","geometry":{"type":"MultiPoint","coordinates":[[12.531254297000974,55.68124300422948]]},"geometry_name":"wkb_geometry","properties":{"id":8,"navn":"Frederiksberg","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43aa","geometry":{"type":"MultiPoint","coordinates":[[12.523531413011062,55.68161867111091]]},"geometry_name":"wkb_geometry","properties":{"id":9,"navn":"Fasanvej (Solbjerg)","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43ab","geometry":{"type":"MultiPoint","coordinates":[[12.513337030500862,55.68339344818599]]},"geometry_name":"wkb_geometry","properties":{"id":10,"navn":"Lindevang","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43ac","geometry":{"type":"MultiPoint","coordinates":[[12.499646450888052,55.68592249094199]]},"geometry_name":"wkb_geometry","properties":{"id":11,"navn":"Flintholm","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43ad","geometry":{"type":"MultiPoint","coordinates":[[12.491907379014119,55.68728788320024]]},"geometry_name":"wkb_geometry","properties":{"id":12,"navn":"Vanløse","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43ae","geometry":{"type":"MultiPoint","coordinates":[[12.513951781588252,55.66380658705647]]},"geometry_name":"wkb_geometry","properties":{"id":13,"navn":"Valby","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43af","geometry":{"type":"MultiPoint","coordinates":[[12.47451627991452,55.66443747336565]]},"geometry_name":"wkb_geometry","properties":{"id":14,"navn":"Hvidovre","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b0","geometry":{"type":"MultiPoint","coordinates":[[12.459453513287263,55.664694113759886]]},"geometry_name":"wkb_geometry","properties":{"id":15,"navn":"Rødovre","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b1","geometry":{"type":"MultiPoint","coordinates":[[12.490777163002031,55.687239555215825]]},"geometry_name":"wkb_geometry","properties":{"id":16,"navn":"Vanløse","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b2","geometry":{"type":"MultiPoint","coordinates":[[12.499902223822332,55.63982705636668]]},"geometry_name":"wkb_geometry","properties":{"id":17,"navn":"Åmarken","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b3","geometry":{"type":"MultiPoint","coordinates":[[12.536625456326755,55.66337868584309]]},"geometry_name":"wkb_geometry","properties":{"id":18,"navn":"Carlsberg","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b4","geometry":{"type":"MultiPoint","coordinates":[[12.638255680353023,55.64528535047976]]},"geometry_name":"wkb_geometry","properties":{"id":19,"navn":"Femøren","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b5","geometry":{"type":"MultiPoint","coordinates":[[12.631889900698601,55.65606516201953]]},"geometry_name":"wkb_geometry","properties":{"id":20,"navn":"Amager Strand","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b6","geometry":{"type":"MultiPoint","coordinates":[[12.628732675353522,55.66144562370018]]},"geometry_name":"wkb_geometry","properties":{"id":21,"navn":"Øresund","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b7","geometry":{"type":"MultiPoint","coordinates":[[12.617021454946313,55.66226966399527]]},"geometry_name":"wkb_geometry","properties":{"id":22,"navn":"Lergravsparken","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b8","geometry":{"type":"MultiPoint","coordinates":[[12.602894848018204,55.66338463587162]]},"geometry_name":"wkb_geometry","properties":{"id":23,"navn":"Amagerbro","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43b9","geometry":{"type":"MultiPoint","coordinates":[[12.591313426197745,55.67214199228414]]},"geometry_name":"wkb_geometry","properties":{"id":24,"navn":"Christianshavn","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43ba","geometry":{"type":"MultiPoint","coordinates":[[12.58517767546056,55.67926647231415]]},"geometry_name":"wkb_geometry","properties":{"id":25,"navn":"Kongens Nytorv","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43bb","geometry":{"type":"MultiPoint","coordinates":[[12.571519041955515,55.68370839910746]]},"geometry_name":"wkb_geometry","properties":{"id":26,"navn":"Nørreport","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43bc","geometry":{"type":"MultiPoint","coordinates":[[12.477272540542272,55.690567117472895]]},"geometry_name":"wkb_geometry","properties":{"id":27,"navn":"Jyllingevej","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43bd","geometry":{"type":"MultiPoint","coordinates":[[12.585310049359089,55.66354758335726]]},"geometry_name":"wkb_geometry","properties":{"id":28,"navn":"Islands Brygge","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43be","geometry":{"type":"MultiPoint","coordinates":[[12.588993504037028,55.6557657280437]]},"geometry_name":"wkb_geometry","properties":{"id":29,"navn":"DR Byen (Universitetet)","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43bf","geometry":{"type":"MultiPoint","coordinates":[[12.585743984257011,55.64520259271433]]},"geometry_name":"wkb_geometry","properties":{"id":30,"navn":"Sundby","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c0","geometry":{"type":"MultiPoint","coordinates":[[12.58291790188751,55.63808144159164]]},"geometry_name":"wkb_geometry","properties":{"id":31,"navn":"Bella Center","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c1","geometry":{"type":"MultiPoint","coordinates":[[12.579242054680918,55.628714222686526]]},"geometry_name":"wkb_geometry","properties":{"id":32,"navn":"Ørestad","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c2","geometry":{"type":"MultiPoint","coordinates":[[12.575573476907428,55.619363794531594]]},"geometry_name":"wkb_geometry","properties":{"id":33,"navn":"Vestamager","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c3","geometry":{"type":"MultiPoint","coordinates":[[12.649389204598918,55.63052706249855]]},"geometry_name":"wkb_geometry","properties":{"id":34,"navn":"Lufthavnen","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c4","geometry":{"type":"MultiPoint","coordinates":[[12.46909390173782,55.699389891615944]]},"geometry_name":"wkb_geometry","properties":{"id":35,"navn":"Islev","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c5","geometry":{"type":"MultiPoint","coordinates":[[12.515567547868768,55.69062901673653]]},"geometry_name":"wkb_geometry","properties":{"id":36,"navn":"Grøndal","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c6","geometry":{"type":"MultiPoint","coordinates":[[12.527019854581582,55.69534900695067]]},"geometry_name":"wkb_geometry","properties":{"id":37,"navn":"Fuglebakken","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c7","geometry":{"type":"MultiPoint","coordinates":[[12.541553831728466,55.70625290501671]]},"geometry_name":"wkb_geometry","properties":{"id":38,"navn":"Bispebjerg","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c8","geometry":{"type":"MultiPoint","coordinates":[[12.559424290905925,55.7152303371333]]},"geometry_name":"wkb_geometry","properties":{"id":39,"navn":"Ryparken","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43c9","geometry":{"type":"MultiPoint","coordinates":[[12.578278638392884,55.71569612147444]]},"geometry_name":"wkb_geometry","properties":{"id":40,"navn":"Svanemøllen","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43ca","geometry":{"type":"MultiPoint","coordinates":[[12.566720237477423,55.73141262631802]]},"geometry_name":"wkb_geometry","properties":{"id":41,"navn":"Hellerup","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43cb","geometry":{"type":"MultiPoint","coordinates":[[12.591263013489852,55.70468899416922]]},"geometry_name":"wkb_geometry","properties":{"id":42,"navn":"Nordhavn","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43cc","geometry":{"type":"MultiPoint","coordinates":[[12.587318708870807,55.6925521132949]]},"geometry_name":"wkb_geometry","properties":{"id":43,"navn":"Østerport","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43cd","geometry":{"type":"MultiPoint","coordinates":[[12.571761714253826,55.6833000498909]]},"geometry_name":"wkb_geometry","properties":{"id":44,"navn":"Nørreport","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43ce","geometry":{"type":"MultiPoint","coordinates":[[12.562511070208261,55.67590905473198]]},"geometry_name":"wkb_geometry","properties":{"id":45,"navn":"Vesterport","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43cf","geometry":{"type":"MultiPoint","coordinates":[[12.564592479491898,55.67282497194036]]},"geometry_name":"wkb_geometry","properties":{"id":46,"navn":"Københavns Hovedbanegård","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d0","geometry":{"type":"MultiPoint","coordinates":[[12.49379262141783,55.66454745042849]]},"geometry_name":"wkb_geometry","properties":{"id":47,"navn":"Danshøj","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d1","geometry":{"type":"MultiPoint","coordinates":[[12.493183893724098,55.672159615441316]]},"geometry_name":"wkb_geometry","properties":{"id":48,"navn":"Ålholm","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d2","geometry":{"type":"MultiPoint","coordinates":[[12.559858524540068,55.664968007867195]]},"geometry_name":"wkb_geometry","properties":{"id":49,"navn":"Dybbølsbro","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d3","geometry":{"type":"MultiPoint","coordinates":[[12.537324981698127,55.65434224540282]]},"geometry_name":"wkb_geometry","properties":{"id":50,"navn":"Sydhavn","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d4","geometry":{"type":"MultiPoint","coordinates":[[12.52695809050934,55.65158768232833]]},"geometry_name":"wkb_geometry","properties":{"id":51,"navn":"Sjælør","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d5","geometry":{"type":"MultiPoint","coordinates":[[12.51728415317508,55.652302891349095]]},"geometry_name":"wkb_geometry","properties":{"id":52,"navn":"Ny Ellebjerg","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d6","geometry":{"type":"MultiPoint","coordinates":[[12.482125585734167,55.62910220170728]]},"geometry_name":"wkb_geometry","properties":{"id":53,"navn":"Friheden","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d7","geometry":{"type":"MultiPoint","coordinates":[[12.456322722832208,55.625783226258]]},"geometry_name":"wkb_geometry","properties":{"id":54,"navn":"Avedøre","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d8","geometry":{"type":"MultiPoint","coordinates":[[12.541565892815964,55.72006163280941]]},"geometry_name":"wkb_geometry","properties":{"id":55,"navn":"Emdrup","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43d9","geometry":{"type":"MultiPoint","coordinates":[[12.463788778024757,55.70971850428385]]},"geometry_name":"wkb_geometry","properties":{"id":56,"navn":"Husum","navnekategori":"19130","navnekategori_txt":"Station/Metro"}},{"type":"Feature","id":"stednavn_punkt.fid--200d312a_166e1b25641_43da","geometry":{"type":"MultiPoint","coordinates":[[12.5377522643377,55.70053346086911]]},"geometry_name":"wkb_geometry","properties":{"id":57,"navn":"Nørrebro","navnekategori":"19130","navnekategori_txt":"Station/Metro"}}],"crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:EPSG::4326"}}}
+{
+  "type": "FeatureCollection",
+  "features": [{
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4333",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.569577674965068, 55.67562753235746]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 1,
+      "navn": "Københavns Stadsarkiv",
+      "navnekategori": "14160",
+      "navnekategori_txt": "Arkiver"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4334",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.49130887528394, 55.68652214248285]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 1,
+      "navn": "Kulturstationen Vanløse",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4335",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.59212091966293, 55.67232124045602]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 2,
+      "navn": "Christianshavns Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4336",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.57937591294882, 55.666467503403034]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 3,
+      "navn": "Islands Brygge Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4337",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.573653234093157, 55.68087610562476]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 4,
+      "navn": "Hovedbiblioteket",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4338",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.529608007873708, 55.64678342318348]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 5,
+      "navn": "Sydhavnens Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4339",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.54364161452531, 55.6990123375313]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 6,
+      "navn": "Nørrebro Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_433a",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.595484064660932, 55.64872227604868]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 7,
+      "navn": "Solvang Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_433b",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.5131070384209, 55.6653427353054]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 8,
+      "navn": "Valby Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_433c",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.543715195841289, 55.66782679418936]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 9,
+      "navn": "Vesterbro Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_433d",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.47727358588045, 55.71083864475739]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 10,
+      "navn": "Husum Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_433e",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.522916217324196, 55.70841203177259]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 11,
+      "navn": "BIBLIOTEKET Rentemestervej",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_433f",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.499258506620144, 55.70414057791254]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 12,
+      "navn": "Brønshøj Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4340",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.576494590600904, 55.70916603955145]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 13,
+      "navn": "Øbro Jagtvej Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4341",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.613150562287347, 55.65034949033002]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 14,
+      "navn": "Bibliotekshuset",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4342",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.503313355608507, 55.6492308208943]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 15,
+      "navn": "Vigerslev Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4343",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.556770109039634, 55.68609122692412]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 16,
+      "navn": "Blågårdens Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4344",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.48119514014686, 55.7188555933771]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 17,
+      "navn": "Tingbjerg Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4345",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.580964243346905, 55.63128647629463]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 18,
+      "navn": "Ørestad Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4346",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.581745359843794, 55.69457326676311]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 19,
+      "navn": "Østerbro Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4347",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.603936487981368, 55.665203677828174]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 20,
+      "navn": "Sundby Bibliotek",
+      "navnekategori": "18145",
+      "navnekategori_txt": "Bibliotek"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4348",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.602137159337724, 55.67606473553194]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 1,
+      "navn": "Hal C",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4349",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.514314521646787, 55.7060411301821]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 2,
+      "navn": "Bellahøj Hallerne ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_434a",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.576790073078762, 55.69868442846709]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 3,
+      "navn": "Remisen",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_434b",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.5434838663867, 55.699427544279864]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 4,
+      "navn": "Nørrebrohallen",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_434c",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.48125556315582, 55.67231413747788]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 5,
+      "navn": "Engdraget ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_434d",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.540914655778298, 55.66203272023012]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 6,
+      "navn": "Copenhagen Skatepark",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_434e",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.599955549189753, 55.6502299787168]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 7,
+      "navn": "Sundby Idrætspark ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_434f",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.48329451925535, 55.71107398289949]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 8,
+      "navn": "Husum Idrætspark - Gadelandet",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4350",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.538605691553606, 55.659685661799294]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 9,
+      "navn": "Bavnehøj Idrætsanlæg",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4351",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.518410458454664, 55.69997705233909]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 10,
+      "navn": "Genforeningspladsens Idrætsanlæg",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4352",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.574848907878387, 55.70476658967722]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 11,
+      "navn": "Østerbro Stadion og Idrætshuset ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4353",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.61087444703706, 55.666698638070095]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 12,
+      "navn": "Prismen (Amager)",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4354",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.515352420377448, 55.69983427823777]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 13,
+      "navn": "Grøndal MultiCenter",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4355",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.51650970036497, 55.649381381010166]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 14,
+      "navn": "Valby-Hallen",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4356",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.51374484498654, 55.64979875451196]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 15,
+      "navn": "Valby Idrætspark ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4357",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.510280930532751, 55.64777877323623]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 16,
+      "navn": "Hafnia-Hallen",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4358",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.476963324938016, 55.68638759776497]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 17,
+      "navn": "Vanløse Idrætspark",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4359",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.60832748953277, 55.672271291367274]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 18,
+      "navn": "Kløvermarkens Idrætsanlæg",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_435a",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.55565742648022, 55.685735950364375]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 19,
+      "navn": "Korsgadehallen",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_435b",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.565886590432894, 55.64651911224422]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 20,
+      "navn": "Hekla Park",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_435c",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.558257344618475, 55.71730895094678]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 21,
+      "navn": "Ryparkens Idrætsanlæg ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_435d",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.613257875139738, 55.65217223390593]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 22,
+      "navn": "Sundbyøster Idrætsanlæg ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_435e",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.481191036046816, 55.68582132896283]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 23,
+      "navn": "Vanløsehallerne",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_435f",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.533731221005159, 55.72574269628036]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 24,
+      "navn": "Emdrupparkens Idrætsanlæg",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4360",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.492325606606434, 55.71881819886828]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 25,
+      "navn": "Tingbjerg Idrætspark ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4361",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.539571021489653, 55.696709769988864]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 26,
+      "navn": "Hillerødgade Bad og Hal",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4362",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.552999765914207, 55.63588592640248]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 27,
+      "navn": "Københavns Skyttecenter",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4363",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.563109476970908, 55.642136175639486]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 28,
+      "navn": "Motorbanen",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4364",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.500616875541464, 55.64301394486279]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 29,
+      "navn": "Vigerslevparken ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4365",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.50419474436913, 55.65297974873978]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 30,
+      "navn": "Gl. Køge Landevej ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4366",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.578719482195991, 55.71422673580446]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 31,
+      "navn": "Svanemøllehallen ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4367",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.587911329581212, 55.70749322486865]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 32,
+      "navn": "Østerbrohuset",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4368",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.582784012048961, 55.63581895441204]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 33,
+      "navn": "Ørestad Streethal",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4369",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.572412881365382, 55.62504729925764]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 34,
+      "navn": "Ørestad Skøjtehal",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_436a",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.58305905662809, 55.71163343733185]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 35,
+      "navn": "Østre Skøjtehal ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_436b",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.563813205728543, 55.70594642376108]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 36,
+      "navn": "Fælledklubhuset ",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_436c",
+    "geometry": null,
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 37,
+      "navn": "Svanemølleanlægget",
+      "navnekategori": "17249",
+      "navnekategori_txt": "Idrætshaller"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_436d",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.540234495419215, 55.71087054231686]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 1,
+      "navn": "Karens Hus",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_436e",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.556770109039634, 55.68609122692412]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 2,
+      "navn": "Støberiet",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_436f",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.49797241530816, 55.70389177835532]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 3,
+      "navn": "Rytterskolen",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4370",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.498025892355757, 55.701865277416005]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 4,
+      "navn": "Kulturhuset Pilegården",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4371",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.491065844939982, 55.68706828063159]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 5,
+      "navn": "Kulturstationen Vanløse",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4372",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.590967441124645, 55.67124804182475]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 6,
+      "navn": "Christianshavns Beboerhus ",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4373",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.603936487981368, 55.665203677828174]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 7,
+      "navn": "Kvarterhuset",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4374",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.551302695460212, 55.686545865333855]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 8,
+      "navn": "Kulturhuset Kapelvej",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4375",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.576278352730036, 55.666836827032874]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 9,
+      "navn": "Kulturhuset Islands Brygge",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4376",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.543715195841289, 55.66782679418936]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 10,
+      "navn": "Vesterbro Bibliotek og Kulturhus",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4377",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.575391045771307, 55.67641847717647]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 11,
+      "navn": "Huset-KBH",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4378",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.560564378798679, 55.69153162939831]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 12,
+      "navn": "VerdensKulturCentret",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4379",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.522916217324196, 55.70841203177259]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 13,
+      "navn": "BIBLIOTEKET Rentemestervej",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_437a",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.509886321875804, 55.66460371015051]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 14,
+      "navn": "Prøvehallen",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_437b",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.525315488458677, 55.709058207547805]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 15,
+      "navn": "Kulturhuset Tomsgårdsvej",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_437c",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.529608007873708, 55.64678342318348]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 16,
+      "navn": "Karens Minde Kulturhus ",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_437d",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.51855171695037, 55.661435388507954]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 17,
+      "navn": "Kraftwerket",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_437e",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.516649678839181, 55.70992860814933]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 18,
+      "navn": "Børnekulturhuset Sokkelundlille ",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_437f",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.518431031015561, 55.660966522877196]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 19,
+      "navn": "Valby Kulturhus",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4380",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.549520843419455, 55.70296754452305]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 20,
+      "navn": "Osramhuset",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4381",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.609358350951801, 55.65794962093013]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 21,
+      "navn": "Amager Kulturpunkt",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4382",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.592894557749773, 55.707247377335065]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 22,
+      "navn": "Havnekulturkontoret",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4383",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.561006414426359, 55.66999390796001]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 23,
+      "navn": "Onkel Dannys Plads",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4384",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.575089528495852, 55.70520565869524]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 24,
+      "navn": "Krudttønden",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4385",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.5301666118678, 55.71624182668981]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 25,
+      "navn": "Dansekapellet",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4386",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.609796103755324, 55.65782747851631]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 26,
+      "navn": "Børnekulturhus Amar'",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4387",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.563648387169117, 55.68361060197746]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 27,
+      "navn": "Kulturhuset Indre By ",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4388",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.537701583947365, 55.701582687172746]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 28,
+      "navn": "Lygten Station",
+      "navnekategori": "18147",
+      "navnekategori_txt": "Medborger-, Kulturhus"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4389",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.57828311124926, 55.676532830461234]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 1,
+      "navn": "Thorvaldsens Museum",
+      "navnekategori": "18148",
+      "navnekategori_txt": "Museum, Udstilling"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_438a",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.581474418386874, 55.678790927330944]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 2,
+      "navn": "Nikolaj Kunsthal",
+      "navnekategori": "18148",
+      "navnekategori_txt": "Museum, Udstilling"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_438b",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.569577674965068, 55.67562753235746]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 3,
+      "navn": "Købehavns Stadsarkiv",
+      "navnekategori": "18148",
+      "navnekategori_txt": "Museum, Udstilling"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_438c",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [12.572613979301401, 55.67426478391609]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 4,
+      "navn": "Københavns Museum",
+      "navnekategori": "18148",
+      "navnekategori_txt": "Museum, Udstilling"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_438d",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.601908818398794, 55.64645057655745]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 1,
+      "navn": "Sundby Bad",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_438e",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.64003338145373, 55.663694179810506]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 2,
+      "navn": "Helgoland Badeanstalt",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_438f",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.58330530184618, 55.72050044648887]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 3,
+      "navn": "Svanemøllestranden",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4390",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.574515400565923, 55.66621002718775]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 4,
+      "navn": "Halfdansgade badezone",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4391",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.514314523455413, 55.70604126223107]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 5,
+      "navn": "Bellahøj Svømmestadion",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4392",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.514314523455413, 55.70604126223107]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 6,
+      "navn": "Bellahøj Friluftsbad",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4393",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.5386058265266, 55.65968582053321]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 7,
+      "navn": "Bavnehøj Friluftsbad",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4394",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.609794635865047, 55.66289894297421]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 8,
+      "navn": "Frankrigsgade Svømmehal",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4395",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.565402699902135, 55.663461101827856]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 9,
+      "navn": "Havnebadet Fisketorvet",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4396",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.577869310677192, 55.66860888257773]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 10,
+      "navn": "Havnebadet Islands Brygge",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4397",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.553926127573828, 55.646364577541284]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 11,
+      "navn": "Havnebadet Sluseholmen",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4398",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.64922257742978, 55.65454851341293]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 12,
+      "navn": "Amager Strandpark",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_4399",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.539571087023372, 55.696709806374244]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 13,
+      "navn": "Hillerødgade Bad og Hal",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_439a",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.484466744519672, 55.7190873971022]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 14,
+      "navn": "Tingbjerg Svømmehal",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_439b",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.538757375947688, 55.664562258068536]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 15,
+      "navn": "Vesterbro Svømmehal",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_439c",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.515266883349383, 55.64897591363164]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 16,
+      "navn": "Valby Vandkulturhus",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_439d",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.576293022867121, 55.70475643400615]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 17,
+      "navn": "Øbro-Hallen",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_439e",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.547187002484652, 55.71834207367829]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 18,
+      "navn": "Emdrup Bad",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_439f",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.596389027440798, 55.706318651508184]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 19,
+      "navn": "Badezone Sandkaj",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a0",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.608987732014254, 55.69508911557121]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 20,
+      "navn": "Halvandet badezone",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a1",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.565559283638908, 55.65453110754235]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 21,
+      "navn": "Havnevigen",
+      "navnekategori": "17237",
+      "navnekategori_txt": "Svømmehal/Bad"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a2",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.646822177590394, 55.635821860424315]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 1,
+      "navn": "Kastrup",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a3",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.503985639108704, 55.66718308046223]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 2,
+      "navn": "Langgade",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a4",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.503343020635267, 55.67817189737545]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 3,
+      "navn": "Peter Bangs Vej",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a5",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.492160770691216, 55.67791235316916]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 4,
+      "navn": "KB Hallen",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a6",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.499082899528844, 55.65973381653242]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 5,
+      "navn": "Vigerslev Allé",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a7",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.498358619148766, 55.68532663348152]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 6,
+      "navn": "Flintholm",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a8",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.552502528319485, 55.68183658102229]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 7,
+      "navn": "Forum",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43a9",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.531254297000974, 55.68124300422948]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 8,
+      "navn": "Frederiksberg",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43aa",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.523531413011062, 55.68161867111091]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 9,
+      "navn": "Fasanvej (Solbjerg)",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43ab",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.513337030500862, 55.68339344818599]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 10,
+      "navn": "Lindevang",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43ac",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.499646450888052, 55.68592249094199]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 11,
+      "navn": "Flintholm",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43ad",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.491907379014119, 55.68728788320024]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 12,
+      "navn": "Vanløse",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43ae",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.513951781588252, 55.66380658705647]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 13,
+      "navn": "Valby",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43af",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.47451627991452, 55.66443747336565]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 14,
+      "navn": "Hvidovre",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b0",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.459453513287263, 55.664694113759886]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 15,
+      "navn": "Rødovre",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b1",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.490777163002031, 55.687239555215825]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 16,
+      "navn": "Vanløse",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b2",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.499902223822332, 55.63982705636668]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 17,
+      "navn": "Åmarken",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b3",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.536625456326755, 55.66337868584309]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 18,
+      "navn": "Carlsberg",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b4",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.638255680353023, 55.64528535047976]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 19,
+      "navn": "Femøren",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b5",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.631889900698601, 55.65606516201953]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 20,
+      "navn": "Amager Strand",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b6",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.628732675353522, 55.66144562370018]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 21,
+      "navn": "Øresund",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b7",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.617021454946313, 55.66226966399527]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 22,
+      "navn": "Lergravsparken",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b8",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.602894848018204, 55.66338463587162]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 23,
+      "navn": "Amagerbro",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43b9",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.591313426197745, 55.67214199228414]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 24,
+      "navn": "Christianshavn",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43ba",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.58517767546056, 55.67926647231415]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 25,
+      "navn": "Kongens Nytorv",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43bb",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.571519041955515, 55.68370839910746]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 26,
+      "navn": "Nørreport",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43bc",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.477272540542272, 55.690567117472895]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 27,
+      "navn": "Jyllingevej",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43bd",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.585310049359089, 55.66354758335726]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 28,
+      "navn": "Islands Brygge",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43be",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.588993504037028, 55.6557657280437]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 29,
+      "navn": "DR Byen (Universitetet)",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43bf",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.585743984257011, 55.64520259271433]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 30,
+      "navn": "Sundby",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c0",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.58291790188751, 55.63808144159164]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 31,
+      "navn": "Bella Center",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c1",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.579242054680918, 55.628714222686526]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 32,
+      "navn": "Ørestad",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c2",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.575573476907428, 55.619363794531594]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 33,
+      "navn": "Vestamager",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c3",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.649389204598918, 55.63052706249855]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 34,
+      "navn": "Lufthavnen",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c4",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.46909390173782, 55.699389891615944]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 35,
+      "navn": "Islev",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c5",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.515567547868768, 55.69062901673653]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 36,
+      "navn": "Grøndal",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c6",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.527019854581582, 55.69534900695067]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 37,
+      "navn": "Fuglebakken",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c7",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.541553831728466, 55.70625290501671]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 38,
+      "navn": "Bispebjerg",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c8",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.559424290905925, 55.7152303371333]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 39,
+      "navn": "Ryparken",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43c9",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.578278638392884, 55.71569612147444]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 40,
+      "navn": "Svanemøllen",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43ca",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.566720237477423, 55.73141262631802]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 41,
+      "navn": "Hellerup",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43cb",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.591263013489852, 55.70468899416922]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 42,
+      "navn": "Nordhavn",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43cc",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.587318708870807, 55.6925521132949]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 43,
+      "navn": "Østerport",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43cd",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.571761714253826, 55.6833000498909]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 44,
+      "navn": "Nørreport",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43ce",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.562511070208261, 55.67590905473198]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 45,
+      "navn": "Vesterport",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43cf",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.564592479491898, 55.67282497194036]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 46,
+      "navn": "Københavns Hovedbanegård",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d0",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.49379262141783, 55.66454745042849]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 47,
+      "navn": "Danshøj",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d1",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.493183893724098, 55.672159615441316]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 48,
+      "navn": "Ålholm",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d2",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.559858524540068, 55.664968007867195]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 49,
+      "navn": "Dybbølsbro",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d3",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.537324981698127, 55.65434224540282]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 50,
+      "navn": "Sydhavn",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d4",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.52695809050934, 55.65158768232833]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 51,
+      "navn": "Sjælør",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d5",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.51728415317508, 55.652302891349095]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 52,
+      "navn": "Ny Ellebjerg",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d6",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.482125585734167, 55.62910220170728]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 53,
+      "navn": "Friheden",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d7",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.456322722832208, 55.625783226258]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 54,
+      "navn": "Avedøre",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d8",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.541565892815964, 55.72006163280941]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 55,
+      "navn": "Emdrup",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43d9",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.463788778024757, 55.70971850428385]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 56,
+      "navn": "Husum",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }, {
+    "type": "Feature",
+    "id": "stednavn_punkt.fid--200d312a_166e1b25641_43da",
+    "geometry": {
+      "type": "MultiPoint",
+      "coordinates": [
+        [12.5377522643377, 55.70053346086911]
+      ]
+    },
+    "geometry_name": "wkb_geometry",
+    "properties": {
+      "id": 57,
+      "navn": "Nørrebro",
+      "navnekategori": "19130",
+      "navnekategori_txt": "Station/Metro"
+    }
+  }],
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::4326"
+    }
+  }
+}
