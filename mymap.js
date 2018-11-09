@@ -8,8 +8,8 @@ var osm = L.tileLayer(
 
 
 
-
-
+var wind = L.OWM.wind({appId: 'ee67f8f53521d94193aa7d8364b7f5d9'});
+var city = L.OWM.current({intervall: 15, lang: 'en'});
 
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
@@ -17,13 +17,13 @@ var mymap = L.map('map', {
   layers: [osm] // add it here
 });
 
-
-
-
+var overlayMaps = { "Wind": wind, "Cities": city };
 
 var basemaps = {
   "OpenStreetMap": osm
 }
+
+var layerControl = L.control.layers(basemaps, overlayMaps).addTo(mymap);
 //var overlays = {"Route": control}
 
 L.control.scale().addTo(mymap);
