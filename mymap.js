@@ -5,19 +5,19 @@ var osm = L.tileLayer(
               <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
   });
 
-
-var wind = L.OWM.wind({appId: 'ee67f8f53521d94193aa7d8364b7f5d9'});
 var city = L.OWM.current({appId: 'ee67f8f53521d94193aa7d8364b7f5d9', intervall: 15, lang: 'en', showWindDirection: 'deg'});
 
 
-  var stations = new ol.layer.Vector({
-    title: 'Stations',
-    source: new ol.source.Vector({
-      format: new ol.format.GeoJSON(),
-      url: 'stations.geojson'
-    }),
-
+var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
+onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+  }
 });
+
+stations.on('click', function(e) {
+    coords2 = [e.latlng.lat, e.latlng.lng];
+    });
+
       var mymap = L.map('map', {
         center: [55.676111, 12.568333],
         zoom: 10,
@@ -25,7 +25,7 @@ var city = L.OWM.current({appId: 'ee67f8f53521d94193aa7d8364b7f5d9', intervall: 
       })
     ;
 
-var overlayMaps = { "Wind": wind, "Cities": city };
+var overlayMaps = {"Cities": city };
 
 var basemaps = {
   "OpenStreetMap": osm
