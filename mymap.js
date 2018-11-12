@@ -13,7 +13,7 @@ onEachFeature: function(feature, layer, ) { //creating popup, when clicking on f
 layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
   }
 });
-
+// test2
 stations.on('click', function(e) {
     coords2 = [e.latlng.lat, e.latlng.lng];
     });
