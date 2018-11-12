@@ -7,6 +7,26 @@ var osm = L.tileLayer(
 
 var city = L.OWM.current({appId: 'ee67f8f53521d94193aa7d8364b7f5d9', intervall: 15, lang: 'en', showWindDirection: 'deg'});
 
+// var xmlhttp = new XMLHttpRequest();
+// xmlhttp.onreadystatechange = function() {
+//     if (this.readyState == 4 && this.status == 200) {
+//         var myArr = JSON.parse(this.responseText);
+//         document.getElementById("demo").innerHTML = myArr[0];
+//     }
+// };
+// xmlhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9", true);
+// xmlhttp.send();
+
+// Replace ./data.json with your JSON feed
+
+
+
+// var t = JSON.parse('{"name": "", "skills": "", "jobtitel": "Entwickler", "res_linkedin": "GwebSearch"}');
+// alert(t['jobtitel'])
+
+
+//http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9)
+
 var myIcon = L.icon({ //defines the icon for the wind location
     iconUrl: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png', //Temporary, so we can see the difference between locations and stations
     iconSize: [40, 40],
@@ -53,7 +73,16 @@ mymap.locate({ //This is the code for the gps coordinates - it isn't
 
 
 var length = 5000 //Distance traveled in meters
-var angle = 270 //The direction that the bicylclist is going to travel - is later going to be defined by the direction of the wind
+
+fetch('http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9').then(response => {
+  return response.json();
+}).then(data => {
+  // Work with JSON data here
+  var test = data.wind.deg
+  alert(test);
+
+alert(test);
+var angle = test //The direction that the bicylclist is going to travel - is later going to be defined by the direction of the wind
 
 //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
@@ -104,6 +133,9 @@ var EndLocation = L.latLng(EndLat, EndLng) //This line defines the location of t
       ],
       router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
     }).addTo(mymap);
+  }).catch(err => {
+    // Do something for an error here
+  });// End of finding the angle
   })
   .on('locationerror', function(e) {//This refers back to the gps part of the code - so it returns an error message if it cant get access to the gps - if that is the case it skips all of the other steps
     console.log(e);
