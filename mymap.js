@@ -65,14 +65,13 @@ L.control.scale().addTo(mymap); //adds a scalebar
 
 mymap.locate({ //This is the code for the gps coordinates - it isn't
     setView: false, //Zooms to the location of the user - disabled since there are going to be zoomed on the map instead
-    watch: false //Temporary dissabled to avoid getting multiple routing options
+    watch: false //Temporary disabled to avoid getting multiple routing options
   })
   .on('locationfound', function(e) {
     var coords = L.latLng([e.latitude, e.longitude]);
-    var StartLocation = coords  //The start of the journey - is later going to be changed to gps coordinates
+    var StartLocation = coords  //The start of the journey
 
 
-var length = 5000 //Distance traveled in meters
 
 var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat='+e.latitude+'&lon='+e.longitude+'&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
@@ -83,7 +82,9 @@ fetch(api_address).then(response => {
   // Work with JSON data here
   var windangle = data.wind.deg
 
-var angle = windangle //The direction that the bicylclist is going to travel - is later going to be defined by the direction of the wind
+var angle = windangle //The direction that the bicylclist is going to travel
+
+var length = 5000 //Distance traveled in meters
 
 //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
@@ -102,7 +103,7 @@ var EndLng = end_x*180/Math.PI
 //Here stops the coordinate definition
 
 
-var start = L.marker([EndLat, EndLng], {icon: myIcon}).addTo(mymap);
+var Winddestination = L.marker([EndLat, EndLng], {icon: myIcon}).addTo(mymap);
 var EndLocation = L.latLng(EndLat, EndLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
 
