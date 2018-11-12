@@ -74,15 +74,16 @@ mymap.locate({ //This is the code for the gps coordinates - it isn't
 
 var length = 5000 //Distance traveled in meters
 
-fetch('http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9').then(response => {
+var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat='+e.latitude+'&lon='+e.longitude+'&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+//var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+
+fetch(api_address).then(response => {
   return response.json();
 }).then(data => {
   // Work with JSON data here
-  var test = data.wind.deg
-  alert(test);
+  var windangle = data.wind.deg
 
-alert(test);
-var angle = test //The direction that the bicylclist is going to travel - is later going to be defined by the direction of the wind
+var angle = windangle //The direction that the bicylclist is going to travel - is later going to be defined by the direction of the wind
 
 //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
