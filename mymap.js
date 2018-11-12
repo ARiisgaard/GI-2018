@@ -6,14 +6,14 @@ var osm = L.tileLayer(
   });
 
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
-onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
-layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+  onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+    layer.bindPopup("<h3>Station:</h3>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
   }
 });
 
 stations.on('click', function(e) {
-    coords2 = [e.latlng.lat, e.latlng.lng];
-    });
+  coords2 = [e.latlng.lat, e.latlng.lng];
+});
 
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
@@ -51,4 +51,4 @@ var control = L.Routing.control({
     steps: 'true' //Adds a guide for the trip
   }) //,
   //  geocoder: L.Control.Geocoder.nominatim({}) This code I haven't activated yet, but it should help translating from addresses to latlon
-}).addTo(mymap);
+})
