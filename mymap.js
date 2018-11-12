@@ -82,7 +82,7 @@ var EndLocation = L.latLng(EndLat, EndLng) //This line defines the location of t
       mymap.removeLayer(myLayer);
   }
 
-  var url = "http://127.0.0.1:5000/findstation?lat="+end_y+"&lng="+end_x
+  var url = "http://127.0.0.1:5000/findstation?lat="+EndLat+"&lng="+EndLng
     console.log(url)
 
     $.getJSON(url, function(data){
