@@ -7,26 +7,6 @@ var osm = L.tileLayer(
 
 var city = L.OWM.current({appId: 'ee67f8f53521d94193aa7d8364b7f5d9', intervall: 15, lang: 'en', showWindDirection: 'deg'});
 
-// var xmlhttp = new XMLHttpRequest();
-// xmlhttp.onreadystatechange = function() {
-//     if (this.readyState == 4 && this.status == 200) {
-//         var myArr = JSON.parse(this.responseText);
-//         document.getElementById("demo").innerHTML = myArr[0];
-//     }
-// };
-// xmlhttp.open("GET", "http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9", true);
-// xmlhttp.send();
-
-// Replace ./data.json with your JSON feed
-
-
-
-// var t = JSON.parse('{"name": "", "skills": "", "jobtitel": "Entwickler", "res_linkedin": "GwebSearch"}');
-// alert(t['jobtitel'])
-
-
-//http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9)
-
 var myIcon = L.icon({ //defines the icon for the wind location
     iconUrl: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png', //Temporary, so we can see the difference between locations and stations
     iconSize: [40, 40],
