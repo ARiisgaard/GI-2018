@@ -102,10 +102,10 @@ mymap.locate({ //This is the code for the gps coordinates - it isn't
 
       var url = "http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng
       console.log(url)
-
-      $.getJSON(url, function(data) {
-
-        console.log(data)
+console.log("Something")
+      $.getJSON(url, function(result) {
+console.log("Something else")
+        console.log(result)
 
         // add GeoJSON layer to the map once the file is loaded
         //     myLayer = L.geoJson(data).bindPopup(function (layer) {
