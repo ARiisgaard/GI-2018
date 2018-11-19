@@ -37,7 +37,7 @@ ORDER BY ST_DISTANCE(ST_SetSRID(
 LIMIT 1;""", (lng, lat ))
 
     res = cur.fetchone()
-    print res
+    print(res)
     navn = res[1]
     navnekate0 = res[2]
 
