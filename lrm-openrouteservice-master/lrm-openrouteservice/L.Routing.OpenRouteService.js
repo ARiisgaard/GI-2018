@@ -168,7 +168,7 @@
 				geometry_format: 'geojson',
 				preference: 'recommended',
 				units: 'm',
-				profile: 'driving-car',
+				profile: 'cycling-regular',
 				api_key: this._apiKey
 			}, this.options.urlParameters), baseUrl);
 		},
