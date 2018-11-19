@@ -58,9 +58,3 @@ LIMIT 1;""", (lng, lat ))
 
 
     return response
-
-
-
-
-
-    #return "Find a machine at " + lat + ", " +lng

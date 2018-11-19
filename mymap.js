@@ -98,23 +98,23 @@ mymap.locate({ //This is the code for the gps coordinates - it isn't
       //Since the code doesn't work at the moment it hasn't been properly documented yet - but basicly the it is the same code as we saw in the parking machine example with small changes
       if (myLayer) {
         mymap.removeLayer(myLayer);
-      }
+      } //This might be deletable later
+
 
       var url = "http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng
       console.log(url)
-console.log("Something")
-      $.getJSON(url, function(result) {
-console.log("Something else")
-        console.log(result)
+// console.log("Something")
+//   var FindStation =  $.getJSON(url, function(result) {
+// console.log("Something else")
+//         console.log(result)
 
-        // add GeoJSON layer to the map once the file is loaded
-        //     myLayer = L.geoJson(data).bindPopup(function (layer) {
-        //     return layer.feature.geometry.coordinates;
-        // })
-        //     myLayer.addTo(mymap);
 
+fetch(url)
+    .then(res => res.json())//response type
+    .then(data => console.log(data)); //log the data;
+
+// //The EndLocation should be changed to the coordinate of the station, when those are available
         var EndLocation = L.latLng(EndLat, EndLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
-
 
         //Here the routing begins
         var route = L.Routing.control({
@@ -124,7 +124,10 @@ console.log("Something else")
           ],
           router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
         }).addTo(mymap);
-      })
+
+
+
+
     })
   })
   .on('locationerror', function(e) { //This refers back to the gps part of the code - so it returns an error message if it cant get access to the gps - if that is the case it skips all of the other steps
