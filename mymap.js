@@ -56,7 +56,8 @@ mymap.locate({ //This is the code for the gps coordinates - it isn't
   getRoute(e.latitude, e.longitude);
 }).on('locationerror', function(e) { //This refers back to the gps part of the code - so it returns an error message if it cant get access to the gps - if that is the case it skips all of the other steps
   console.log(e);
-  alert("Location access denied.");
+  getRoute(55.6504670, 12.5429260);
+  $("span#hidden").show(500);
 });
 
 function getRoute(lat, lng) {
