@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import Response
 from flask_cors import CORS
 import password
 
@@ -47,14 +48,13 @@ LIMIT 1;""", (lng, lat ))
     closest_coords = closest_station.split("(")[1] ##[ removed
 
     coords = closest_coords.split(")")[0]##] removed
+    x = coords.split()[0]
+    y = coords.split()[1]
 
-    response = '{"type": "Feature","geometry": {"type": "Point","coordinates": ['+coords+']},"properties": {"vejnavn": "'+navn+'", "type": "'+navnekate0+'"}}'
+    json_response = '{"type": "Feature","geometry": {"type": "Point","coordinates": ['+x+','+y+']},"properties": {"vejnavn": "'+navn+'", "type": "'+navnekate0+'"}}'
 
-
+    return Response(json_response, content_type='application/json; charset=UTF-8')
 
 
     cur.close()
     conn.close()
-
-
-    return response
