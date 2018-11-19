@@ -104,7 +104,7 @@ mymap.locate({ //This is the code for the gps coordinates - it isn't
       var url = "http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng
       console.log(url)
 // console.log("Something")
-//   var FindStation =  $.getJSON(url, function(result) {
+// $.getJSON(url, function(result) {
 // console.log("Something else")
 //         console.log(result)
 
