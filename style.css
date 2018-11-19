@@ -15,7 +15,7 @@ h2{
   float: left
 }
 
-span#hidden{
+#hidden{
   float: left;
   margin-left: 100px;
   padding: 10px;

@@ -55,24 +55,25 @@ mymap.locate({ //This is the code for the gps coordinates - it isn't
 }).on('locationfound', function(e) {
   getRoute(e.latitude, e.longitude);
 }).on('locationerror', function(e) { //This refers back to the gps part of the code - so it returns an error message if it cant get access to the gps - if that is the case it skips all of the other steps
-  console.log(e);
   getRoute(55.6504670, 12.5429260);
   $("span#hidden").show(500);
 });
 
 function getRoute(lat, lng) {
-  var coords = L.latLng([lat, lng]);
-  var StartLocation = coords //The start of the journey
+
+  console.log("Getting route from "+lat+", "+lng);
+
+  var StartLocation = L.latLng([lat, lng]); //The start of the journey
 
 
 
   var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+
   //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
-  fetch(api_address).then(response => {
-    return response.json();
-  }).then(data => {
-    // Work with JSON data here
+
+  $.getJSON(api_address, function(data) {
+
     var windangle = data.wind.deg
 
     var angle = windangle //The direction that the bicylclist is going to travel
@@ -108,34 +109,23 @@ function getRoute(lat, lng) {
     } //This might be deletable later
 
 
-    var url = "http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng
-    console.log(url)
-    // console.log("Something")
-    // $.getJSON(url, function(result) {
-    // console.log("Something else")
-    //         console.log(result)
 
+    $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
+      console.log("Got a response")
+      console.log(data);
 
-    fetch(url)
-      .then(res => res.json()) //response type
-      .then(data => console.log(data)); //log the data;
+      // //The EndLocation should be changed to the coordinate of the station, when those are available
+      var EndLocation = L.latLng(EndLat, EndLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
-    // //The EndLocation should be changed to the coordinate of the station, when those are available
-    var EndLocation = L.latLng(EndLat, EndLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
+      //Here the routing begins
+      var route = L.Routing.control({
+        waypoints: [ //This defines from there the route should start and end
+          StartLocation,
+          EndLocation
+        ],
+        router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+      }).addTo(mymap);
 
-    //Here the routing begins
-    var route = L.Routing.control({
-      waypoints: [ //This defines from there the route should start and end
-        StartLocation,
-        EndLocation
-      ],
-      router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-    }).addTo(mymap);
-
-
-
-
-  })
-
-
+    });
+  });
 }
