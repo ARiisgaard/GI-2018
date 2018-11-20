@@ -49,7 +49,7 @@ var layerControl = L.control.layers(basemaps, overlayMaps).addTo(mymap);
 
 L.control.scale().addTo(mymap); //adds a scalebar
 
-mymap.locate({ //This is the code for the gps coordinates - it isn't
+mymap.locate({ //This is the code for finding the users location
   setView: false, //Zooms to the location of the user - disabled since there are going to be zoomed on the map instead
   watch: false //Temporary disabled to avoid getting multiple routing options
 }).on('locationfound', function(e) {
@@ -76,7 +76,7 @@ function getRoute(lat, lng) {
 
     var windangle = data.wind.deg
 
-    var angle = windangle //The direction that the bicylclist is going to travel
+    var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
 
     var length = 5000 //Distance traveled in meters
 
@@ -108,10 +108,8 @@ function getRoute(lat, lng) {
       mymap.removeLayer(myLayer);
     } //This might be deletable later
 
-console.log(EndLat)
 
     $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
-      console.log("Got a response")
        var stationLat = data.geometry.coordinates [1]
        var stationLng = data.geometry.coordinates [0]
 
