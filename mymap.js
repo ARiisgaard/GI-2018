@@ -108,14 +108,15 @@ function getRoute(lat, lng) {
       mymap.removeLayer(myLayer);
     } //This might be deletable later
 
-
+console.log(EndLat)
 
     $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
       console.log("Got a response")
-      console.log(data);
+       var stationLat = data.geometry.coordinates [1]
+       var stationLng = data.geometry.coordinates [0]
 
       // //The EndLocation should be changed to the coordinate of the station, when those are available
-      var EndLocation = L.latLng(EndLat, EndLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
+      var EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
       //Here the routing begins
       var route = L.Routing.control({
