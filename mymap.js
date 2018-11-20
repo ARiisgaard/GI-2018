@@ -51,7 +51,7 @@ L.control.scale().addTo(mymap); //adds a scalebar
 
 mymap.locate({ //This is the code for finding the users location
   setView: false, //Zooms to the location of the user - disabled since there are going to be zoomed on the map instead
-  watch: false //Temporary disabled to avoid getting multiple routing options
+  watch: true //Temporary disabled to avoid getting multiple routing options
 }).on('locationfound', function(e) {
   getRoute(e.latitude, e.longitude);
 }).on('locationerror', function(e) { //This refers back to the gps part of the code - so it returns an error message if it cant get access to the gps - if that is the case it skips all of the other steps
@@ -103,9 +103,10 @@ function getRoute(lat, lng) {
 
 
     //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
-    //Since the code doesn't work at the moment it hasn't been properly documented yet - but basicly the it is the same code as we saw in the parking machine example with small changes
-    if (myLayer) {
-      mymap.removeLayer(myLayer);
+    var route;
+
+    if (route) {
+      mymap.removeLayer(route);
     } //This might be deletable later
 
 
@@ -117,13 +118,17 @@ function getRoute(lat, lng) {
       var EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
       //Here the routing begins
+      $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+
       var route = L.Routing.control({
         waypoints: [ //This defines from there the route should start and end
           StartLocation,
           EndLocation
         ],
         router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-      }).addTo(mymap);
+      })
+
+      route.addTo(mymap);
 
     });
   });
