@@ -14,8 +14,8 @@ var city = L.OWM.current({
 
 var myIcon = L.icon({ //defines the icon for the wind location
   iconUrl: 'Images/windsock.png', //Credits:  Flaticon/Freepik
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [30, 30],
+  iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
 var myLayer; //Layer with distination
@@ -62,7 +62,7 @@ mymap.locate({ //This is the code for finding the users location
 
 function getRoute(lat, lng) {
 
-  console.log("Getting route from "+lat+", "+lng);
+  console.log("Getting route from " + lat + ", " + lng);
 
   var StartLocation = L.latLng([lat, lng]); //The start of the journey
 
@@ -100,7 +100,7 @@ function getRoute(lat, lng) {
     var winddestination;
     if (winddestination) {
       mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
-    } //This might be deletable later
+    }
 
     var winddestination = L.marker([EndLat, EndLng], {
       icon: myIcon
@@ -108,22 +108,22 @@ function getRoute(lat, lng) {
 
 
     //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
-    var route;
-
-    if (route) {
-      mymap.removeLayer(route); //This removes the old route, if a new one is created
-    }
-
 
     $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
-       var stationLat = data.geometry.coordinates [1]
-       var stationLng = data.geometry.coordinates [0]
+      var stationLat = data.geometry.coordinates[1]
+      var stationLng = data.geometry.coordinates[0]
 
       // //The EndLocation should be changed to the coordinate of the station, when those are available
       var EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
       //Here the routing begins
       $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+
+      var route;
+
+      if (route) {
+        mymap.removeLayer(route); //This removes the old route, if a new one is created
+      }
 
       var route = L.Routing.control({
         waypoints: [ //This defines from there the route should start and end
