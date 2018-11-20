@@ -36,6 +36,33 @@ var mymap = L.map('map', {
   layers: [osm] // add it here
 });
 
+var locked = "false"
+var EndLocation;
+
+var toggle = L.easyButton({
+  states: [{
+    stateName: 'UnlockDestination',
+    icon: 'fa-unlock',
+    title: 'Lock final destination',
+    onClick: function(control) {
+      var locked = "true";
+      control.state('LockDestination');
+console.log("Knap1. Locked: " + locked)
+    }
+  }, {
+    icon: 'fa-lock',
+    stateName: 'LockDestination',
+    onClick: function(control) {
+      var locked = "Test2";
+      control.state('UnlockDestination');
+      console.log("Knap2. Locked: " + locked)
+    },
+    title: 'Unlock final destination'
+  }]
+});
+toggle.addTo(mymap);
+
+
 var overlayMaps = {
   "Cities": city,
   "Stations": stations
@@ -45,11 +72,14 @@ var basemaps = {
   "OpenStreetMap": osm
 }
 
+L.easyButton( 'fa-star', function(){ //This is just used to test if the locked is changing
+  alert(locked);
+}).addTo(mymap);
+
 var layerControl = L.control.layers(basemaps, overlayMaps).addTo(mymap);
 //var overlays = {"Route": control}
 
 L.control.scale().addTo(mymap); //adds a scalebar
-
 mymap.locate({ //This is the code for finding the users location
   setView: false, //Zooms to the location of the user - disabled since there are going to be zoomed on the map instead
   watch: true //Temporary disabled to avoid getting multiple routing options
@@ -65,13 +95,12 @@ function getRoute(lat, lng) {
   console.log("Getting route from " + lat + ", " + lng);
 
   var StartLocation = L.latLng([lat, lng]); //The start of the journey
-
-
-
+console.log("Test before if-statement. Locked: " + locked);
+  if (locked == "false") { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
+console.log("Test inside if-statement. Locked: " + locked);
   var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
   //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
-
 
   $.getJSON(api_address, function(data) {
 
@@ -137,4 +166,24 @@ function getRoute(lat, lng) {
 
     });
   });
+} else {
+    //Here the routing begins
+    $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+ console.log("Test inside else-statement: " + locked + EndLocation)
+    var route;
+
+    if (route) {
+      mymap.removeLayer(route); //This removes the old route, if a new one is created
+    }
+
+    var route = L.Routing.control({
+      waypoints: [ //This defines from there the route should start and end
+        StartLocation,
+        EndLocation
+      ],
+      router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+    })
+
+    route.addTo(mymap);
+}
 }
