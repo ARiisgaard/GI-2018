@@ -13,7 +13,7 @@ var city = L.OWM.current({
 });
 
 var myIcon = L.icon({ //defines the icon for the wind location
-  iconUrl: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png', //Temporary, so we can see the difference between locations and stations
+  iconUrl: 'Images/windsock.png', //Credits:  Flaticon/Freepik
   iconSize: [40, 40],
   iconAnchor: [20, 40],
   popupAnchor: [-3, -76]
@@ -33,11 +33,12 @@ stations.on('click', function(e) {
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
   zoom: 10,
-  layers: [osm, stations] // add it here
+  layers: [osm] // add it here
 });
 
 var overlayMaps = {
-  "Cities": city
+  "Cities": city,
+  "Stations": stations
 }; //Adds the overlayer with weather information
 
 var basemaps = {
@@ -96,8 +97,12 @@ function getRoute(lat, lng) {
 
     //Here stops the coordinate definition
 
+    var winddestination;
+    if (winddestination) {
+      mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+    } //This might be deletable later
 
-    var Winddestination = L.marker([EndLat, EndLng], {
+    var winddestination = L.marker([EndLat, EndLng], {
       icon: myIcon
     }).addTo(mymap);
 
@@ -106,8 +111,8 @@ function getRoute(lat, lng) {
     var route;
 
     if (route) {
-      mymap.removeLayer(route);
-    } //This might be deletable later
+      mymap.removeLayer(route); //This removes the old route, if a new one is created
+    }
 
 
     $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
