@@ -36,7 +36,7 @@ var mymap = L.map('map', {
   layers: [osm] // add it here
 });
 
-var locked = "false"
+var locked = false
 var EndLocation;
 
 var toggle = L.easyButton({
@@ -45,7 +45,7 @@ var toggle = L.easyButton({
     icon: 'fa-unlock',
     title: 'Lock final destination',
     onClick: function(control) {
-      var locked = "true";
+      var locked = true;
       control.state('LockDestination');
 console.log("Knap1. Locked: " + locked)
     }
@@ -53,7 +53,7 @@ console.log("Knap1. Locked: " + locked)
     icon: 'fa-lock',
     stateName: 'LockDestination',
     onClick: function(control) {
-      var locked = "Test2";
+      var locked = false;
       control.state('UnlockDestination');
       console.log("Knap2. Locked: " + locked)
     },
@@ -72,7 +72,7 @@ var basemaps = {
   "OpenStreetMap": osm
 }
 
-L.easyButton( 'fa-star', function(){ //This is just used to test if the locked is changing
+L.easyButton( 'fa-star', function(){ //This is just used to test if the locked status is changing
   alert(locked);
 }).addTo(mymap);
 
@@ -96,7 +96,7 @@ function getRoute(lat, lng) {
 
   var StartLocation = L.latLng([lat, lng]); //The start of the journey
 console.log("Test before if-statement. Locked: " + locked);
-  if (locked == "false") { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
+  if (locked == false) { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
 console.log("Test inside if-statement. Locked: " + locked);
   var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
