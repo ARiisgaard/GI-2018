@@ -1,0 +1,55 @@
+{
+  "name": "dms-conversion",
+  "version": "3.1.2",
+  "description": "A JavaScript library for converting between decimal degrees and degrees, minutes, and seconds (DMS).",
+  "main": "dist/node/dms.js",
+  "browser": "dist/browser/dms.js",
+  "module": "dist/esm/dms.js",
+  "typings": "dist/esm/dms.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "directories": {
+    "lib": "dist",
+    "test": "spec"
+  },
+  "scripts": {
+    "prepare": "tsc -p tsconfig.esm.json && tsc -p tsconfig.node.json && webpack",
+    "pretest": "tsc -p spec",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WSDOT-GIS/dms-js.git"
+  },
+  "keywords": [
+    "DMS",
+    "decimal",
+    "degrees",
+    "degree",
+    "minute",
+    "second",
+    "GIS"
+  ],
+  "author": "WSDOT-GIS (https://github.com/WSDOT-GIS)",
+  "contributors": [
+    "Jeff Jacobson (https://github.com/JeffJacobson)",
+    "James Puddicombe (https://github.com/puddicombe)"
+  ],
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/WSDOT-GIS/dms-js/issues"
+  },
+  "homepage": "https://github.com/WSDOT-GIS/dms-js#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jasmine": "^2.8.8",
+    "jasmine": "^3.1.0",
+    "source-map": "^0.7.3",
+    "ts-loader": "^4.3.1",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.1",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^3.0.2"
+  }
+}

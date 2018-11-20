@@ -2,21 +2,23 @@
 <html>
 
 <head>
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--Fixes the favicon 404-->
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--Fixes the favicon 404 error-->
   <title>GI2018</title>
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="leaflet/leaflet.css" />
-    <link rel="stylesheet" href="leaflet-routing-machine-3.2.7\dist\leaflet-routing-machine.css" />
-    <link rel="stylesheet" href="leaflet-locatecontrol-gh-pages/dist/L.Control.Locate.min.css" />
-      <!--Enables the use of leaflet routing commands-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> <!--Enables Jquery, which gets used for creating the server-->
+    <link rel="stylesheet" href="leaflet-routing-machine-3.2.8\dist\leaflet-routing-machine.css" /> <!--Enables the use of leaflet routing commands-->
+    <link rel="stylesheet" href="leaflet-locatecontrol-gh-pages/dist/L.Control.Locate.min.css" /> <!--Enables the use of gps-->
+
   <script src="leaflet/leaflet.js"></script>
-<script src="openrouteservice-js-master/dist/ors-js-client.js"></script>
-<script src="leaflet-ajax-gh-pages\dist\leaflet.ajax.js"></script>
-  <!--Dette er en kommentar -->
+<script src="openrouteservice-js-master/dist/ors-js-client.js"></script> <!--Enables the use of leaflet routing commands-->
+<script src="leaflet-ajax-gh-pages\dist\leaflet.ajax.js"></script> <!--This is added, so that the stations can be added as geojson files-->
+
   <script src="leaflet/leaflet.ajax.min.js"></script>
+
 
   <!--Missing files for making L.Routing.OpenRouteService work -->
   <script src="lrm-openrouteservice-master\lrm-openrouteservice\corslite.min.js"></script>
@@ -25,7 +27,7 @@
 <!--Stops here -->
 
 <script src="leaflet-locatecontrol-gh-pages/src/L.Control.Locate.js" ></script>  <!--Enables the use of leaflet gps commands-->
-<script src="leaflet-routing-machine-3.2.7\dist\leaflet-routing-machine.js"></script>    <!--Enables the use of leaflet routing commands-->
+<script src="leaflet-routing-machine-3.2.8\dist\leaflet-routing-machine.js"></script>    <!--Enables the use of leaflet routing commands-->
 <script src="lrm-openrouteservice-master\lrm-openrouteservice\L.Routing.OpenRouteService.js"></script> <!--Adds the ORS expansion to leaflet routing machine - has to be after the routing machine load -->
 
 
@@ -35,8 +37,8 @@
 </head>
 
 <body>
-  <h2>Bike map</h2>
-  <div id="map"></div> <!-- remove it here -->
+  <h2>Bike map</h2> <span id="hidden">Location access denied. Starting trip at AAU CPH.</span>
+  <div id="map"></div>
   <script src="mymap.js"></script>
 </body>
 </html>
