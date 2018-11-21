@@ -47,7 +47,6 @@ var toggle = L.easyButton({ //With a click of this button the user can lock in t
     onClick: function(control) {
       locked = true;
       control.state('LockDestination');
-console.log("Knap1. Locked: " + locked)
     }
   }, {
     icon: 'fa-lock',
@@ -55,7 +54,6 @@ console.log("Knap1. Locked: " + locked)
     onClick: function(control) {
       locked = false;
       control.state('UnlockDestination');
-      console.log("Knap2. Locked: " + locked)
     },
     title: 'Unlock final destination'
   }]
@@ -82,20 +80,17 @@ mymap.locate({ //This is the code for finding the users location
   watch: true //Makes the program keep track of the user location. So this code wont just run once, but will keep running every now and then
 }).on('locationfound', function(e) {
   getRoute(e.latitude, e.longitude);
-}).on('locationerror', function(e) { //If the gps is unaccessable it will calculate a route from the university and give an error message 
+}).on('locationerror', function(e) { //If the gps is unaccessable it will calculate a route from the university and give an error message
   getRoute(55.6504670, 12.5429260);
   $("span#hidden").show(500);
 });
 
 function getRoute(lat, lng) {
 
-  console.log("Getting route from " + lat + ", " + lng);
-
   var StartLocation = L.latLng([lat, lng]); //The start of the journey
-console.log("Test before if-statement. Locked: " + locked);
 
   if (locked == false) { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
-console.log("Test inside if-statement. Locked: " + locked);
+
   var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
   //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
@@ -167,7 +162,7 @@ console.log("Test inside if-statement. Locked: " + locked);
 } else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
     //Here the routing begins
     $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
- console.log("Test inside else-statement: " + locked + EndLocation)
+
     var route;
 
     if (route) {
