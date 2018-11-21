@@ -13,9 +13,9 @@ var city = L.OWM.current({
 });
 
 var myIcon = L.icon({ //defines the icon for the wind location
-  iconUrl: 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/256/Map-Marker-Marker-Outside-Chartreuse-icon.png', //Temporary, so we can see the difference between locations and stations
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconUrl: 'Images/windsock.png', //Credits:  Flaticon/Freepik
+  iconSize: [30, 30],
+  iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
 var myLayer; //Layer with distination
@@ -33,11 +33,37 @@ stations.on('click', function(e) {
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
   zoom: 10,
-  layers: [osm, stations] // add it here
+  layers: [osm]
 });
 
+var locked = false //This variable is telling the program if it should keep looking for new destinations
+var EndLocation; //This is variable containing the coordinats of the destination
+
+var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
+  states: [{
+    stateName: 'UnlockDestination',
+    icon: 'fa-unlock',
+    title: 'Lock final destination',
+    onClick: function(control) {
+      locked = true;
+      control.state('LockDestination');
+    }
+  }, {
+    icon: 'fa-lock',
+    stateName: 'LockDestination',
+    onClick: function(control) {
+      locked = false;
+      control.state('UnlockDestination');
+    },
+    title: 'Unlock final destination'
+  }]
+});
+toggle.addTo(mymap);
+
+
 var overlayMaps = {
-  "Cities": city
+  "Cities": city,
+  "Stations": stations
 }; //Adds the overlayer with weather information
 
 var basemaps = {
@@ -51,26 +77,23 @@ L.control.scale().addTo(mymap); //adds a scalebar
 
 mymap.locate({ //This is the code for finding the users location
   setView: false, //Zooms to the location of the user - disabled since there are going to be zoomed on the map instead
-  watch: false //Temporary disabled to avoid getting multiple routing options
+  watch: true //Makes the program keep track of the user location. So this code wont just run once, but will keep running every now and then
 }).on('locationfound', function(e) {
   getRoute(e.latitude, e.longitude);
-}).on('locationerror', function(e) { //This refers back to the gps part of the code - so it returns an error message if it cant get access to the gps - if that is the case it skips all of the other steps
+}).on('locationerror', function(e) { //If the gps is unaccessable it will calculate a route from the university and give an error message
   getRoute(55.6504670, 12.5429260);
   $("span#hidden").show(500);
 });
 
 function getRoute(lat, lng) {
 
-  console.log("Getting route from "+lat+", "+lng);
-
   var StartLocation = L.latLng([lat, lng]); //The start of the journey
 
-
+  if (locked == false) { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
 
   var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
   //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
-
 
   $.getJSON(api_address, function(data) {
 
@@ -96,35 +119,64 @@ function getRoute(lat, lng) {
 
     //Here stops the coordinate definition
 
+    var winddestination;
+    if (winddestination) {
+      mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+    }
 
-    var Winddestination = L.marker([EndLat, EndLng], {
+    var winddestination = L.marker([EndLat, EndLng], {
       icon: myIcon
     }).addTo(mymap);
 
 
     //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
-    //Since the code doesn't work at the moment it hasn't been properly documented yet - but basicly the it is the same code as we saw in the parking machine example with small changes
-    if (myLayer) {
-      mymap.removeLayer(myLayer);
-    } //This might be deletable later
-
 
     $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
-       var stationLat = data.geometry.coordinates [1]
-       var stationLng = data.geometry.coordinates [0]
+      var stationLat = data.geometry.coordinates[1]
+      var stationLng = data.geometry.coordinates[0]
 
       // //The EndLocation should be changed to the coordinate of the station, when those are available
-      var EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
+      EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
       //Here the routing begins
-      var route = L.Routing.control({
+      $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+
+      var route;
+
+      if (route) {
+        mymap.removeLayer(route); //This removes the old route, if a new one is created
+      }
+
+      route = L.Routing.control({
         waypoints: [ //This defines from there the route should start and end
           StartLocation,
           EndLocation
         ],
         router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-      }).addTo(mymap);
+      })
+
+      route.addTo(mymap);
 
     });
   });
+} else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
+    //Here the routing begins
+    $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+
+    var route;
+
+    if (route) {
+      mymap.removeLayer(route); //This removes the old route, if a new one is created
+    }
+
+    route = L.Routing.control({
+      waypoints: [ //This defines from there the route should start and end
+        StartLocation,
+        EndLocation
+      ],
+      router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+    })
+
+    route.addTo(mymap);
+}
 }
