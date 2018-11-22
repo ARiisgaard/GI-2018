@@ -38,6 +38,7 @@ var mymap = L.map('map', {
 
 var locked = false //This variable is telling the program if it should keep looking for new destinations
 var EndLocation; //This is variable containing the coordinats of the destination
+var route;
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -141,7 +142,6 @@ function getRoute(lat, lng) {
       //Here the routing begins
       $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
 
-      var route;
 
       if (route) {
         mymap.removeLayer(route); //This removes the old route, if a new one is created
@@ -163,7 +163,7 @@ function getRoute(lat, lng) {
     //Here the routing begins
     $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
 
-    var route;
+
 
     if (route) {
       mymap.removeLayer(route); //This removes the old route, if a new one is created
