@@ -123,6 +123,7 @@ function getRoute(lat, lng) {
     var winddestination;
     if (winddestination) {
       mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+console.log("Wind remove")
     }
 
     var winddestination = L.marker([EndLat, EndLng], {
@@ -144,7 +145,8 @@ function getRoute(lat, lng) {
 
 
       if (route) {
-        mymap.removeLayer(route); //This removes the old route, if a new one is created
+        mymap.removeControl(route); //This removes the old route, if a new one is created
+        console.log("Does it go here")
       }
 
       route = L.Routing.control({
@@ -166,7 +168,8 @@ function getRoute(lat, lng) {
 
 
     if (route) {
-      mymap.removeLayer(route); //This removes the old route, if a new one is created
+      mymap.removeControl(route); //This removes the old route, if a new one is created
+console.log("Does it go here")
     }
 
     route = L.Routing.control({
