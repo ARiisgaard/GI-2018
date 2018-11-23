@@ -38,6 +38,9 @@ var mymap = L.map('map', {
 
 var locked = false //This variable is telling the program if it should keep looking for new destinations
 var EndLocation; //This is variable containing the coordinats of the destination
+var StartLocation;
+var route;
+var length = 5000; //This is the default distance of the trip
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -60,6 +63,24 @@ var toggle = L.easyButton({ //With a click of this button the user can lock in t
 });
 toggle.addTo(mymap);
 
+function enterDistance() {
+    var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
+    if (distance != null && isNaN(distance) == false) {
+        length = distance*1000
+        console.log("isNaN: " + isNaN(distance))
+                getRoute(StartLocation.lat, StartLocation.lng);
+    }
+    else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
+    alert("That is not a valid input")
+           enterDistance();
+         }
+}
+
+ // && isNaN(distance) == false
+
+L.easyButton( 'fa-ruler', function(){
+  enterDistance();
+}).addTo(mymap);
 
 var overlayMaps = {
   "Cities": city,
@@ -87,7 +108,7 @@ mymap.locate({ //This is the code for finding the users location
 
 function getRoute(lat, lng) {
 
-  var StartLocation = L.latLng([lat, lng]); //The start of the journey
+  StartLocation = L.latLng([lat, lng]); //The start of the journey
 
   if (locked == false) { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
 
@@ -101,7 +122,7 @@ function getRoute(lat, lng) {
 
     var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
 
-    var length = 5000 //Distance traveled in meters
+  //  var length = 5000 //Distance traveled in meters
 
     //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
@@ -122,6 +143,7 @@ function getRoute(lat, lng) {
     var winddestination;
     if (winddestination) {
       mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+console.log("Wind remove")
     }
 
     var winddestination = L.marker([EndLat, EndLng], {
@@ -141,10 +163,9 @@ function getRoute(lat, lng) {
       //Here the routing begins
       $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
 
-      var route;
 
       if (route) {
-        mymap.removeLayer(route); //This removes the old route, if a new one is created
+        mymap.removeControl(route); //This removes the old route, if a new one is created
       }
 
       route = L.Routing.control({
@@ -163,10 +184,10 @@ function getRoute(lat, lng) {
     //Here the routing begins
     $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
 
-    var route;
+
 
     if (route) {
-      mymap.removeLayer(route); //This removes the old route, if a new one is created
+      mymap.removeControl(route); //This removes the old route, if a new one is created
     }
 
     route = L.Routing.control({
