@@ -18,7 +18,7 @@ var myIcon = L.icon({ //defines the icon for the wind location
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
-var myLayer; //Layer with distination
+//var myLayer; //Layer with distination
 
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
@@ -66,17 +66,29 @@ toggle.addTo(mymap);
 function enterDistance() {
     var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
     if (distance != null && isNaN(distance) == false) {
-        length = distance*1000
         console.log("isNaN: " + isNaN(distance))
                 getRoute(StartLocation.lat, StartLocation.lng);
     }
     else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
     alert("That is not a valid input")
+    length = distance*1000
            enterDistance();
          }
 }
 
- // && isNaN(distance) == false
+L.easyButton( 'fa-flask', function(){
+  var proxy = 'https://cors-anywhere.herokuapp.com/';
+  var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
+
+  $.getJSON(proxy + apiLinkDS, function(data2) {
+  console.log(data2.hourly.data["0"].precipProbability)
+  console.log(data2.hourly.data["0"].precipProbability)
+});
+}).addTo(mymap);
+
+
+//https://api.darksky.net/forecast/[key]/[latitude],[longitude]
+//https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
 L.easyButton( 'fa-ruler', function(){
   enterDistance();
