@@ -41,6 +41,7 @@ var EndLocation; //This is variable containing the coordinats of the destination
 var StartLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
+var reverse = false;
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -62,6 +63,27 @@ var toggle = L.easyButton({ //With a click of this button the user can lock in t
   }]
 });
 toggle.addTo(mymap);
+
+var reversebotton = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
+  states: [{
+    stateName: 'OneWay',
+    icon: 'fa-train',
+    title: 'Train first',
+    onClick: function(control) {
+      reverse = true;
+      control.state('OtherWay');
+    }
+  }, {
+    icon: 'fa-bicycle',
+    stateName: 'OtherWay',
+    onClick: function(control) {
+      reverse = false;
+      control.state('OneWay');
+    },
+    title: 'Bike first'
+  }]
+});
+reversebotton.addTo(mymap);
 
 function enterDistance() {
     var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
@@ -131,8 +153,11 @@ function getRoute(lat, lng) {
   $.getJSON(api_address, function(data) {
 
     var windangle = data.wind.deg
+if (reverse == false) {
 
     var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
+}
+else {var angle = windangle};
 
   //  var length = 5000 //Distance traveled in meters
 
@@ -174,12 +199,19 @@ console.log("Wind remove")
 
       //Here the routing begins
       $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+      if (reverse == true) {
 
+      // var templocation = StartLocation;
+      // StartLocation = EndLocation;
+      // Endlocation = templocation;
+[StartLocation,EndLocation] = [EndLocation,StartLocation];
+    };
 
       if (route) {
         mymap.removeControl(route); //This removes the old route, if a new one is created
       }
-
+console.log("StartLocation; " + StartLocation)
+console.log("EndLocation; " + EndLocation)
       route = L.Routing.control({
         waypoints: [ //This defines from there the route should start and end
           StartLocation,
