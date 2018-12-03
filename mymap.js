@@ -68,10 +68,10 @@ function enterDistance() {
     if (distance != null && isNaN(distance) == false) {
         console.log("isNaN: " + isNaN(distance))
                 getRoute(StartLocation.lat, StartLocation.lng);
+                length = distance*1000
     }
     else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
     alert("That is not a valid input")
-    length = distance*1000
            enterDistance();
          }
 }
@@ -79,7 +79,7 @@ function enterDistance() {
 L.easyButton( 'fa-flask', function(){
   var proxy = 'https://cors-anywhere.herokuapp.com/';
   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
-
+  console.log(length)
   $.getJSON(proxy + apiLinkDS, function(data2) {
   console.log(data2.hourly)
   console.log(data2.hourly.data["0"].precipProbability)
