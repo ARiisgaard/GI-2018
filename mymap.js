@@ -101,10 +101,24 @@ function enterDistance() {
 L.easyButton( 'fa-flask', function(){
   var proxy = 'https://cors-anywhere.herokuapp.com/';
   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
-  console.log(length)
+var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+var currentTime = Math.round((new Date()).getTime() / 1000);
+$.getJSON(proxy + apiLinkOWM, function(data1) {
+console.log("Sunrise: " + data1.sys.sunrise)
+console.log("Current time: " + currentTime)
+var minToSunset = (data1.sys.sunset - currentTime)/60
+var minToSunrise = (currentTime - data1.sys.sunrise)/60
+if (minToSunset > 0) {
+console.log("Minuttes to sunset: " + Math.round(minToSunset))
+}
+else {
+console.log("Minuttes to sunrise: " + Math.round(minToSunrise))
+}
+});
+
   $.getJSON(proxy + apiLinkDS, function(data2) {
-  console.log(data2.hourly)
-  console.log(data2.hourly.data["0"].precipProbability)
+  console.log("Chance of precipitation in current hour: " + data2.hourly.data["0"].precipProbability)
+  console.log("Chance of precipitation in next hour: " + data2.hourly.data["1"].precipProbability)
 });
 }).addTo(mymap);
 
