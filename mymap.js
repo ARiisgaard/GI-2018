@@ -117,8 +117,8 @@ console.log("Minuttes to sunrise: " + Math.round(minToSunrise))
 });
 
   $.getJSON(proxy + apiLinkDS, function(data2) {
-  console.log("Chance of precipitation in current hour: " + data2.hourly.data["0"].precipProbability)
-  console.log("Chance of precipitation in next hour: " + data2.hourly.data["1"].precipProbability)
+  console.log(data2.hourly.data["0"].precipProbability*100 + "% Chance of precipitation in current hour. Intensity: " + data2.hourly.data["0"].precipIntensity + " millimeters per hour")
+  console.log(data2.hourly.data["1"].precipProbability*100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
 });
 }).addTo(mymap);
 
