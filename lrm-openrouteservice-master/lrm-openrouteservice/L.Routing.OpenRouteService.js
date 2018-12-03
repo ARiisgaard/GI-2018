@@ -121,7 +121,7 @@
 				}
 
 				alts.push({
-					name: 'Routing option ' + i,
+					name: "",//'Routing option ' + i, Andreas
 					coordinates: coordinates,
 					instructions: instructions,
 					summary: {
