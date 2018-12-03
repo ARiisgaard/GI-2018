@@ -81,7 +81,7 @@ L.easyButton( 'fa-flask', function(){
   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
 
   $.getJSON(proxy + apiLinkDS, function(data2) {
-  console.log(data2.hourly.data["0"].precipProbability)
+  console.log(data2.hourly)
   console.log(data2.hourly.data["0"].precipProbability)
 });
 }).addTo(mymap);
