@@ -71,6 +71,7 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
     title: 'Train first',
     onClick: function(control) {
       reverse = true;
+      getRoute(StartLocation.lat, StartLocation.lng);
       control.state('OtherWay');
     }
   }, {
@@ -78,6 +79,7 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
     stateName: 'OtherWay',
     onClick: function(control) {
       reverse = false;
+      getRoute(StartLocation.lat, StartLocation.lng);
       control.state('OneWay');
     },
     title: 'Bike first'
