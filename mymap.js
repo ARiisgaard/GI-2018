@@ -88,47 +88,45 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
 reversebotton.addTo(mymap);
 
 function enterDistance() {
-    var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
-    if (distance != null && isNaN(distance) == false) {
-        console.log("isNaN: " + isNaN(distance))
-                getRoute(StartLocation.lat, StartLocation.lng);
-                length = distance*1000
-    }
-    else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
+  var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
+  if (distance != null && isNaN(distance) == false) {
+    console.log("isNaN: " + isNaN(distance))
+    getRoute(StartLocation.lat, StartLocation.lng);
+    length = distance * 1000
+  } else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
     alert("That is not a valid input")
-           enterDistance();
-         }
+    enterDistance();
+  }
 }
 
-L.easyButton( 'fa-flask', function(){
+L.easyButton('fa-flask', function() {
   var proxy = 'https://cors-anywhere.herokuapp.com/';
   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
-var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
-var currentTime = Math.round((new Date()).getTime() / 1000);
-$.getJSON(proxy + apiLinkOWM, function(data1) {
-console.log("Sunrise: " + data1.sys.sunrise)
-console.log("Current time: " + currentTime)
-var minToSunset = (data1.sys.sunset - currentTime)/60
-var minToSunrise = (currentTime - data1.sys.sunrise)/60
-if (minToSunset > 0) {
-console.log("Minuttes to sunset: " + Math.round(minToSunset))
-}
-else {
-console.log("Minuttes to sunrise: " + Math.round(minToSunrise))
-}
-});
+  var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+  var currentTime = Math.round((new Date()).getTime() / 1000);
+  $.getJSON(proxy + apiLinkOWM, function(data1) {
+    console.log("Sunrise: " + data1.sys.sunrise)
+    console.log("Current time: " + currentTime)
+    var minToSunset = (data1.sys.sunset - currentTime) / 60
+    var minToSunrise = (currentTime - data1.sys.sunrise) / 60
+    if (minToSunset > 0) {
+      console.log("Minuttes to sunset: " + Math.round(minToSunset))
+    } else {
+      console.log("Minuttes to sunrise: " + Math.round(minToSunrise))
+    }
+  });
 
   $.getJSON(proxy + apiLinkDS, function(data2) {
-  console.log(data2.hourly.data["0"].precipProbability*100 + "% Chance of precipitation in current hour. Intensity: " + data2.hourly.data["0"].precipIntensity + " millimeters per hour")
-  console.log(data2.hourly.data["1"].precipProbability*100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
-});
+    console.log(data2.hourly.data["0"].precipProbability * 100 + "% Chance of precipitation in current hour. Intensity: " + data2.hourly.data["0"].precipIntensity + " millimeters per hour")
+    console.log(data2.hourly.data["1"].precipProbability * 100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
+  });
 }).addTo(mymap);
 
 
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 //https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
-L.easyButton( 'fa-ruler', function(){
+L.easyButton('fa-ruler', function() {
   enterDistance();
 }).addTo(mymap);
 
@@ -162,102 +160,96 @@ function getRoute(lat, lng) {
 
   if (locked == false) { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
 
-  var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+    var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
-  //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+    //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
-  $.getJSON(api_address, function(data) {
+    $.getJSON(api_address, function(data) {
 
-    var windangle = data.wind.deg
-if (reverse == false) {
+      var windangle = data.wind.deg
+      if (reverse == false) {
 
-    var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
-}
-else {var angle = windangle};
+        var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
+      } else {
+        var angle = windangle
+      };
 
-  //  var length = 5000 //Distance traveled in meters
+      //  var length = 5000 //Distance traveled in meters
 
-    //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
+      //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
-    var StartLatInRat = lat * Math.PI / 180
-    var StartLngInRat = lng * Math.PI / 180
-    var AngleInRat = angle * Math.PI / 180
+      var StartLatInRat = lat * Math.PI / 180
+      var StartLngInRat = lng * Math.PI / 180
+      var AngleInRat = angle * Math.PI / 180
 
-    var R = 6371e3; // Distance to the centre of the earth in metres
-    var end_y = Math.asin(Math.sin(StartLatInRat) * Math.cos(length / R) +
-      Math.cos(StartLatInRat) * Math.sin(length / R) * Math.cos(AngleInRat));
-    var end_x = StartLngInRat + Math.atan2(Math.sin(AngleInRat) * Math.sin(length / R) * Math.cos(StartLatInRat),
-      Math.cos(length / R) - Math.sin(StartLatInRat) * Math.sin(end_y));
-    var EndLat = end_y * 180 / Math.PI
-    var EndLng = end_x * 180 / Math.PI
+      var R = 6371e3; // Distance to the centre of the earth in metres
+      var end_y = Math.asin(Math.sin(StartLatInRat) * Math.cos(length / R) +
+        Math.cos(StartLatInRat) * Math.sin(length / R) * Math.cos(AngleInRat));
+      var end_x = StartLngInRat + Math.atan2(Math.sin(AngleInRat) * Math.sin(length / R) * Math.cos(StartLatInRat),
+        Math.cos(length / R) - Math.sin(StartLatInRat) * Math.sin(end_y));
+      var EndLat = end_y * 180 / Math.PI
+      var EndLng = end_x * 180 / Math.PI
 
-    //Here stops the coordinate definition
+      //Here stops the coordinate definition
 
-    var winddestination;
-    if (winddestination) {
-      mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
-console.log("Wind remove")
-    }
-
-    var winddestination = L.marker([EndLat, EndLng], {
-      icon: myIcon
-    }).addTo(mymap);
-
-
-    //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
-
-    $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
-      var stationLat = data.geometry.coordinates[1]
-      var stationLng = data.geometry.coordinates[0]
-
-      // //The EndLocation should be changed to the coordinate of the station, when those are available
-      EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
-
-      //Here the routing begins
-      $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-      if (reverse == true) {
-
-      // var templocation = StartLocation;
-      // StartLocation = EndLocation;
-      // Endlocation = templocation;
-[StartLocation,EndLocation] = [EndLocation,StartLocation];
-    };
-
-      if (route) {
-        mymap.removeControl(route); //This removes the old route, if a new one is created
+      var winddestination;
+      if (winddestination) {
+        mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+        console.log("Wind remove")
       }
-console.log("StartLocation; " + StartLocation)
-console.log("EndLocation; " + EndLocation)
-      route = L.Routing.control({
-        waypoints: [ //This defines from there the route should start and end
-          StartLocation,
+
+      var winddestination = L.marker([EndLat, EndLng], {
+        icon: myIcon
+      }).addTo(mymap);
+
+
+      //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
+
+      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
+        var stationLat = data.geometry.coordinates[1]
+        var stationLng = data.geometry.coordinates[0]
+
+        // //The EndLocation should be changed to the coordinate of the station, when those are available
+        EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
+
+        //Here the routing begins
+        $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+        if (reverse == true) {
+
+          // var templocation = StartLocation;
+          // StartLocation = EndLocation;
+          // Endlocation = templocation;
+          [StartLocation, EndLocation] = [EndLocation, StartLocation];
+        };
+
+        fullRoute = [StartLocation,
           EndLocation
-        ],
-        router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-      })
+        ]
+        calculateRoute(fullRoute);
 
-      route.addTo(mymap);
-
+      });
     });
-  });
-} else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
+  } else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
     //Here the routing begins
-    $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-
-
-
-    if (route) {
-      mymap.removeControl(route); //This removes the old route, if a new one is created
-    }
-
-    route = L.Routing.control({
-      waypoints: [ //This defines from there the route should start and end
-        StartLocation,
-        EndLocation
-      ],
-      router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-    })
-
-    route.addTo(mymap);
+    fullRoute = [StartLocation,
+      EndLocation
+    ]
+    calculateRoute(fullRoute);
+  }
 }
+
+function calculateRoute(array) {
+  $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+
+
+
+  if (route) {
+    mymap.removeControl(route); //This removes the old route, if a new one is created
+  }
+
+  route = L.Routing.control({
+    waypoints: array,
+    router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+  })
+  route.addTo(mymap);
 }
