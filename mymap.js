@@ -42,6 +42,7 @@ var StartLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
 var reverse = false;
+var fullRoute;
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -223,41 +224,98 @@ console.log("Wind remove")
 [StartLocation,EndLocation] = [EndLocation,StartLocation];
     };
 
-      if (route) {
-        mymap.removeControl(route); //This removes the old route, if a new one is created
-      }
-console.log("StartLocation; " + StartLocation)
-console.log("EndLocation; " + EndLocation)
-      route = L.Routing.control({
-        waypoints: [ //This defines from there the route should start and end
-          StartLocation,
-          EndLocation
-        ],
-        router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-      })
+    fullRoute = [  StartLocation,
+      EndLocation]
+    calculateRoute(fullRoute);
 
-      route.addTo(mymap);
+      // if (route) {
+      //   mymap.removeControl(route); //This removes the old route, if a new one is created
+      // }
+      //
+      // route = L.Routing.control({
+      //   waypoints: [ //This defines from there the route should start and end
+      //     StartLocation,
+      //     EndLocation
+      //   ],
+      //   router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+      // })
+      //
+      // route.addTo(mymap);
 
     });
   });
-} else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
+} else {
+fullRoute = [  StartLocation,
+  EndLocation]
+calculateRoute(fullRoute);
+  //If the user has decided to lock the destination this following code will run instead of the looking for a destination
     //Here the routing begins
-    $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-
-
-
-    if (route) {
-      mymap.removeControl(route); //This removes the old route, if a new one is created
-    }
-
-    route = L.Routing.control({
-      waypoints: [ //This defines from there the route should start and end
-        StartLocation,
-        EndLocation
-      ],
-      router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-    })
-
-    route.addTo(mymap);
+    // $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+    //
+    //
+    //
+    // if (route) {
+    //   mymap.removeControl(route); //This removes the old route, if a new one is created
+    // }
+    //
+    // route = L.Routing.control({
+    //   waypoints: [ //This defines from there the route should start and end
+    //     StartLocation,
+    //     EndLocation
+    //   ],
+    //   router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+    // })
+    //
+    // route.addTo(mymap);
 }
+}
+
+// function calculateRoute(array) {
+//   $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+//
+//
+//
+//   if (route) {
+//     mymap.removeControl(route); //This removes the old route, if a new one is created
+//   }
+//
+//   route = L.Routing.control({
+//     waypoints: array,
+//     router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+//   })
+//   route.addTo(mymap);
+// }
+
+function calculateRoute(array) {
+  $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+
+
+
+  if (route) {
+    mymap.removeControl(route); //This removes the old route, if a new one is created
+  }
+
+  let orsDirections = new Openrouteservice.Directions({
+    api_key: "5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf"
+  });
+console.log("Dette er en test: " + array)
+  orsDirections.calculate({
+    coordinates: [[8.690958, 49.404662], [8.687868, 49.390139]],
+    profile: "cycling-regular",
+    extra_info: ["waytype", "steepness"],
+    geometry_format: "geojson",
+    format: "json",
+    elevation: "true"
+  })
+    .then(function(json) {
+        // Add your own result handling here
+        console.log("Virker det?");
+        console.log(JSON.stringify(json));
+        new L.GeoJSON.AJAX(json, { //creating the "stations" layer
+        });
+    })
+    .catch(function(err) {
+        console.error(err);
+        console.log("Virker det ikke?");
+    });
 }
