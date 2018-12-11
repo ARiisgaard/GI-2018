@@ -144,7 +144,7 @@
 			for (i = 0; i < coords.length; i++) {
 				latlngs[i] = new L.LatLng(coords[i][0], coords[i][1]);
 			}
-
+			console.log("Decoded:" + latlngs)
 			return latlngs;
 		},
 
