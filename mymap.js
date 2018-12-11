@@ -42,6 +42,7 @@ var StartLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
 var reverse = false;
+var routeCoordinates;
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -104,6 +105,7 @@ L.easyButton('fa-flask', function() {
   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
   var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
   var currentTime = Math.round((new Date()).getTime() / 1000);
+
   $.getJSON(proxy + apiLinkOWM, function(data1) {
     console.log("Sunrise: " + data1.sys.sunrise)
     console.log("Current time: " + currentTime)
@@ -122,6 +124,50 @@ L.easyButton('fa-flask', function() {
   });
 }).addTo(mymap);
 
+L.easyButton('fa-bolt', function() {
+  //console.log("Coords: " + routeCoordinates);
+// var punktStart = StartLocation
+// var punktSlut = EndLocation
+
+for (i = 0; i < routeCoordinates.length -1; i++) {
+  console.log("Dette er vinkel: " + i)
+  calculateAngle(routeCoordinates[i], routeCoordinates[i+1]);
+}
+// for (i = 0; i < routeCoordinates.length -1; i++) {
+//   latlngs[i] = new L.LatLng(routeCoordinates[i][0], routeCoordinates[i][1]);
+// }
+// return latlngs;
+
+
+//calculateAngle(StartLocation, EndLocation);
+
+
+// console.log(routeCoordinates[1])
+//       var dLon = (punktSlut.lng-punktStart.lng);
+//       var y = Math.sin(dLon) * Math.cos(punktSlut.lat);
+//       var x = Math.cos(punktStart.lat)*Math.sin(punktSlut.lat) - Math.sin(punktStart.lat)*Math.cos(punktSlut.lat)*Math.cos(dLon);
+//       var brng = 180 / Math.PI*(Math.atan2(y, x));
+//       if (brng < 0) {var brng360 = brng + 360}
+//         else brng360 = brng
+//
+//       console.log(brng360);
+
+      // console.log(360 - ((brng + 360) % 360));
+
+      // _toDeg : function(rad) {
+      //     return rad * 180 / Math.PI;
+      // }
+
+  // var point1 = turf.point([routeCoordinates[0].lat,routeCoordinates[0].lng], {"marker-color": "#F00"});
+  // var point2 = turf.point([routeCoordinates[1].lat,routeCoordinates[1].lng], {"marker-color": "#00F"});
+
+
+  // for (i = 0; i < routeCoordinates.length; i++) {
+  //   latlngs[i] = new L.LatLng(routeCoordinates[i][0], routeCoordinates[i][1]);
+  // }
+  // return latlngs;
+
+}).addTo(mymap);
 
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 //https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
@@ -166,7 +212,7 @@ function getRoute(lat, lng) {
 
     $.getJSON(api_address, function(data) {
 
-      var windangle = data.wind.deg
+      var windangle = 190//data.wind.deg
       if (reverse == false) {
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
@@ -251,5 +297,24 @@ function calculateRoute(array) {
     waypoints: array,
     router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
   })
-  route.addTo(mymap);
+  .on('routesfound', function(e) {
+    routeCoordinates = e.routes[0].coordinates
+    })
+route.addTo(mymap);
+
+
+// for (i = 0; i < 20; i++) {
+//   console.log("Punkt " + i + " lat: " + routePoint[i].latLng.lat + " lng: "+routePoint[i].latLng.lng);
+//   }
+}
+
+function calculateAngle(punktStart, punktSlut) {
+
+      var dLon = (punktSlut.lng-punktStart.lng);
+      var y = Math.sin(dLon) * Math.cos(punktSlut.lat);
+      var x = Math.cos(punktStart.lat)*Math.sin(punktSlut.lat) - Math.sin(punktStart.lat)*Math.cos(punktSlut.lat)*Math.cos(dLon);
+      var brng = 180 / Math.PI*(Math.atan2(y, x));
+      if (brng < 0) {var brng360 = brng + 360}
+        else brng360 = brng
+        console.log(brng360);
 }
