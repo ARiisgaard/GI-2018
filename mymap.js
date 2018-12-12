@@ -226,8 +226,11 @@ function changeArrow() {
      $(id="myCanvas").remove();
      if (oldAngle != angle){
       var c = document.getElementById("myCanvas");
+      console.log("c: " + c);
       var ctx = c.getContext("2d");
+      console.log("c: " + ctx);
       var img = document.getElementById("image");
+      console.log("c: " + img);
       ctx.clearRect(0,0, 100,100);
       ctx.translate(100/2, 100/2);
       ctx.rotate(resetarrow); //Resets the position of the arrow
@@ -237,7 +240,12 @@ function changeArrow() {
       resetarrow = -angle * Math.PI / 180;
       ctx.translate(-100/2, -100/2);
       ctx.drawImage(img, 0, 0,100,100);
+      document.getElementById("myCanvas").onmouseover = function() {mouseOver()};
 }
 else {console.log("Det virker?")}}
 //changeArrow()
-setInterval(changeArrow, 30000); //in milliseconds
+setInterval(changeArrow, 3000); //in milliseconds
+
+
+function mouseOver() {
+    alert("oh no"); }
