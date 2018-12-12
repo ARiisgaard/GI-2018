@@ -1,3 +1,11 @@
+var locked = false //This variable is telling the program if it should keep looking for new destinations
+var EndLocation; //This is variable containing the coordinats of the destination
+var StartLocation;
+var route;
+var length = 5000; //This is the default distance of the trip
+var test = [StartLocation,EndLocation];
+var numberofwaypoints = 2;
+
 var osm = L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -26,9 +34,27 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
   }
 });
 
-stations.on('click', function(e) {
-  coords2 = [e.latlng.lat, e.latlng.lng];
+// stations.on('click', function(e) {
+//   coords2 = [e.latlng.lat, e.latlng.lng];
+// });
+
+var park1;
+
+var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" layer
+   // onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+   //  layer.bindPopup("<h2>Park:</h2>" + "You want to go here?" + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+// console.log(park1)
+ // }
 });
+
+// parks.on('click', function(e) {
+// coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
+// numberofwaypoints += 1
+// console.log(numberofwaypoints)
+// getRoute(StartLocation.lat, StartLocation.lng);
+// // test = [StartLocation,coords2,EndLocation];
+// console.log(test)
+// });
 
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
@@ -36,11 +62,44 @@ var mymap = L.map('map', {
   layers: [osm]
 });
 
-var locked = false //This variable is telling the program if it should keep looking for new destinations
-var EndLocation; //This is variable containing the coordinats of the destination
-var StartLocation;
-var route;
-var length = 5000; //This is the default distance of the trip
+// mymap.on('click', function(e) {
+//   var link = $('<a href="#" class="speciallink">TestLink</a>').click(function(e) {
+//     console.log(e)
+//     coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
+//     numberofwaypoints += 1
+//     console.log(numberofwaypoints)
+//     getRoute(StartLocation.lat, StartLocation.lng);
+//   })[0];
+//   parks.bindPopup(link);
+// });
+
+
+// Create an element to hold all your text and markup
+var container = $('<div />');
+// Delegate all event handling for the container itself and its contents to the container
+container.on('click', '.smallPolygonLink', function(e) {
+  console.log(e)
+    coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
+    numberofwaypoints += 1
+    console.log(numberofwaypoints)
+    getRoute(StartLocation.lat, StartLocation.lng);
+});
+// Insert whatever you want into the container, using whichever approach you prefer
+container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</a>.");
+container.append($('<span class="bold">').text())
+// Insert the container into the popup
+parks.bindPopup(container[0]);
+
+
+// var testmarker = L.marker([55.676111, 12.568333]).addTo(mymap);
+// var link = $('<a href="#" class="speciallink">TestLink</a>').click(function(e) {
+//   coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
+//   numberofwaypoints += 1
+//   console.log(numberofwaypoints)
+//   getRoute(StartLocation.lat, StartLocation.lng);
+// })[0];
+
+
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -96,7 +155,8 @@ L.easyButton( 'fa-ruler', function(){
 
 var overlayMaps = {
   "Cities": city,
-  "Stations": stations
+  "Stations": stations,
+  "Parks": parks
 }; //Adds the overlayer with weather information
 
 var basemaps = {
@@ -116,7 +176,7 @@ mymap.locate({ //This is the code for finding the users location
 }).on('locationerror', function(e) { //If the gps is unaccessable it will calculate a route from the university and give an error message
   getRoute(55.6504670, 12.5429260);
   $("span#hidden").show(500);
-});
+  });
 
 function getRoute(lat, lng) {
 
@@ -171,23 +231,27 @@ console.log("Wind remove")
 
       // //The EndLocation should be changed to the coordinate of the station, when those are available
       EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
-
+console.log(EndLocation)
       //Here the routing begins
       $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-
-
+console.log("test"+numberofwaypoints)
+if (numberofwaypoints == 2) {
+  test = [StartLocation,EndLocation]
+  console.log("number" + numberofwaypoints)
+}
+else if (numberofwaypoints == 3) {
+    test = [StartLocation,coords2,EndLocation]
+}
+else {console.log("Test A")}
+console.log("park"+test)
       if (route) {
         mymap.removeControl(route); //This removes the old route, if a new one is created
       }
-
       route = L.Routing.control({
-        waypoints: [ //This defines from there the route should start and end
-          StartLocation,
-          EndLocation
-        ],
+        waypoints: test,
         router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
       })
-
+console.log(test)
       route.addTo(mymap);
 
     });
@@ -195,7 +259,7 @@ console.log("Wind remove")
 } else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
     //Here the routing begins
     $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-
+test = [StartLocation,EndLocation]
 
 
     if (route) {
@@ -203,10 +267,7 @@ console.log("Wind remove")
     }
 
     route = L.Routing.control({
-      waypoints: [ //This defines from there the route should start and end
-        StartLocation,
-        EndLocation
-      ],
+      waypoints: test,
       router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
     })
 
