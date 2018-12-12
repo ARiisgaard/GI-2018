@@ -5,6 +5,7 @@
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">   <!--Fixes the favicon 404 error-->
   <title>GI2018</title>
 
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> <!--Enables Jquery, which gets used for creating the server-->
     <link rel="stylesheet" href="leaflet-routing-machine-3.2.8\dist\leaflet-routing-machine.css" /> <!--Enables the use of leaflet routing commands-->
     <link rel="stylesheet" href="leaflet-locatecontrol-gh-pages/dist/L.Control.Locate.min.css" /> <!--Enables the use of gps-->
+
 
   <script src="leaflet/leaflet.js"></script>
 <script src="openrouteservice-js-master/dist/ors-js-client.js"></script> <!--Enables the use of leaflet routing commands-->
@@ -42,7 +44,23 @@
 
 <body>
   <h2>Bike map</h2> <span id="hidden">Location access denied. Starting trip at AAU CPH.</span>
-  <div id="map"></div>
-  <script src="mymap.js"></script>
+
+
+      <div id="map"></div>
+      <script src="mymap.js"></script>
+
+      <img id="image" src="Images\left-arrow.png" style= "display:none;">
+      <canvas id="myCanvas" width="100" height="100" >
+     <div id="over_map">
+       <canvas id="myCanvas" width="400" height="300" style="border:1px solid #000000;">
+       </div>
+     <div id="windarrow">
+       <img src="Images\left-arrow.png" alt="wind arrow" width="150" height="75">
+     </div>
+
+<div>Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+  <!-- <div id="map"></div>
+  <script src="mymap.js"></script> -->
 </body>
 </html>

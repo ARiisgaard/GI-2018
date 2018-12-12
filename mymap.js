@@ -150,6 +150,20 @@ function getRoute(lat, lng) {
     var EndLat = end_y * 180 / Math.PI
     var EndLng = end_x * 180 / Math.PI
 
+// arrow test
+    $(id="myCanvas").remove();
+
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("image");
+    ctx.clearRect(0,0, 300,300);
+    ctx.translate(300/2, 300/2);
+    console.log("vinkel:" + angle);
+    ctx.rotate(angle * Math.PI / 180);
+    ctx.translate(-300/2, -300/2);
+    ctx.drawImage(img, 0, 0,100,100);
+
+
     //Here stops the coordinate definition
 
     var winddestination;

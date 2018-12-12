@@ -1,0 +1,37 @@
+{
+  "author": "André Lichtenthäler",
+  "name": "arrowhead",
+  "description": "A vanilla JavaScript helper to parse JSON into CSS.",
+  "main": "./dist/Arrowhead.min.js",
+  "version": "2.0.1",
+  "homepage": "https://github.com/Bikossor/Arrowhead",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Bikossor/Arrowhead.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "gulp"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-uglify": "^3.0.1",
+    "jest": "^22.2.1",
+    "pump": "^3.0.0"
+  },
+  "keywords": [
+    "Arrowhead",
+    "bikossor",
+    "css",
+    "json",
+    "parse",
+    "parser",
+    "javascript",
+    "performance",
+    "vanilla"
+  ],
+  "dependencies": {
+    "turf": "^3.0.14"
+  }
+}
