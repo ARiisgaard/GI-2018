@@ -41,6 +41,9 @@ var EndLocation; //This is variable containing the coordinats of the destination
 var StartLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
+var angle;
+var resetarrow;
+var oldAngle = "test";
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -118,6 +121,7 @@ mymap.locate({ //This is the code for finding the users location
   $("span#hidden").show(500);
 });
 
+
 function getRoute(lat, lng) {
 
   StartLocation = L.latLng([lat, lng]); //The start of the journey
@@ -132,7 +136,7 @@ function getRoute(lat, lng) {
 
     var windangle = data.wind.deg
 
-    var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
+    angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
 
   //  var length = 5000 //Distance traveled in meters
 
@@ -151,18 +155,6 @@ function getRoute(lat, lng) {
     var EndLng = end_x * 180 / Math.PI
 
 // arrow test
-    $(id="myCanvas").remove();
-
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-    var img = document.getElementById("image");
-    ctx.clearRect(0,0, 300,300);
-    ctx.translate(300/2, 300/2);
-    console.log("vinkel:" + angle);
-    ctx.rotate(angle * Math.PI / 180);
-    ctx.translate(-300/2, -300/2);
-    ctx.drawImage(img, 0, 0,100,100);
-
 
     //Here stops the coordinate definition
 
@@ -227,3 +219,25 @@ console.log("Wind remove")
     route.addTo(mymap);
 }
 }
+
+
+function changeArrow() {
+  // // arrow test
+     $(id="myCanvas").remove();
+     if (oldAngle != angle){
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      var img = document.getElementById("image");
+      ctx.clearRect(0,0, 100,100);
+      ctx.translate(100/2, 100/2);
+      ctx.rotate(resetarrow); //Resets the position of the arrow
+      oldAngle = angle
+      console.log("vinkel:" + angle);
+      ctx.rotate(angle * Math.PI / 180);
+      resetarrow = -angle * Math.PI / 180;
+      ctx.translate(-100/2, -100/2);
+      ctx.drawImage(img, 0, 0,100,100);
+}
+else {console.log("Det virker?")}}
+//changeArrow()
+setInterval(changeArrow, 30000); //in milliseconds
