@@ -44,6 +44,7 @@ var length = 5000; //This is the default distance of the trip
 var angle;
 var resetarrow;
 var oldAngle = "test";
+var windSpeed;
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -133,6 +134,8 @@ function getRoute(lat, lng) {
   //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
   $.getJSON(api_address, function(data) {
+
+  windSpeed = data.wind.speed
 
     var windangle = data.wind.deg
 
@@ -243,9 +246,9 @@ function changeArrow() {
       document.getElementById("myCanvas").onmouseover = function() {mouseOver()};
 }
 else {console.log("Det virker?")}}
-//changeArrow()
+//changeArrow();
 setInterval(changeArrow, 3000); //in milliseconds
 
-
 function mouseOver() {
-    alert("oh no"); }
+    alert("Wind direction: " + angle + " Wind Speed: " + windSpeed );
+}
