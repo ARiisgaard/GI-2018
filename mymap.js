@@ -43,13 +43,17 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", {
     return L.geoJson(data, {
       onEachFeature: function(feature, layer) {
         console.log("Test: "+String(feature.geometry.coordinates))
-          // L.marker([feature.geometry.coordinates], {icon: trainIcon}).addTo(mymap); <--we tried this, instead of layer.setIcon, but didn't work.
+
         layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>")
-        // layer.setIcon(trainIcon); <-- we tried to add the popup and the layer.setIcon. It works until here, and also the addto(mymap) works. 
-      }
+        // <-- we tried to add the popup and the layer.setIcon. It works until here, and also the addto(mymap) works.
+      },
+      pointToLayer: function(geoJsonPoint, latlng) { return L.marker(latlng, {icon: trainIcon})} 
+
     }).addTo(mymap);
  }
 });
+
+// stations.setIcon(trainIcon);
 
 //
 // var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
