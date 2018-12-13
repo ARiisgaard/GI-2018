@@ -43,6 +43,11 @@ var route;
 var length = 5000; //This is the default distance of the trip
 var reverse = false;
 var routeCoordinates;
+var routeTime;
+var routeDistance;
+var arrayDistance = [];
+var arrayAngles = [];
+
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -101,6 +106,9 @@ function enterDistance() {
 }
 
 L.easyButton('fa-flask', function() {
+
+  console.log("Distance: " + arrayDistance);
+  console.log("Angles: " + arrayAngles);
   var proxy = 'https://cors-anywhere.herokuapp.com/';
   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
   var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
@@ -125,14 +133,39 @@ L.easyButton('fa-flask', function() {
 }).addTo(mymap);
 
 L.easyButton('fa-bolt', function() {
+
+  arrayDistance = []; //Resets the arrays - otherwise the route would be twice as long on the second button click
+  arrayAngles = [];
+
   //console.log("Coords: " + routeCoordinates);
 // var punktStart = StartLocation
 // var punktSlut = EndLocation
+console.log("totalDistance: " + routeDistance)
 
 for (i = 0; i < routeCoordinates.length -1; i++) {
-  console.log("Dette er vinkel: " + i)
-  calculateAngle(routeCoordinates[i], routeCoordinates[i+1]);
+//Husk at slet hver gang den køre igennem
+//Husk at du skal bruge tid
+
+
+
+  // console.log("Dette er vinkel: " + i)
+  arrayAngles.push(calculateAngle(routeCoordinates[i], routeCoordinates[i+1]));
+  // console.log("Distance: " + routeTime[i].distance)
+  // console.log(routeTime[i].time)
+  //console.log("Speed: " + routeTime[i].distance/routeTime[i].time)
+  //getDistanceFromLatLonInKm
+
+arrayDistance.push(routeTime*(getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i+1].lat, routeCoordinates[i+1].lng)/(routeDistance/1000)));
+
 }
+
+// for (i = 0; i < routeCoordinates.length; i++) {
+//   console.log("Dette er en tid: " + i)
+//   calculateAngle(routeCoordinates[i], routeCoordinates[i+1]);
+// }
+
+// console.log(routeTime[i].time)
+
 // for (i = 0; i < routeCoordinates.length -1; i++) {
 //   latlngs[i] = new L.LatLng(routeCoordinates[i][0], routeCoordinates[i][1]);
 // }
@@ -298,7 +331,10 @@ function calculateRoute(array) {
     router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
   })
   .on('routesfound', function(e) {
-    routeCoordinates = e.routes[0].coordinates
+    routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
+    routeTime = e.routes[0].summary.totalTime
+    routeDistance = e.routes[0].summary.totalDistance
+    console.log(e.routes[0].summary.totalTime)
     })
 route.addTo(mymap);
 
@@ -309,12 +345,31 @@ route.addTo(mymap);
 }
 
 function calculateAngle(punktStart, punktSlut) {
-
+//https://stackoverflow.com/questions/11415106/issue-with-calcuating-compass-bearing-between-two-gps-coordinates?lq=1
       var dLon = (punktSlut.lng-punktStart.lng);
       var y = Math.sin(dLon) * Math.cos(punktSlut.lat);
       var x = Math.cos(punktStart.lat)*Math.sin(punktSlut.lat) - Math.sin(punktStart.lat)*Math.cos(punktSlut.lat)*Math.cos(dLon);
       var brng = 180 / Math.PI*(Math.atan2(y, x));
       if (brng < 0) {var brng360 = brng + 360}
         else brng360 = brng
-        console.log(brng360);
+        return brng360
+
+}
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1);
+  var a =
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
 }
