@@ -1,3 +1,5 @@
+//Sorter i array, så den tager nærmeste først 
+
 var locked = false //This variable is telling the program if it should keep looking for new destinations
 var EndLocation; //This is variable containing the coordinats of the destination
 var StartLocation;
