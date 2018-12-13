@@ -222,27 +222,24 @@ console.log("Wind remove")
     route.addTo(mymap);
 }
 }
-
-
-function changeArrow() {
   // // arrow test
+
+function changeArrow() { // function that checks whether the angle has changed. If it has changed it should run the code again.
+
      $(id="myCanvas").remove();
-     if (oldAngle != angle){
+     if (oldAngle != angle){ //if the angle is not oldangle then run function.
       var c = document.getElementById("myCanvas");
-      console.log("c: " + c);
       var ctx = c.getContext("2d");
-      console.log("c: " + ctx);
       var img = document.getElementById("image");
-      console.log("c: " + img);
       ctx.clearRect(0,0, 100,100);
-      ctx.translate(100/2, 100/2);
-      ctx.rotate(resetarrow); //Resets the position of the arrow
+      ctx.translate(100/2, 100/2); //lets the arrow rotate from center
+      ctx.rotate(resetarrow); //Resets the position of the arrow. otherwise adds angle to current arrow. for instance if angle = 10 the first display in correct whreeas the 2nd will be 20, then 30 etc.
       oldAngle = angle
       console.log("vinkel:" + angle);
-      ctx.rotate(angle * Math.PI / 180);
-      resetarrow = -angle * Math.PI / 180;
-      ctx.translate(-100/2, -100/2);
-      ctx.drawImage(img, 0, 0,100,100);
+      ctx.rotate(angle * Math.PI / 180); //rotates arrow
+      resetarrow = -angle * Math.PI / 180; //defines angle needed to reset
+      ctx.translate(-100/2, -100/2); //draws arrow from topleft.
+      ctx.drawImage(img, 0, 0,100,100); //draws the arrow 100x100
       document.getElementById("myCanvas").onmouseover = function() {mouseOver()};
 }
 else {console.log("Det virker?")}}
@@ -250,5 +247,5 @@ else {console.log("Det virker?")}}
 setInterval(changeArrow, 3000); //in milliseconds
 
 function mouseOver() {
-    alert("Wind direction: " + angle + " Wind Speed: " + windSpeed );
+    alert("Wind direction: " + angle + " Wind Speed: " + windSpeed ); //displays wind direction and wind speed
 }
