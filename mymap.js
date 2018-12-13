@@ -20,21 +20,49 @@ var myIcon = L.icon({ //defines the icon for the wind location
 });
 //var myLayer; //Layer with distination
 
-var trainIcon = L.icon({ //defines the icon for the stations
-  iconUrl: 'Images/train.png', //Credits:  Flaticon/Freepik
+var trainIcon = L.icon({
+  iconUrl: 'https://image.flaticon.com/icons/svg/1201/1201644.svg', // change this, obviously...
   iconSize: [30, 30],
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
 
-var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
-  onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
-    layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
-}});
+// function onEachFeature(feature, layer) {
+//   // does this feature have a property named popupContent?
+//      layer.setIcon(trainIcon);
+// }
+//
+// var station = L.geoJson(stations, {
+//   style: trainIcon,
+//   onEachFeature: onEachFeature
+// }).addTo(mymap);
+
+// var coordinates = stations.feature.geometry.coordinates;
+var stations = new L.GeoJSON.AJAX("stations.geojson", {
+  middleware: function(data) {
+    return L.geoJson(data, {
+      onEachFeature: function(feature, layer) {
+        console.log("Test: "+String(feature.geometry.coordinates))
+          // L.marker([feature.geometry.coordinates], {icon: trainIcon}).addTo(mymap); <--we tried this, instead of layer.setIcon, but didn't work.
+        layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>")
+        // layer.setIcon(trainIcon); <-- we tried to add the popup and the layer.setIcon. It works until here, and also the addto(mymap) works. 
+      }
+    }).addTo(mymap);
+ }
+});
+
+//
+// var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
+//           onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+//             layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+//
+//     }
+// });
 
 stations.on('click', function(e) {
   coords2 = [e.latlng.lat, e.latlng.lng];
 });
+
 
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
@@ -144,6 +172,15 @@ mymap.locate({ //This is the code for finding the users location
   getRoute(55.6504670, 12.5429260);
   $("span#hidden").show(500);
 });
+
+// var aIcon = L.icon({ //defines the icon for the wind location
+//   iconUrl: 'Images/loca.png', //Credits:  Flaticon/Freepik
+//   iconSize: [30, 30],
+//   iconAnchor: [15, 20],
+//   popupAnchor: [-3, -76]
+// });
+//
+// return L.marker(latlng, {icon: smallIcon});
 
 function getRoute(lat, lng) {
 
