@@ -78,8 +78,8 @@ var mymap = L.map('map', {
 var container = $('<div />');
 // Delegate all event handling for the container itself and its contents to the container
 container.on('click', '.smallPolygonLink', function(e) {
-  console.log(e)
-    coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
+  console.log("e: " + e)
+    // coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
     numberofwaypoints += 1
     console.log(numberofwaypoints)
     getRoute(StartLocation.lat, StartLocation.lng);
@@ -88,7 +88,7 @@ container.on('click', '.smallPolygonLink', function(e) {
 container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</a>.");
 container.append($('<span class="bold">').text())
 // Insert the container into the popup
-parks.bindPopup(container[0]);
+parks.bindPopup(container[0]).on('click', function(e) {coords2 = L.latLng([e.latlng.lat, e.latlng.lng])});
 
 
 // var testmarker = L.marker([55.676111, 12.568333]).addTo(mymap);
@@ -136,6 +136,8 @@ function enterDistance() {
 }
 
 L.easyButton( 'fa-flask', function(){
+
+  console.log("Hvad er coords2: " + coords2)
   var proxy = 'https://cors-anywhere.herokuapp.com/';
   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
   console.log(length)
