@@ -1,11 +1,12 @@
-//Sorter i array, så den tager nærmeste først 
+//Sorter i array, så den tager nærmeste først
 
 var locked = false //This variable is telling the program if it should keep looking for new destinations
 var EndLocation; //This is variable containing the coordinats of the destination
 var StartLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
-var test = [StartLocation, EndLocation];
+var finalArray = [StartLocation, EndLocation];
+var goThrough =[];
 var numberofwaypoints = 2;
 
 var osm = L.tileLayer(
@@ -40,7 +41,7 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
 //   coords2 = [e.latlng.lat, e.latlng.lng];
 // });
 
-var park1;
+// var park1;
 
 var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" layer
   // onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
@@ -70,8 +71,10 @@ container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</
 container.append($('<span class="bold">').text())
 // Insert the container into the popup
 parks.bindPopup(container[0]).on('click', function(e) {
-  coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
-  test.splice( 1, 0, coords2);
+  parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
+  goThrough.push(parkLocation);
+  // orderArray();
+  // finalArray.splice( 1, 0, parkLocation);
 });
 
 
@@ -110,7 +113,7 @@ function enterDistance() {
 
 L.easyButton('fa-flask', function() {
 
-  console.log("Hvad er coords2: " + test)
+  console.log("Hvad er goThrough: " + goThrough)
   var proxy = 'https://cors-anywhere.herokuapp.com/';
   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
   console.log(length)
@@ -209,19 +212,19 @@ function getRoute(lat, lng) {
         console.log(EndLocation)
         //Here the routing begins
         $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-        console.log("test" + numberofwaypoints)
+        console.log("finalArray" + numberofwaypoints)
         if (numberofwaypoints == 2) {
-          test = [StartLocation, EndLocation]
+          finalArray = [StartLocation, EndLocation]
           console.log("number" + numberofwaypoints)
         }
         if (route) {
           mymap.removeControl(route); //This removes the old route, if a new one is created
         }
         route = L.Routing.control({
-          waypoints: test,
+          waypoints: finalArray,
           router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
         })
-        console.log(test)
+        console.log(finalArray)
         route.addTo(mymap);
 
       });
@@ -229,7 +232,7 @@ function getRoute(lat, lng) {
   } else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
     //Here the routing begins
     $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-    test = [StartLocation, EndLocation]
+    finalArray = [StartLocation, EndLocation]
 
 
     if (route) {
@@ -237,10 +240,20 @@ function getRoute(lat, lng) {
     }
 
     route = L.Routing.control({
-      waypoints: test,
+      waypoints: finalArray,
       router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
     })
 
     route.addTo(mymap);
   }
+}
+
+//Husk at slå til i 75
+function orderArray(fromArray, toArray) {
+var orderOfArray = [];
+fromArray.forEach(
+
+
+)
+
 }
