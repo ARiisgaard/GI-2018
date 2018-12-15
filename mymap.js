@@ -276,7 +276,8 @@ console.log("Here distanceArray doesnt have a value: " + distanceArray)
   //Nu har vi et array med afstandende fra Start sorteret med nærmeste først
 
 console.log("distanceArray 2nd: " + distanceArray)
-//Issue aLocation blive -1 i stedet for 0 - hvis -1, så fandtes værdien aldrig
+
+
   goThrough = [];
   for (i = 0; i < orderedDistances.length; i++) {
     console.log("orderedDistances.length: " + orderedDistances.length)
@@ -291,8 +292,8 @@ console.log("distanceArray 2nd: " + distanceArray)
   }
 
   //All the values then gets added to the array
-  finalArray = [];
-  finalArray = finalArray.concat([StartLocation],goThrough,[EndLocation])
+  var tempArray = []; //In this empty Array we are fitting all the pieces together
+  finalArray = tempArray.concat([StartLocation],goThrough,[EndLocation])
   // finalArray.push(StartLocation);
 console.log("finalArray in End: " + finalArray)
   // finalArray.push(goThrough);
