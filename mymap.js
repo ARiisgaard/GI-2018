@@ -6,8 +6,8 @@ var StartLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
 var finalArray = [StartLocation, EndLocation];
-var goThrough =[];
-var orderOfWaypoints =[];
+var goThrough = [];
+var orderOfWaypoints = [];
 var numberofwaypoints = 2;
 
 var osm = L.tileLayer(
@@ -75,8 +75,8 @@ parks.bindPopup(container[0]).on('click', function(e) {
   parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
   goThrough.push(parkLocation);
   orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
-  console.log("orderOfWaypoints: " + orderOfWaypoints)
-   orderArray(goThrough, orderOfWaypoints);
+  console.log("click: " + goThrough)
+  orderArray(goThrough, orderOfWaypoints);
   // finalArray.splice( 1, 0, parkLocation);
 });
 
@@ -253,53 +253,65 @@ function getRoute(lat, lng) {
 
 var orderOfArray = [];
 var orderedDistances = [];
+
 function orderArray(coordsArray, distanceArray) { //This function changes the order of the visited waypoint, so they are ordered by closeness to the starting location instead of the order of the clicks
 
-var whatsLeft = distanceArray //In order to be able to sort the array, we need to be able to remove values from the array
+//  var whatsLeft = distanceArray; //In order to be able to sort the array, we need to be able to remove values from the array
+var whatsLeft = distanceArray.concat(); //This is basicly the same as whatsLeft = distanceArray, but that doesn't work the same way with arrays, so we have to do it this way. If we havent the program would have made whatsLeft a reference to distanceArray instead of just making a copy. This is an issue, since we need to remove values from whatsLeft, but distanceArray has to remain untouched.
 
+console.log("distanceArray before: " + distanceArray)
 
+  //Sorting the array from closest to furthest away
+  for (i = 0; i < distanceArray.length; i++) { //This function finds the closest location, adds it to a array of ordered distances and then removes it from this array. This last step is nessercery inorder to be able to be able to find the second closest location (which is now the closest). It keeps going for distanceArray.length amount of turns instead of whatsLeft.length, since distanceArray is a constant, whereas whatsLeft gets a value removed every time
 
-//Sorting the array from closest to furthest away
-for (i = 0; i < distanceArray.length; i++) {//This function finds the closest location, adds it to a array of ordered distances and then removes it from this array. This last step is nessercery inorder to be able to be able to find the second closest location (which is now the closest). It keeps going for distanceArray.length amount of turns instead of whatsLeft.length, since distanceArray is a constant, whereas whatsLeft gets a value removed every time
-  var closestDistance = Math.min(whatsLeft)
-  orderedDistances.push(closestDistance)
-  whatsLeft.splice(whatsLeft.indexOf(closestDistance), 1) //Removed the closest location from the array
-  console.log("I forste for statement: " + orderedDistances)
+    var closestDistance = Math.min(whatsLeft)
+    orderedDistances.push(closestDistance)
+    console.log("I forste for statement whatsLeft: " + whatsLeft)
+    console.log("Here distanceArray has a value: " + distanceArray)
+
+    whatsLeft.splice(whatsLeft.indexOf(closestDistance), 1) //Removed the closest location from the array
+console.log("Here distanceArray doesnt have a value: " + distanceArray)
+    console.log("I forste for statement: " + orderedDistances)
+  }
+  //Nu har vi et array med afstandende fra Start sorteret med nærmeste først
+
+console.log("distanceArray 2nd: " + distanceArray)
+//Issue aLocation blive -1 i stedet for 0 - hvis -1, så fandtes værdien aldrig
+  goThrough = [];
+  for (i = 0; i < orderedDistances.length; i++) {
+    console.log("orderedDistances.length: " + orderedDistances.length)
+
+      console.log("orderedDistance: " + orderedDistances[i])
+            console.log("distanceArray: " + distanceArray)
+    var aLocation = distanceArray.indexOf(orderedDistances[i]) //Finds index for the closest waypoint
+    console.log("aLocation: " + aLocation)
+    console.log("coordsArray[aLocation]: " + coordsArray[aLocation])
+    goThrough.push(coordsArray[aLocation]) //Takes the coordinates from coordsArray fitting the closest location and adds them to a array
+    console.log("goThrough for" + i + ": " + goThrough)
+  }
+
+  //All the values then gets added to the array
+  finalArray = [];
+  finalArray = finalArray.concat([StartLocation],goThrough,[EndLocation])
+  // finalArray.push(StartLocation);
+console.log("finalArray in End: " + finalArray)
+  // finalArray.push(goThrough);
+  // finalArray.push(EndLocation);
 }
-//Nu har vi et array med afstandende fra Start sorteret med nærmeste først
 
-
-for (i = 0; i < orderedDistances.length; i++) {
-console.log("orderedDistances.length: " +  orderedDistances.length)
-  var aLocation = distanceArray.indexOf(orderedDistances[i]) //Finds index for the closest waypoint
-
-goThrough = [];
-goThrough.push(coordsArray[aLocation]) //Takes the coordinates from coordsArray fitting the closest location and adds them to a array
-console.log("goThrough for" + i + ": " + goThrough)
-}
-
-//All the values then gets added to the array
-finalArray = [];
-finalArray.push(StartLocation);
-console.log("goThrough: " + goThrough)
-finalArray.push(goThrough);
-finalArray.push(EndLocation);
-}
-
-function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1);
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
   var a =
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ;
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in km
   return d;
 }
 
 function deg2rad(deg) {
-  return deg * (Math.PI/180)
+  return deg * (Math.PI / 180)
 }
