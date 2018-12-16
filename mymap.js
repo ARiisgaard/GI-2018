@@ -263,12 +263,10 @@ console.log("distanceArray before: " + distanceArray)
 
     var closestDistance = Math.min(whatsLeft)
     orderedDistances.push(closestDistance)
-    console.log("I forste for statement whatsLeft: " + whatsLeft)
-    console.log("Here distanceArray has a value: " + distanceArray)
-
+    console.log("First  for statement whatsLeft 1: " + whatsLeft)
     whatsLeft.splice(whatsLeft.indexOf(closestDistance), 1) //Removed the closest location from the array
-console.log("Here distanceArray doesnt have a value: " + distanceArray)
-    console.log("I forste for statement: " + orderedDistances)
+    console.log("First  for statement orderedDistances: " + orderedDistances)
+    console.log("First  for statement whatsLeft 2: " + whatsLeft)
   }
   //Nu har vi et array med afstandende fra Start sorteret med nærmeste først
 
@@ -278,8 +276,8 @@ console.log("distanceArray 2nd: " + distanceArray)
   goThrough = [];
   for (i = 0; i < orderedDistances.length; i++) {
     console.log("orderedDistances.length: " + orderedDistances.length)
-
-      console.log("orderedDistance: " + orderedDistances[i])
+      console.log("orderedDistances: " + orderedDistances)
+      console.log("orderedDistances[i]: " + orderedDistances[i])
             console.log("distanceArray: " + distanceArray)
     var aLocation = distanceArray.indexOf(orderedDistances[i]) //Finds index for the closest waypoint
     console.log("aLocation: " + aLocation)
