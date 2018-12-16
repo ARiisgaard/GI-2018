@@ -251,11 +251,8 @@ function getRoute(lat, lng) {
   }
 }
 
-var orderOfArray = [];
-var orderedDistances = [];
-
 function orderArray(coordsArray, distanceArray) { //This function changes the order of the visited waypoint, so they are ordered by closeness to the starting location instead of the order of the clicks
-
+var orderedDistances = [];
 //  var whatsLeft = distanceArray; //In order to be able to sort the array, we need to be able to remove values from the array
 var whatsLeft = distanceArray.concat(); //This is basicly the same as whatsLeft = distanceArray, but that doesn't work the same way with arrays, so we have to do it this way. If we havent the program would have made whatsLeft a reference to distanceArray instead of just making a copy. This is an issue, since we need to remove values from whatsLeft, but distanceArray has to remain untouched.
 
@@ -288,7 +285,7 @@ console.log("distanceArray 2nd: " + distanceArray)
     console.log("aLocation: " + aLocation)
     console.log("coordsArray[aLocation]: " + coordsArray[aLocation])
     goThrough.push(coordsArray[aLocation]) //Takes the coordinates from coordsArray fitting the closest location and adds them to a array
-    console.log("goThrough for" + i + ": " + goThrough)
+    console.log("goThrough for " + i + ": " + goThrough)
   }
 
   //All the values then gets added to the array
