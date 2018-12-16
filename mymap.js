@@ -47,7 +47,8 @@ var routeTime;
 var routeDistance;
 var arrayDistance = [];
 var arrayAngles = [];
-
+var windspeed;
+var windangle;
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -131,20 +132,53 @@ L.easyButton('fa-flask', function() {
     console.log(data2.hourly.data["1"].precipProbability * 100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
   });
 }).addTo(mymap);
-
+var slet = 0;
+var testArray = [];
 L.easyButton('fa-bolt', function() {
 
   arrayDistance = []; //Resets the arrays - otherwise the route would be twice as long on the second button click
   arrayAngles = [];
 
 
-for (i = 0; i < routeCoordinates.length -1; i++) { //Goes through each coordinate except the last since this one has no angle
-arrayAngles.push(calculateAngle(routeCoordinates[i], routeCoordinates[i+1])); //Calculating the bearing between a point and the next point on the route - for each point
+  for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle
+    arrayAngles.push(calculateAngle(routeCoordinates[i], routeCoordinates[i + 1])); //Calculating the bearing between a point and the next point on the route - for each point
 
-//Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
-arrayDistance.push(routeTime*(getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i+1].lat, routeCoordinates[i+1].lng)/(routeDistance/1000)));
+    //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
+    arrayDistance.push(routeTime * (getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng) / (routeDistance / 1000)));
+
+
+    //Warning: arrayDistance is about time and not distance
+    var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]);
+    var cyclistDistancei = getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);
+    var cyclistTimei = routeTime * cyclistDistancei / (routeDistance / 1000); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
+    var vwtan = windspeed * Math.cos((cyclistAnglei - windangle)/180*Math.PI);
+    var vwnor = windspeed * Math.sin((cyclistAnglei - windangle)/180*Math.PI);
+    var cyclistSpeed = routeDistance / routeTime;
+    var Va = cyclistSpeed + vwtan;
+    var spokesDrag = 0.0044;
+    var yawAngle = Math.atan(vwnor / Va) * 180 / Math.PI;
+    testArray.push(Math.round(yawAngle))
+
+if (slet ==0) {
+
+  console.log("cyclistAnglei: " + cyclistAnglei)
+  console.log("cyclistDistancei: " + cyclistDistancei)
+  console.log("cyclistTimei: " + cyclistTimei)
+  console.log("vwtan: " + vwtan)
+  console.log("vwnor: " + vwnor)
+  console.log("Va: " + Va)
+  console.log("cyclistAnglei: " + cyclistAnglei)
+  console.log("yawAngle: " + yawAngle)
+  console.log("cyclistSpeed: " + cyclistSpeed)
+
+
+
 
 }
+  }
+
+  console.log(testArray);
+
 }).addTo(mymap);
 
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
@@ -190,7 +224,9 @@ function getRoute(lat, lng) {
 
     $.getJSON(api_address, function(data) {
 
-      var windangle = 190//data.wind.deg
+      windangle = data.wind.deg
+      windspeed = data.wind.speed
+
       if (reverse == false) {
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
@@ -272,51 +308,51 @@ function calculateRoute(array) {
   }
 
   route = L.Routing.control({
-    waypoints: array,
-    router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-  })
-  .on('routesfound', function(e) {
-    routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
-    routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
-    routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
+      waypoints: array,
+      router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
     })
-route.addTo(mymap);
+    .on('routesfound', function(e) {
+      routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
+      routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
+      routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
+    })
+  route.addTo(mymap);
 
 
-// for (i = 0; i < 20; i++) {
-//   console.log("Punkt " + i + " lat: " + routePoint[i].latLng.lat + " lng: "+routePoint[i].latLng.lng);
-//   }
+  // for (i = 0; i < 20; i++) {
+  //   console.log("Punkt " + i + " lat: " + routePoint[i].latLng.lat + " lng: "+routePoint[i].latLng.lng);
+  //   }
 }
 
 
 //This function calculate the angle between two coordinates
 function calculateAngle(punktStart, punktSlut) {
-//https://stackoverflow.com/questions/11415106/issue-with-calcuating-compass-bearing-between-two-gps-coordinates?lq=1
-      var dLon = (punktSlut.lng-punktStart.lng);
-      var y = Math.sin(dLon) * Math.cos(punktSlut.lat);
-      var x = Math.cos(punktStart.lat)*Math.sin(punktSlut.lat) - Math.sin(punktStart.lat)*Math.cos(punktSlut.lat)*Math.cos(dLon);
-      var brng = 180 / Math.PI*(Math.atan2(y, x));
-      if (brng < 0) {var brng360 = brng + 360}
-        else brng360 = brng
-        return brng360
+  //https://stackoverflow.com/questions/11415106/issue-with-calcuating-compass-bearing-between-two-gps-coordinates?lq=1
+  var dLon = (punktSlut.lng - punktStart.lng);
+  var y = Math.sin(dLon) * Math.cos(punktSlut.lat);
+  var x = Math.cos(punktStart.lat) * Math.sin(punktSlut.lat) - Math.sin(punktStart.lat) * Math.cos(punktSlut.lat) * Math.cos(dLon);
+  var brng = 180 / Math.PI * (Math.atan2(y, x));
+  if (brng < 0) {
+    var brng360 = brng + 360
+  } else brng360 = brng
+  return brng360
 
 }
 
 //This function calculates the distance between to coordinates
-function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1);
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
   var a =
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ;
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   var d = R * c; // Distance in km
   return d;
 }
 
 function deg2rad(deg) {
-  return deg * (Math.PI/180)
+  return deg * (Math.PI / 180)
 }
