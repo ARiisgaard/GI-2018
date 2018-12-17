@@ -177,9 +177,9 @@ console.log("Elevation Curve: " + elevationCurve)
 
     //Warning: arrayDistance is about time and not distance
     var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]);
-    var cyclistDistancei = getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);
-    var cyclistTimei = routeTime * cyclistDistancei / (routeDistance / 1000); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
-    var cyclistGradei = Math.atan((arrayHeight[i]-arrayHeight[i+1])/(cyclistDistancei*1000))*180/Math.PI  //This is calculating the slope between one point and the next based on the formular: tan(A)=a/b. *1000 is km_>m
+    var cyclistDistancei = 1000*getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);
+    var cyclistTimei = routeTime * cyclistDistancei / (routeDistance); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
+    var cyclistGradei = (Math.atan((arrayHeight[i]-arrayHeight[i+1])/(cyclistDistancei))*180/Math.PI)/100  //This is calculating the slope between one point and the next based on the formular: tan(A)=a/b. - Divided with 100 cause percent
 
     var roadResistance = 0.0032
     var vwtan = windspeed * Math.cos((cyclistAnglei - windangle) / 180 * Math.PI);
@@ -214,17 +214,22 @@ console.log("Elevation Curve: " + elevationCurve)
 
     if (slet == 0) {
 
-      // console.log("cyclistAnglei: " + cyclistAnglei)
-      // console.log("cyclistDistancei: " + cyclistDistancei)
-      // console.log("cyclistTimei: " + cyclistTimei)
-      // console.log("vwtan: " + vwtan)
-      // console.log("vwnor: " + vwnor)
+      // console.log("aerodynamicEnergyi: " + aerodynamicEnergyi)
+      // console.log("rollingResistanceEnergyi: " + rollingResistanceEnergyi)
+      // console.log("wheelBearingFrictionEnergyi: " + wheelBearingFrictionEnergyi)
+
+      console.log("cyclistDistancei: " + cyclistDistancei)
+      var bob =arrayHeight[i]-arrayHeight[i+1]
+      console.log("Height difference: " + bob)
+      console.log("cyclistGradei: " + cyclistGradei)
+      console.log("potentialEnergyi: " + potentialEnergyi)
+      console.log("potentialEnergyPower: " + potentialEnergyPower)
       // console.log("Va: " + Va)
       // console.log("cyclistAnglei: " + cyclistAnglei)
       // console.log("yawAngle: " + yawAngle)
       // console.log("cyclistSpeed: " + cyclistSpeed)
       // console.log("arrayHeight[i]: " + arrayHeight[i])
-      // console.log("cyclistGradei: " + cyclistGradei)
+
 
 
 
