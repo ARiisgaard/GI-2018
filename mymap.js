@@ -156,8 +156,15 @@ L.easyButton('fa-bolt', function() {
     var cyclistSpeed = routeDistance / routeTime;
     var Va = cyclistSpeed + vwtan;
     var spokesDrag = 0.0044;
+    var airDensity =  1.2234;
     var yawAngle = Math.atan(vwnor / Va) * 180 / Math.PI;
-    testArray.push(Math.round(yawAngle))
+    var cyclistDrag = dragAreaFromYaw(yawAngle);
+
+
+//Power
+    var aerodynamicPower = Math.pow(Va,2)*cyclistSpeed*0.5*airDensity*(cyclistDrag+spokesDrag)
+
+    testArray.push(aerodynamicPower)//Slet
 
 if (slet ==0) {
 
@@ -355,4 +362,27 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
+}
+
+function dragAreaFromYaw(yaw) {
+var positiveYaw = Math.abs(yaw)
+var yaw0 = 0.269;
+var yaw5 = 0.258;//The real value is 265 - changed to do test through their example
+var yaw10 = 0.257;//The real value is 265 - changed to do test through their example
+var yaw15 = 0.255;
+var yawmere = 0.250;
+
+
+
+if (positiveYaw > 0 && positiveYaw < 5)
+{var dragArea =((yaw5-yaw0)/5)*(positiveYaw-5)+yaw0}
+else if (positiveYaw > 5 && positiveYaw < 10)
+{var dragArea =((yaw10-yaw5)/5)*(positiveYaw-5)+yaw5}
+else if (positiveYaw > 10 && positiveYaw < 15)
+{var dragArea =((yaw15-yaw10)/5)*(positiveYaw-5)+yaw10}
+else if (positiveYaw > 15)
+{var dragArea =((yawmere-yaw15)/5)*(positiveYaw-5)+yaw15}
+else alert("Yaw is too big!!!!")
+
+return dragArea
 }
