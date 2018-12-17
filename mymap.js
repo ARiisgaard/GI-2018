@@ -144,6 +144,7 @@ function getRoute(lat, lng) {
   //  var length = 5000 //Distance traveled in meters
 
     //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
+changeArrow();
 
     var StartLatInRat = lat * Math.PI / 180
     var StartLngInRat = lng * Math.PI / 180
@@ -243,9 +244,10 @@ function changeArrow() { // function that checks whether the angle has changed. 
       document.getElementById("myCanvas").onmouseover = function() {mouseOver()};
 }
 else {console.log("Det virker?")}}
-//changeArrow();
+
 setInterval(changeArrow, 3000); //in milliseconds
 
 function mouseOver() {
-    alert("Wind direction: " + angle + " Wind Speed: " + windSpeed ); //displays wind direction and wind speed
+    alert
+     //displays wind direction and wind speed
 }
