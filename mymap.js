@@ -47,6 +47,7 @@ var routeTime;
 var routeDistance;
 var arrayDistance = [];
 var arrayAngles = [];
+var arrayHeight = [];
 var windspeed;
 var windangle;
 
@@ -138,6 +139,33 @@ L.easyButton('fa-bolt', function() {
 
   arrayDistance = []; //Resets the arrays - otherwise the route would be twice as long on the second button click
   arrayAngles = [];
+  arrayHeight = [];
+  //This upcoming part of the function is changing the format of the route coordinates, so, they fit with the elevationAPIs demands
+    var elevationRequestCoordinates = [];
+    for (i = 0; i < routeCoordinates.length; i++) {
+      elevationRequestCoordinates.push(routeCoordinates[i].lat)
+      elevationRequestCoordinates.push(routeCoordinates[i].lng)
+    }
+
+    var elevationAPI = "http://open.mapquestapi.com/elevation/v1/profile?key=5hRZ9Xq1M67vIy42cAAsxHBepy5hBzBR&shapeFormat=raw&latLngCollection=" + elevationRequestCoordinates //routeCoordinates
+
+    $.getJSON(elevationAPI, function(elevationData) {
+
+  console.log(elevationAPI)
+  for (i = 0; i < routeCoordinates.length; i++)
+  {
+arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
+  }
+
+
+    var elevationCurve = "http://open.mapquestapi.com/elevation/v1/chart?key=5hRZ9Xq1M67vIy42cAAsxHBepy5hBzBR&shapeFormat=raw&width=425&height=350&latLngCollection=" + elevationRequestCoordinates
+
+
+    // console.log("arrayHeight: " + arrayHeight)
+
+console.log("Elevation Curve: " + elevationCurve)
+
+
 
 
   for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle
@@ -151,40 +179,67 @@ L.easyButton('fa-bolt', function() {
     var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]);
     var cyclistDistancei = getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);
     var cyclistTimei = routeTime * cyclistDistancei / (routeDistance / 1000); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
-    var vwtan = windspeed * Math.cos((cyclistAnglei - windangle)/180*Math.PI);
-    var vwnor = windspeed * Math.sin((cyclistAnglei - windangle)/180*Math.PI);
+    var cyclistGradei = Math.atan((arrayHeight[i]-arrayHeight[i+1])/(cyclistDistancei*1000))*180/Math.PI  //This is calculating the slope between one point and the next based on the formular: tan(A)=a/b. *1000 is km_>m
+
+    var roadResistance = 0.0032
+    var vwtan = windspeed * Math.cos((cyclistAnglei - windangle) / 180 * Math.PI);
+    var vwnor = windspeed * Math.sin((cyclistAnglei - windangle) / 180 * Math.PI);
     var cyclistSpeed = routeDistance / routeTime;
     var Va = cyclistSpeed + vwtan;
     var spokesDrag = 0.0044;
-    var airDensity =  1.2234;
+    var airDensity = 1.2234;
     var yawAngle = Math.atan(vwnor / Va) * 180 / Math.PI;
     var cyclistDrag = dragAreaFromYaw(yawAngle);
+    var cyclistMass = 90
+    var kineticEnergyI = 0.14
+    var kineticEnergyR = 0.311
+
+    //Power
+    var aerodynamicPower = Math.pow(Va, 2) * cyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
+    var rollingResistancePower = cyclistSpeed*Math.cos(Math.atan(cyclistGradei))*roadResistance*cyclistMass*9.81
+    var wheelBearingFrictionPower = cyclistSpeed*(91+8.7*cyclistSpeed)*0.001
+    var potentialEnergyPower = cyclistSpeed*cyclistMass*9.81*Math.sin(Math.atan(cyclistGradei))
+    var kineticEnergyPower = 0.5*(cyclistMass+kineticEnergyI/Math.pow(kineticEnergyR, 2))*0 //Hvis vi siger at cyklisten har en konstant fart, så bliver denne værdi 0
+
+    //Energy
+
+    var aerodynamicEnergyi = aerodynamicPower *cyclistTimei
+    var rollingResistanceEnergyi = rollingResistancePower *cyclistTimei
+    var wheelBearingFrictionEnergyi = wheelBearingFrictionPower *cyclistTimei
+    var potentialEnergyi = potentialEnergyPower *cyclistTimei
+
+    var energyTotali = aerodynamicEnergyi+rollingResistanceEnergyi+wheelBearingFrictionEnergyi+potentialEnergyi
+
+    testArray.push(energyTotali) //Slet
+
+    if (slet == 0) {
+
+      // console.log("cyclistAnglei: " + cyclistAnglei)
+      // console.log("cyclistDistancei: " + cyclistDistancei)
+      // console.log("cyclistTimei: " + cyclistTimei)
+      // console.log("vwtan: " + vwtan)
+      // console.log("vwnor: " + vwnor)
+      // console.log("Va: " + Va)
+      // console.log("cyclistAnglei: " + cyclistAnglei)
+      // console.log("yawAngle: " + yawAngle)
+      // console.log("cyclistSpeed: " + cyclistSpeed)
+      // console.log("arrayHeight[i]: " + arrayHeight[i])
+      // console.log("cyclistGradei: " + cyclistGradei)
 
 
-//Power
-    var aerodynamicPower = Math.pow(Va,2)*cyclistSpeed*0.5*airDensity*(cyclistDrag+spokesDrag)
 
-    testArray.push(aerodynamicPower)//Slet
-
-if (slet ==0) {
-
-  console.log("cyclistAnglei: " + cyclistAnglei)
-  console.log("cyclistDistancei: " + cyclistDistancei)
-  console.log("cyclistTimei: " + cyclistTimei)
-  console.log("vwtan: " + vwtan)
-  console.log("vwnor: " + vwnor)
-  console.log("Va: " + Va)
-  console.log("cyclistAnglei: " + cyclistAnglei)
-  console.log("yawAngle: " + yawAngle)
-  console.log("cyclistSpeed: " + cyclistSpeed)
-
-
-
-
-}
+    }
   }
 
-  console.log(testArray);
+  function getSum(total, num) { //Small function of calculate the sum of values in a array
+  return total + num;
+  }
+    console.log("Total Energy per streach:" + testArray);
+    console.log("Total total Energy:" + testArray.reduce(getSum));
+
+});//This is the end of the heightRequest
+
+
 
 }).addTo(mymap);
 
@@ -365,24 +420,24 @@ function deg2rad(deg) {
 }
 
 function dragAreaFromYaw(yaw) {
-var positiveYaw = Math.abs(yaw)
-var yaw0 = 0.269;
-var yaw5 = 0.258;//The real value is 265 - changed to do test through their example
-var yaw10 = 0.257;//The real value is 265 - changed to do test through their example
-var yaw15 = 0.255;
-var yawmere = 0.250;
+  var positiveYaw = Math.abs(yaw)
+  var yaw0 = 0.269;
+  var yaw5 = 0.258; //The real value is 265 - changed to do test through their example
+  var yaw10 = 0.257; //The real value is 265 - changed to do test through their example
+  var yaw15 = 0.255;
+  var yawmere = 0.250;
 
 
 
-if (positiveYaw > 0 && positiveYaw < 5)
-{var dragArea =((yaw5-yaw0)/5)*(positiveYaw-5)+yaw0}
-else if (positiveYaw > 5 && positiveYaw < 10)
-{var dragArea =((yaw10-yaw5)/5)*(positiveYaw-5)+yaw5}
-else if (positiveYaw > 10 && positiveYaw < 15)
-{var dragArea =((yaw15-yaw10)/5)*(positiveYaw-5)+yaw10}
-else if (positiveYaw > 15)
-{var dragArea =((yawmere-yaw15)/5)*(positiveYaw-5)+yaw15}
-else alert("Yaw is too big!!!!")
+  if (positiveYaw > 0 && positiveYaw < 5) {
+    var dragArea = ((yaw5 - yaw0) / 5) * (positiveYaw - 5) + yaw0
+  } else if (positiveYaw > 5 && positiveYaw < 10) {
+    var dragArea = ((yaw10 - yaw5) / 5) * (positiveYaw - 5) + yaw5
+  } else if (positiveYaw > 10 && positiveYaw < 15) {
+    var dragArea = ((yaw15 - yaw10) / 5) * (positiveYaw - 5) + yaw10
+  } else if (positiveYaw > 15) {
+    var dragArea = ((yawmere - yaw15) / 5) * (positiveYaw - 5) + yaw15
+  } else alert("Yaw is too big!!!!")
 
-return dragArea
+  return dragArea
 }
