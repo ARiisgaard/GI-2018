@@ -61,7 +61,7 @@ var mymap = L.map('map', {
 var container = $('<div />');
 // Delegate all event handling for the container itself and its contents to the container
 container.on('click', '.smallPolygonLink', function(e) {
-  console.log("e: " + e)
+  console.log("e: " + JSON.stringify(e))
   // coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
   numberofwaypoints += 1
   console.log(numberofwaypoints)
@@ -75,9 +75,12 @@ parks.bindPopup(container[0]).on('click', function(e) {
   parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
   goThrough.push(parkLocation);
   orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
+  console.log("orderOfWaypoints: " + orderOfWaypoints)
   console.log("click: " + goThrough)
-  orderArray(goThrough, orderOfWaypoints);
-  // finalArray.splice( 1, 0, parkLocation);
+  var orderedParks =  orderArray(goThrough, orderOfWaypoints);
+  console.log("orderedParks: " + orderedParks)
+  var tempArray = []; //In this empty Array we are fitting all the pieces together
+  finalArray = tempArray.concat([StartLocation],orderedParks,[EndLocation])
 });
 
 
@@ -251,49 +254,77 @@ function getRoute(lat, lng) {
   }
 }
 
-function orderArray(coordsArray, distanceArray) { //This function changes the order of the visited waypoint, so they are ordered by closeness to the starting location instead of the order of the clicks
-var orderedDistances = [];
-//  var whatsLeft = distanceArray; //In order to be able to sort the array, we need to be able to remove values from the array
-var whatsLeft = distanceArray.concat(); //This is basicly the same as whatsLeft = distanceArray, but that doesn't work the same way with arrays, so we have to do it this way. If we havent the program would have made whatsLeft a reference to distanceArray instead of just making a copy. This is an issue, since we need to remove values from whatsLeft, but distanceArray has to remain untouched.
+function orderArray(coords, distances) {
+  var sorted_coords = []
 
-console.log("distanceArray before: " + distanceArray)
-
-  //Sorting the array from closest to furthest away
-  for (i = 0; i < distanceArray.length; i++) { //This function finds the closest location, adds it to a array of ordered distances and then removes it from this array. This last step is nessercery inorder to be able to be able to find the second closest location (which is now the closest). It keeps going for distanceArray.length amount of turns instead of whatsLeft.length, since distanceArray is a constant, whereas whatsLeft gets a value removed every time
-
-    var closestDistance = Math.min(whatsLeft)
-    orderedDistances.push(closestDistance)
-    console.log("First  for statement whatsLeft 1: " + whatsLeft)
-    whatsLeft.splice(whatsLeft.indexOf(closestDistance), 1) //Removed the closest location from the array
-    console.log("First  for statement orderedDistances: " + orderedDistances)
-    console.log("First  for statement whatsLeft 2: " + whatsLeft)
-  }
-  //Nu har vi et array med afstandende fra Start sorteret med nærmeste først
-
-console.log("distanceArray 2nd: " + distanceArray)
+  //Test
+var coordsLeft = coords.concat();
+var distancesLeft = distances.concat();
 
 
-  goThrough = [];
-  for (i = 0; i < orderedDistances.length; i++) {
-    console.log("orderedDistances.length: " + orderedDistances.length)
-      console.log("orderedDistances: " + orderedDistances)
-      console.log("orderedDistances[i]: " + orderedDistances[i])
-            console.log("distanceArray: " + distanceArray)
-    var aLocation = distanceArray.indexOf(orderedDistances[i]) //Finds index for the closest waypoint
-    console.log("aLocation: " + aLocation)
-    console.log("coordsArray[aLocation]: " + coordsArray[aLocation])
-    goThrough.push(coordsArray[aLocation]) //Takes the coordinates from coordsArray fitting the closest location and adds them to a array
-    console.log("goThrough for " + i + ": " + goThrough)
+  // keep doing this until the distances array is empty:
+  while (distancesLeft.length > 0) {
+
+    // find index of smallest distance
+    var i = distancesLeft.indexOf(Math.min(...distancesLeft));
+
+    // copy the coordinates for that entry over
+    sorted_coords.push(coordsLeft[i]);
+
+    // remove that element from the two input arrays
+    coordsLeft.splice(i, 1);
+    distancesLeft.splice(i, 1);
   }
 
-  //All the values then gets added to the array
-  var tempArray = []; //In this empty Array we are fitting all the pieces together
-  finalArray = tempArray.concat([StartLocation],goThrough,[EndLocation])
-  // finalArray.push(StartLocation);
-console.log("finalArray in End: " + finalArray)
-  // finalArray.push(goThrough);
-  // finalArray.push(EndLocation);
+  return (sorted_coords);
+
 }
+
+
+
+// function orderArray(coordsArray, distanceArray) { //This function changes the order of the visited waypoint, so they are ordered by closeness to the starting location instead of the order of the clicks
+// var orderedDistances = [];
+// //  var whatsLeft = distanceArray; //In order to be able to sort the array, we need to be able to remove values from the array
+// var whatsLeft = distanceArray.concat(); //This is basicly the same as whatsLeft = distanceArray, but that doesn't work the same way with arrays, so we have to do it this way. If we havent the program would have made whatsLeft a reference to distanceArray instead of just making a copy. This is an issue, since we need to remove values from whatsLeft, but distanceArray has to remain untouched.
+//
+// console.log("distanceArray before: " + distanceArray)
+//
+//   //Sorting the array from closest to furthest away
+//   for (i = 0; i < distanceArray.length; i++) { //This function finds the closest location, adds it to a array of ordered distances and then removes it from this array. This last step is nessercery inorder to be able to be able to find the second closest location (which is now the closest). It keeps going for distanceArray.length amount of turns instead of whatsLeft.length, since distanceArray is a constant, whereas whatsLeft gets a value removed every time
+//
+//     var closestDistance = Math.min(whatsLeft)
+//     orderedDistances.push(closestDistance)
+//     console.log("First  for statement whatsLeft 1: " + whatsLeft)
+//     whatsLeft.splice(whatsLeft.indexOf(closestDistance), 1) //Removed the closest location from the array
+//     console.log("First  for statement orderedDistances: " + orderedDistances)
+//     console.log("First  for statement whatsLeft 2: " + whatsLeft)
+//   }
+//   //Nu har vi et array med afstandende fra Start sorteret med nærmeste først
+//
+// console.log("distanceArray 2nd: " + distanceArray)
+//
+//
+//   goThrough = [];
+//   for (i = 0; i < orderedDistances.length; i++) {
+//     console.log("orderedDistances.length: " + orderedDistances.length)
+//       console.log("orderedDistances: " + orderedDistances)
+//       console.log("orderedDistances[i]: " + orderedDistances[i])
+//             console.log("distanceArray: " + distanceArray)
+//     var aLocation = distanceArray.indexOf(orderedDistances[i]) //Finds index for the closest waypoint
+//     console.log("aLocation: " + aLocation)
+//     console.log("coordsArray[aLocation]: " + coordsArray[aLocation])
+//     goThrough.push(coordsArray[aLocation]) //Takes the coordinates from coordsArray fitting the closest location and adds them to a array
+//     console.log("goThrough for " + i + ": " + goThrough)
+//   }
+//
+//   //All the values then gets added to the array
+//   var tempArray = []; //In this empty Array we are fitting all the pieces together
+//   finalArray = tempArray.concat([StartLocation],goThrough,[EndLocation])
+//   // finalArray.push(StartLocation);
+// console.log("finalArray in End: " + finalArray)
+//   // finalArray.push(goThrough);
+//   // finalArray.push(EndLocation);
+// }
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   var R = 6371; // Radius of the earth in km
