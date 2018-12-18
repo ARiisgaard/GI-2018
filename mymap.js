@@ -174,21 +174,30 @@ console.log("Elevation Curve: " + elevationCurve)
     //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
     arrayDistance.push(routeTime * (getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng) / (routeDistance / 1000)));
 
+//Formular for converting from 100 m to ground level of wind: Source: https://websites.pmc.ucsc.edu/~jnoble/wind/extrap/
+
+heightForKnownWind = 100 //The height that the data we have are from. There is no information in the API. Based on Windatlas it is assumed to be in 100 m
+groundHeight = 10 //What height it should translate the wind to
+knownWindSpeed = windspeed// Zref = reference height where vref is known
+roughnessLevel = 3.5 // Roughness for "Larger cities with tall buildings"
+
+windGroundSpeed = knownWindSpeed*((Math.log(groundHeight/roughnessLevel))/(Math.log(heightForKnownWind/roughnessLevel)))
+
 
     //Warning: arrayDistance is about time and not distance
     var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]);
     var cyclistDistancei = 1000*getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);
     var cyclistTimei = routeTime * cyclistDistancei / (routeDistance); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
-    var cyclistGradei = (Math.atan((arrayHeight[i]-arrayHeight[i+1])/(cyclistDistancei))*180/Math.PI)/100  //This is calculating the slope between one point and the next based on the formular: tan(A)=a/b. - Divided with 100 cause percent
+    var cyclistGradei = (Math.atan((arrayHeight[i]-arrayHeight[i+1])/(cyclistDistancei))*(180/Math.PI))/100  //This is calculating the slope between one point and the next based on the formular: tan(A)=a/b. - Divided with 100 cause percent
 
     var roadResistance = 0.0032
-    var vwtan = windspeed * Math.cos((cyclistAnglei - windangle) / 180 * Math.PI);
-    var vwnor = windspeed * Math.sin((cyclistAnglei - windangle) / 180 * Math.PI);
+    var vwtan = windGroundSpeed * Math.cos((cyclistAnglei - windangle)* (Math.PI / 180) );
+    var vwnor = windGroundSpeed * Math.sin((cyclistAnglei - windangle)* (Math.PI / 180) );
     var cyclistSpeed = routeDistance / routeTime;
     var Va = cyclistSpeed + vwtan;
     var spokesDrag = 0.0044;
     var airDensity = 1.2234;
-    var yawAngle = Math.atan(vwnor / Va) * 180 / Math.PI;
+    var yawAngle = Math.atan(vwnor / Va) * (180 / Math.PI);
     var cyclistDrag = dragAreaFromYaw(yawAngle);
     var cyclistMass = 90
     var kineticEnergyI = 0.14
@@ -210,27 +219,40 @@ console.log("Elevation Curve: " + elevationCurve)
 
     var energyTotali = aerodynamicEnergyi+rollingResistanceEnergyi+wheelBearingFrictionEnergyi+potentialEnergyi
 
-    testArray.push(energyTotali) //Slet
+    testArray.push(potentialEnergyi) //Slet
+
+
+    var heightStart = elevationData.elevationProfile[0].height
+    var heightEnd = elevationData.elevationProfile[routeCoordinates.length-1].height
+
+    //m*g*h
+    var alternativePotentialEnergy =cyclistMass*9.82*(heightStart-heightEnd)
 
     if (slet == 0) {
 
       // console.log("aerodynamicEnergyi: " + aerodynamicEnergyi)
       // console.log("rollingResistanceEnergyi: " + rollingResistanceEnergyi)
       // console.log("wheelBearingFrictionEnergyi: " + wheelBearingFrictionEnergyi)
+      // console.log("potentialEnergyi: " + potentialEnergyi)
 
-      console.log("cyclistDistancei: " + cyclistDistancei)
-      var bob =arrayHeight[i]-arrayHeight[i+1]
-      console.log("Height difference: " + bob)
-      console.log("cyclistGradei: " + cyclistGradei)
-      console.log("potentialEnergyi: " + potentialEnergyi)
-      console.log("potentialEnergyPower: " + potentialEnergyPower)
+      // console.log("cyclistDistancei: " + cyclistDistancei)
+      // var bob =arrayHeight[i]-arrayHeight[i+1]
+      // console.log("Height difference: " + bob)
+      // console.log("cyclistGradei: " + cyclistGradei)
+      // console.log("potentialEnergyi: " + potentialEnergyi)
+      // console.log("potentialEnergyPower: " + potentialEnergyPower)
+
+// console.log( i + "- vwtan: " + vwtan + " windspeed: " + windspeed + " cycangle: " + cyclistAnglei + " windangle: " + windangle)
+// console.log( i + "- vwnor: " + vwnor + " yawAngle: " + yawAngle)
+// console.log( i + "Va: " + Va + " cyclistSpeed: " + cyclistSpeed)
+
       // console.log("Va: " + Va)
-      // console.log("cyclistAnglei: " + cyclistAnglei)
-      // console.log("yawAngle: " + yawAngle)
+      // // console.log("cyclistAnglei: " + cyclistAnglei)
+      console.log("yawAngle " + i + ": " + yawAngle)
       // console.log("cyclistSpeed: " + cyclistSpeed)
       // console.log("arrayHeight[i]: " + arrayHeight[i])
 
-
+// console.log("Alternative Potential Energy: " + alternativePotentialEnergy);
 
 
     }
@@ -239,8 +261,10 @@ console.log("Elevation Curve: " + elevationCurve)
   function getSum(total, num) { //Small function of calculate the sum of values in a array
   return total + num;
   }
-    console.log("Total Energy per streach:" + testArray);
-    console.log("Total total Energy:" + testArray.reduce(getSum));
+    console.log("Total Energy per streach: " + testArray);
+    console.log("Total total potential Energy: " + testArray.reduce(getSum));
+
+
 
 });//This is the end of the heightRequest
 
