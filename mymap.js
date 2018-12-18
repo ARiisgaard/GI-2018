@@ -258,7 +258,7 @@ function orderArray(coords, distances) {
   var sorted_coords = []
 
   //Test
-var coordsLeft = coords.concat();
+var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
 var distancesLeft = distances.concat();
 
 
