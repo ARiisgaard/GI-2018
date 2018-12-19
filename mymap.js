@@ -1,3 +1,15 @@
+var locked = false //This variable is telling the program if it should keep looking for new destinations
+var EndLocation; //This is variable containing the coordinats of the destination
+var StartLocation;
+var route;
+var length = 5000; //This is the default distance of the trip
+var reverse = false;
+var finalArray = [StartLocation, EndLocation]; //Test den her - tror at den vil fungere lige så godt hvis den var tom
+var goThrough = [];
+var orderOfWaypoints = [];
+var numberofwaypoints = 2;
+
+
 var osm = L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -33,18 +45,52 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
   pointToLayer: function(geoJsonPoint, latlng) { return L.marker(latlng, {icon: trainIcon})}
 })
 
+var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" layer
+
+//fix stuff here
+
+  // onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+  // //  layer.bindPopup("<h2>Park:</h2>" + "You want to go here?" + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+  // // console.log(park1)
+  // layer.on({
+  //     click: function(e){
+  //
+  //
+  //     }
+  // }
+  });
+
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
   zoom: 10,
   layers: [osm]
 });
 
-var locked = false //This variable is telling the program if it should keep looking for new destinations
-var EndLocation; //This is variable containing the coordinats of the destination
-var StartLocation;
-var route;
-var length = 5000; //This is the default distance of the trip
-var reverse = false;
+// Create an element to hold all your text and markup
+var container = $('<div />');
+// Delegate all event handling for the container itself and its contents to the container
+container.on('click', '.smallPolygonLink', function(e) {
+  console.log("e: " + JSON.stringify(e))
+  // coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
+  numberofwaypoints += 1
+  console.log(numberofwaypoints)
+  getRoute(StartLocation.lat, StartLocation.lng);
+});
+// Insert whatever you want into the container, using whichever approach you prefer
+container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</a>.");
+container.append($('<span class="bold">').text())
+// Insert the container into the popup
+parks.bindPopup(container[0]).on('click', function(e) {
+  parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
+  goThrough.push(parkLocation);
+  orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
+  console.log("orderOfWaypoints: " + orderOfWaypoints)
+  console.log("click: " + goThrough)
+  var orderedParks =  orderArray(goThrough, orderOfWaypoints);
+  console.log("orderedParks: " + orderedParks)
+  var tempArray = []; //In this empty Array we are fitting all the pieces together
+  finalArray = tempArray.concat([StartLocation],orderedParks,[EndLocation])
+});
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -135,7 +181,8 @@ L.easyButton('fa-ruler', function() {
 
 var overlayMaps = {
   "Cities": city,
-  "Stations": stations
+  "Stations": stations,
+  "Parks": parks
 }; //Adds the overlayer with weather information
 
 var basemaps = {
@@ -195,15 +242,17 @@ function getRoute(lat, lng) {
 
       //Here stops the coordinate definition
 
-      var winddestination;
-      if (winddestination) {
-        mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
-        console.log("Wind remove")
-      }
 
-      var winddestination = L.marker([EndLat, EndLng], {
-        icon: myIcon
-      }).addTo(mymap);
+//This following disabled code was for showing the "ideal location" - Only use for testing
+      // var winddestination;
+      // if (winddestination) {
+      //   mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+      //   console.log("Wind remove")
+      // }
+      //
+      // var winddestination = L.marker([EndLat, EndLng], {
+      //   icon: myIcon
+      // }).addTo(mymap);
 
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
@@ -217,28 +266,77 @@ function getRoute(lat, lng) {
 
         //Here the routing begins
         $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-        if (reverse == true) {
 
-          // var templocation = StartLocation;
-          // StartLocation = EndLocation;
-          // Endlocation = templocation;
-          [StartLocation, EndLocation] = [EndLocation, StartLocation];
-        };
+//HEY!! FIX Reverse Route
 
-        fullRoute = [StartLocation,
+
+        // if (reverse == true) {
+        //   [StartLocation, EndLocation] = [EndLocation, StartLocation];
+        // };
+
+
+if (numberofwaypoints == 2) {
+        finalArray = [StartLocation,
           EndLocation
         ]
-        calculateRoute(fullRoute);
+}
+
+        calculateRoute(finalArray);
 
       });
     });
   } else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
     //Here the routing begins
-    fullRoute = [StartLocation,
-      EndLocation
-    ]
-    calculateRoute(fullRoute);
+
+    // fullRoute = [StartLocation,
+    //   EndLocation
+    // ]
+
+    calculateRoute(finalArray);
   }
+}
+
+function orderArray(coords, distances) {
+  var sorted_coords = []
+
+  //Test
+var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
+var distancesLeft = distances.concat();
+
+
+  // keep doing this until the distances array is empty:
+  while (distancesLeft.length > 0) {
+
+    // find index of smallest distance
+    var i = distancesLeft.indexOf(Math.min(...distancesLeft));
+
+    // copy the coordinates for that entry over
+    sorted_coords.push(coordsLeft[i]);
+
+    // remove that element from the two input arrays
+    coordsLeft.splice(i, 1);
+    distancesLeft.splice(i, 1);
+  }
+
+  return (sorted_coords);
+
+}
+
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2 - lat1); // deg2rad below
+  var dLon = deg2rad(lon2 - lon1);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI / 180)
 }
 
 function calculateRoute(array) {
