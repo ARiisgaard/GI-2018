@@ -1,4 +1,5 @@
-//These are all of the global variables.
+//These are all of the global variables. They are defined here because they are used across multiple functions.
+//Most of these will be explained, when they are used instead of here.
 
 var locked = false //This variable is telling the program if it should keep looking for new destinations
 var EndLocation; //This is variable containing the coordinats of the destination
@@ -6,7 +7,7 @@ var StartLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
 var reverse = false;
-var finalArray = []; //Test den her - tror at den vil fungere lige så godt hvis den var tom
+var finalArray = [];
 var goThrough = [];
 var orderOfWaypoints = [];
 var numberofwaypoints = 2;
@@ -19,6 +20,7 @@ var osm = L.tileLayer(
               <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
   });
 
+//This one should be disabled in the final version
 var city = L.OWM.current({
   appId: 'ee67f8f53521d94193aa7d8364b7f5d9',
   intervall: 15,
