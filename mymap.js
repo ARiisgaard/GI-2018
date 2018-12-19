@@ -1,10 +1,12 @@
+//These are all of the global variables.
+
 var locked = false //This variable is telling the program if it should keep looking for new destinations
 var EndLocation; //This is variable containing the coordinats of the destination
 var StartLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
 var reverse = false;
-var finalArray = [StartLocation, EndLocation]; //Test den her - tror at den vil fungere lige så godt hvis den var tom
+var finalArray = []; //Test den her - tror at den vil fungere lige så godt hvis den var tom
 var goThrough = [];
 var orderOfWaypoints = [];
 var numberofwaypoints = 2;
@@ -270,9 +272,7 @@ function getRoute(lat, lng) {
 //HEY!! FIX Reverse Route
 
 
-        // if (reverse == true) {
-        //   [StartLocation, EndLocation] = [EndLocation, StartLocation];
-        // };
+
 
 
 if (numberofwaypoints == 2) {
@@ -280,6 +280,11 @@ if (numberofwaypoints == 2) {
           EndLocation
         ]
 }
+
+if (reverse == true) {
+  finalArray = finalArray.reverse()
+  console.log("finalArray: " + finalArray)
+};
 
         calculateRoute(finalArray);
 
