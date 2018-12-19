@@ -181,7 +181,7 @@ groundHeight = 10 //What height it should translate the wind to
 knownWindSpeed = windspeed// Zref = reference height where vref is known
 roughnessLevel = 3.5 // Roughness for "Larger cities with tall buildings"
 
-windGroundSpeed = knownWindSpeed*((Math.log(groundHeight/roughnessLevel))/(Math.log(heightForKnownWind/roughnessLevel)))
+windGroundSpeed = windspeed // knownWindSpeed*((Math.log(groundHeight/roughnessLevel))/(Math.log(heightForKnownWind/roughnessLevel)))
 
 
     //Warning: arrayDistance is about time and not distance
@@ -193,7 +193,7 @@ windGroundSpeed = knownWindSpeed*((Math.log(groundHeight/roughnessLevel))/(Math.
     var roadResistance = 0.0032
     var vwtan = windGroundSpeed * Math.cos((cyclistAnglei - windangle)* (Math.PI / 180) );
     var vwnor = windGroundSpeed * Math.sin((cyclistAnglei - windangle)* (Math.PI / 180) );
-    var cyclistSpeed = routeDistance / routeTime;
+    var cyclistSpeed =  routeDistance / routeTime;
     var Va = cyclistSpeed + vwtan;
     var spokesDrag = 0.0044;
     var airDensity = 1.2234;
@@ -219,21 +219,21 @@ windGroundSpeed = knownWindSpeed*((Math.log(groundHeight/roughnessLevel))/(Math.
 
     var energyTotali = aerodynamicEnergyi+rollingResistanceEnergyi+wheelBearingFrictionEnergyi+potentialEnergyi
 
-    testArray.push(potentialEnergyi) //Slet
+    testArray.push(energyTotali) //Slet
 
 
     var heightStart = elevationData.elevationProfile[0].height
     var heightEnd = elevationData.elevationProfile[routeCoordinates.length-1].height
 
     //m*g*h
-    var alternativePotentialEnergy =cyclistMass*9.82*(heightStart-heightEnd)
+    var alternativePotentialEnergy =cyclistMass*9.82*(heightEnd-heightStart)
 
     if (slet == 0) {
 
-      // console.log("aerodynamicEnergyi: " + aerodynamicEnergyi)
-      // console.log("rollingResistanceEnergyi: " + rollingResistanceEnergyi)
-      // console.log("wheelBearingFrictionEnergyi: " + wheelBearingFrictionEnergyi)
-      // console.log("potentialEnergyi: " + potentialEnergyi)
+      console.log("aerodynamicEnergyi: " + aerodynamicEnergyi)
+      console.log("rollingResistanceEnergyi: " + rollingResistanceEnergyi)
+      console.log("wheelBearingFrictionEnergyi: " + wheelBearingFrictionEnergyi)
+      console.log("potentialEnergyi: " + potentialEnergyi)
 
       // console.log("cyclistDistancei: " + cyclistDistancei)
       // var bob =arrayHeight[i]-arrayHeight[i+1]
@@ -248,11 +248,11 @@ windGroundSpeed = knownWindSpeed*((Math.log(groundHeight/roughnessLevel))/(Math.
 
       // console.log("Va: " + Va)
       // // console.log("cyclistAnglei: " + cyclistAnglei)
-      console.log("yawAngle " + i + ": " + yawAngle)
+      // console.log("yawAngle " + i + ": " + yawAngle)
       // console.log("cyclistSpeed: " + cyclistSpeed)
       // console.log("arrayHeight[i]: " + arrayHeight[i])
 
-// console.log("Alternative Potential Energy: " + alternativePotentialEnergy);
+console.log("Alternative Potential Energy: " + alternativePotentialEnergy);
 
 
     }
@@ -262,7 +262,7 @@ windGroundSpeed = knownWindSpeed*((Math.log(groundHeight/roughnessLevel))/(Math.
   return total + num;
   }
     console.log("Total Energy per streach: " + testArray);
-    console.log("Total total potential Energy: " + testArray.reduce(getSum));
+    console.log("Total total Energy: " + testArray.reduce(getSum));
 
 
 
