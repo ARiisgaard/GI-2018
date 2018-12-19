@@ -19,15 +19,37 @@ var myIcon = L.icon({ //defines the icon for the wind location
   popupAnchor: [-3, -76]
 });
 //var myLayer; //Layer with distination
+var trainIcon = L.icon({
+  iconUrl: 'https://image.flaticon.com/icons/svg/1201/1201644.svg', // change this, obviously...
+  iconSize: [30, 30],
+  iconAnchor: [15, 20],
+  popupAnchor: [-3, -76]
+  });
 
-var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
-  onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
-    layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
-  }
-});
 
-stations.on('click', function(e) {
-  coords2 = [e.latlng.lat, e.latlng.lng];
+// var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
+//   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+//     layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+//   }
+// });
+//
+// stations.on('click', function(e) {
+//   coords2 = [e.latlng.lat, e.latlng.lng];
+// });
+
+var stations = new L.GeoJSON.AJAX("stations.geojson", {
+  middleware: function(data) {
+    return L.geoJson(data, {
+      onEachFeature: function(feature, layer) {
+        console.log("Test: "+String(feature.geometry.coordinates))
+
+        layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>")
+        // <-- we tried to add the popup and the layer.setIcon. It works until here, and also the addto(mymap) works.
+      },
+      pointToLayer: function(geoJsonPoint, latlng) { return L.marker(latlng, {icon: trainIcon})}
+
+    }).addTo(mymap);
+ }
 });
 
 var mymap = L.map('map', {
