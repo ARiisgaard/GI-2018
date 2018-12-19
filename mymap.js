@@ -45,6 +45,8 @@ var angle;
 var resetarrow;
 var oldAngle = "test";
 var windSpeed;
+var pProbability;
+var pIntensity;
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -80,15 +82,15 @@ function enterDistance() {
          }
 }
 
-L.easyButton( 'fa-flask', function(){
-  var proxy = 'https://cors-anywhere.herokuapp.com/';
-  var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
-
-  $.getJSON(proxy + apiLinkDS, function(data2) {
-  console.log(data2.hourly)
-  console.log(data2.hourly.data["0"].precipProbability)
-});
-}).addTo(mymap);
+// L.easyButton( 'fa-flask', function(){
+//   var proxy = 'https://cors-anywhere.herokuapp.com/';
+//   var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
+//
+//   $.getJSON(proxy + apiLinkDS, function(data2) {
+//   console.log(data2.hourly)
+//   console.log(data2.hourly.data["0"].precipProbability)
+// });
+// }).addTo(mymap);
 
 
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
@@ -159,6 +161,9 @@ changeArrow();
     var EndLng = end_x * 180 / Math.PI
 
 // arrow test
+console.log("windSpeed "+ windSpeed);
+document.getElementById("div2").innerHTML = windSpeed;
+document.getElementById("div3").innerHTML = windangle;
 
     //Here stops the coordinate definition
 
@@ -242,12 +247,17 @@ function changeArrow() { // function that checks whether the angle has changed. 
       ctx.translate(-100/2, -100/2); //draws arrow from topleft.
       ctx.drawImage(img, 0, 0,100,100); //draws the arrow 100x100
       document.getElementById("myCanvas").onmouseover = function() {mouseOver()};
+      var proxy = 'https://cors-anywhere.herokuapp.com/';
+      var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
+
+      $.getJSON(proxy + apiLinkDS, function(data2) {
+      pPercipitation = data2.hourly.data["0"].precipProbability *100;
+      pIntensity = data2.hourly.data["0"].precipIntensity;
+      console.log(pIntensity + " mm/hour");
+      console.log(pPercipitation + " %");
+    });
+
 }
 else {console.log("Det virker?")}}
 
 setInterval(changeArrow, 3000); //in milliseconds
-
-function mouseOver() {
-    alert
-     //displays wind direction and wind speed
-}
