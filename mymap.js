@@ -45,10 +45,19 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
 // var park1;
 
 var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" layer
+
+//fix stuff here 
+
   // onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
-  //  layer.bindPopup("<h2>Park:</h2>" + "You want to go here?" + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
-  // console.log(park1)
+  // //  layer.bindPopup("<h2>Park:</h2>" + "You want to go here?" + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+  // // console.log(park1)
+  // layer.on({
+  //     click: function(e){
+  //
+  //
+  //     }
   // }
+
 });
 
 var mymap = L.map('map', {
