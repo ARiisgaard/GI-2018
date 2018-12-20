@@ -1,4 +1,4 @@
-//Sorter i array, så den tager nærmeste først 
+//Sorter i array, så den tager nærmeste først
 
 var locked = false //This variable is telling the program if it should keep looking for new destinations
 var EndLocation; //This is variable containing the coordinats of the destination
@@ -75,7 +75,8 @@ parks.bindPopup(container[0]).on('click', function(e) {
 });
 
 
-var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
+var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination.
+  // The button can be clicked again to start looking for new stations
   states: [{
     stateName: 'UnlockDestination',
     icon: 'fa-unlock',
