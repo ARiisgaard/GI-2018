@@ -229,11 +229,14 @@ windGroundSpeed = windspeed // knownWindSpeed*((Math.log(groundHeight/roughnessL
     var alternativePotentialEnergy =cyclistMass*9.82*(heightEnd-heightStart)
 
     if (slet == 0) {
-
+      //
       console.log("aerodynamicEnergyi: " + aerodynamicEnergyi)
       console.log("rollingResistanceEnergyi: " + rollingResistanceEnergyi)
       console.log("wheelBearingFrictionEnergyi: " + wheelBearingFrictionEnergyi)
       console.log("potentialEnergyi: " + potentialEnergyi)
+
+
+      // console.log("cyclistDrag: " + cyclistDrag)
 
       // console.log("cyclistDistancei: " + cyclistDistancei)
       // var bob =arrayHeight[i]-arrayHeight[i+1]
@@ -449,24 +452,31 @@ function deg2rad(deg) {
 }
 
 function dragAreaFromYaw(yaw) {
-  var positiveYaw = Math.abs(yaw)
-  var yaw0 = 0.269;
-  var yaw5 = 0.258; //The real value is 265 - changed to do test through their example
-  var yaw10 = 0.257; //The real value is 265 - changed to do test through their example
-  var yaw15 = 0.255;
-  var yawmere = 0.250;
+  var positiveYaw = Math.abs(yaw) //Changes the value to a positive number. Without this we would have to make the if else code below twice as long - one for when the wind comes from the right side (positive values) and one for values on the left side (negative values)
+
+var yaw0 = 0.34;
+var yaw15 = 0.36;
+var yaw30 = 0.34;
+var yaw45 = 0.28;
+var yaw60 = 0.21;
+var yaw75 = 0.13;
+var yaw90 = 0.04;
 
 
-
-  if (positiveYaw > 0 && positiveYaw < 5) {
-    var dragArea = ((yaw5 - yaw0) / 5) * (positiveYaw - 5) + yaw0
-  } else if (positiveYaw > 5 && positiveYaw < 10) {
-    var dragArea = ((yaw10 - yaw5) / 5) * (positiveYaw - 5) + yaw5
-  } else if (positiveYaw > 10 && positiveYaw < 15) {
-    var dragArea = ((yaw15 - yaw10) / 5) * (positiveYaw - 5) + yaw10
-  } else if (positiveYaw > 15) {
-    var dragArea = ((yawmere - yaw15) / 5) * (positiveYaw - 5) + yaw15
-  } else alert("Yaw is too big!!!!")
+//This is (drag per degree in that interval)*(number of degree from last known value)+(drag at last known value)
+if (positiveYaw > 0 && positiveYaw < 15) {
+  var dragArea = ((yaw15 - yaw0) / 15) * (positiveYaw - 0) + yaw0
+} else if (positiveYaw > 15 && positiveYaw < 30) {
+  var dragArea = ((yaw30 - yaw15) / 15) * (positiveYaw - 15) + yaw15
+} else if (positiveYaw > 30 && positiveYaw < 45) {
+  var dragArea = ((yaw45 - yaw30) / 15) * (positiveYaw - 30) + yaw30
+} else if (positiveYaw > 45 && positiveYaw < 60) {
+  var dragArea = ((yaw60 - yaw45) / 15) * (positiveYaw - 45) + yaw45
+} else if (positiveYaw > 60 && positiveYaw < 75) {
+  var dragArea = ((yaw75 - yaw60) / 15) * (positiveYaw - 60) + yaw60
+} else if (positiveYaw > 75 && positiveYaw < 90) {
+  var dragArea = ((yaw90 - yaw75) / 15) * (positiveYaw - 75) + yaw75
+} else alert("Yaw is too big!!!!")
 
   return dragArea
 }
