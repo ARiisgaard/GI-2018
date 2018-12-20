@@ -166,23 +166,22 @@ arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
 console.log("Elevation Curve: " + elevationCurve)
 
 
+var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+var proxy = 'https://cors-anywhere.herokuapp.com/';
+
+$.getJSON(proxy + apiLinkOWM, function(data) {
+
+var boltwindangle = data.wind.deg
+var boltwindspeed = data.wind.speed
+
+console.log(boltwindangle)
 
 
-  for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle
-    arrayAngles.push(calculateAngle(routeCoordinates[i], routeCoordinates[i + 1])); //Calculating the bearing between a point and the next point on the route - for each point
-
-    //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
-    arrayDistance.push(routeTime * (getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng) / (routeDistance / 1000)));
-
-//Formular for converting from 100 m to ground level of wind: Source: https://websites.pmc.ucsc.edu/~jnoble/wind/extrap/
-
-heightForKnownWind = 100 //The height that the data we have are from. There is no information in the API. Based on Windatlas it is assumed to be in 100 m
-groundHeight = 10 //What height it should translate the wind to
-knownWindSpeed = windspeed// Zref = reference height where vref is known
-roughnessLevel = 3.5 // Roughness for "Larger cities with tall buildings"
-
-windGroundSpeed = windspeed // knownWindSpeed*((Math.log(groundHeight/roughnessLevel))/(Math.log(heightForKnownWind/roughnessLevel)))
-
+  for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle and there are no distance from the last coordinate
+    // arrayAngles.push(calculateAngle(routeCoordinates[i], routeCoordinates[i + 1])); //Calculating the bearing between a point and the next point on the route - for each point
+    //
+    // //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
+    // arrayDistance.push(routeTime * (getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng) / (routeDistance / 1000)));
 
     //Warning: arrayDistance is about time and not distance
     var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]);
@@ -191,8 +190,8 @@ windGroundSpeed = windspeed // knownWindSpeed*((Math.log(groundHeight/roughnessL
     var cyclistGradei = (Math.atan((arrayHeight[i]-arrayHeight[i+1])/(cyclistDistancei))*(180/Math.PI))/100  //This is calculating the slope between one point and the next based on the formular: tan(A)=a/b. - Divided with 100 cause percent
 
     var roadResistance = 0.0032
-    var vwtan = windGroundSpeed * Math.cos((cyclistAnglei - windangle)* (Math.PI / 180) );
-    var vwnor = windGroundSpeed * Math.sin((cyclistAnglei - windangle)* (Math.PI / 180) );
+    var vwtan = boltwindspeed * Math.cos((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
+    var vwnor = boltwindspeed * Math.sin((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
     var cyclistSpeed =  routeDistance / routeTime;
     var Va = cyclistSpeed + vwtan;
     var spokesDrag = 0.0044;
@@ -268,7 +267,7 @@ console.log("Alternative Potential Energy: " + alternativePotentialEnergy);
     console.log("Total total Energy: " + testArray.reduce(getSum));
 
 
-
+});//This is the end of windRequest
 });//This is the end of the heightRequest
 
 
@@ -346,6 +345,8 @@ function getRoute(lat, lng) {
 
       //Here stops the coordinate definition
 
+
+//remove this before the final turn in - only for testing + it doesn't work
       var winddestination;
       if (winddestination) {
         mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
