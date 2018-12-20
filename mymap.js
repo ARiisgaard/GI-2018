@@ -144,8 +144,8 @@ function enterDistance() {
   var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
   if (distance != null && isNaN(distance) == false) {
     console.log("isNaN: " + isNaN(distance))
-    getRoute(StartLocation.lat, StartLocation.lng);
     length = distance * 1000
+    getRoute(StartLocation.lat, StartLocation.lng);
   } else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
     alert("That is not a valid input")
     enterDistance();
@@ -269,7 +269,7 @@ function getRoute(lat, lng) {
         EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
         //Here the routing begins
-        $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+    //    $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
 
 //HEY!! FIX Reverse Route
 
