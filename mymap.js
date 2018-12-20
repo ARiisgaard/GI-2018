@@ -465,7 +465,10 @@ var yaw90 = 0.04;
 
 
 //This is (drag per degree in that interval)*(number of degree from last known value)+(drag at last known value)
-if (positiveYaw > 0 && positiveYaw < 15) {
+if (positiveYaw == 0) {
+  var dragArea = yaw0
+}
+  else if (positiveYaw > 0 && positiveYaw < 15) {
   var dragArea = ((yaw15 - yaw0) / 15) * (positiveYaw - 0) + yaw0
 } else if (positiveYaw > 15 && positiveYaw < 30) {
   var dragArea = ((yaw30 - yaw15) / 15) * (positiveYaw - 15) + yaw15
