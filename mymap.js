@@ -281,6 +281,32 @@ L.easyButton('fa-ruler', function() {
   enterDistance();
 }).addTo(mymap);
 
+L.easyButton('fa-calculator', function() {
+
+  var theoryWindspeed = 2
+  //https://web.archive.org/web/20131212093813/http://subsite.kk.dk/sitecore/content/Subsites/CityOfCopenhagen/SubsiteFrontpage/LivingInCopenhagen/CityAndTraffic/CityOfCyclists/CycleStatistics.aspx
+  var theorycyclistSpeed =  4.3
+
+for (i = 0; i < 36; i++) {
+
+  var angledifference = i*10
+
+  var vwtan = theoryWindspeed * Math.cos((angledifference)* (Math.PI / 180) );
+  var vwnor = theoryWindspeed * Math.sin((angledifference)* (Math.PI / 180) );
+  var Va = theorycyclistSpeed + vwtan;
+  var spokesDrag = 0.0044;
+  var airDensity = 1.2234;
+  var yawAngle = Math.atan(vwnor / Va) * (180 / Math.PI);
+console.log("yawAngle " + i*10 +": " + yawAngle)
+  var cyclistDrag = dragAreaFromYaw(yawAngle);
+
+  //Power
+  var aerodynamicPower = Math.pow(Va, 2) * theorycyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
+
+  console.log("Power at angle " + i*10 +": " + aerodynamicPower)
+  }
+}).addTo(mymap);
+
 var overlayMaps = {
   "Cities": city,
   "Stations": stations
@@ -465,7 +491,11 @@ var yaw90 = 0.04;
 
 
 //This is (drag per degree in that interval)*(number of degree from last known value)+(drag at last known value)
-if (positiveYaw > 0 && positiveYaw < 15) {
+
+if (positiveYaw == 0) {
+  var dragArea = yaw0
+}
+  else if (positiveYaw > 0 && positiveYaw < 15) {
   var dragArea = ((yaw15 - yaw0) / 15) * (positiveYaw - 0) + yaw0
 } else if (positiveYaw > 15 && positiveYaw < 30) {
   var dragArea = ((yaw30 - yaw15) / 15) * (positiveYaw - 15) + yaw15
