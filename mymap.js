@@ -42,7 +42,7 @@ var trainIcon = L.icon({
   popupAnchor: [-3, -76]
   });
 
-var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
+var stations = new L.GeoJSON.AJAX("Stationer.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
     layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
   },
