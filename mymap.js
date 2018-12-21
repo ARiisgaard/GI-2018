@@ -33,7 +33,7 @@ stations.on('click', function(e) {
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
   zoom: 10,
-  layers: [osm]
+  layers: [osm, stations]
 });
 
 var locked = false //This variable is telling the program if it should keep looking for new destinations
@@ -135,6 +135,17 @@ L.easyButton('fa-flask', function() {
 }).addTo(mymap);
 var slet = 0;
 var testArray = [];
+
+var aeroArray = [];
+var rollResArray = [];
+var wheelBearingArray = [];
+var potentialArray = [];
+
+
+
+
+
+
 L.easyButton('fa-bolt', function() {
 
   arrayDistance = []; //Resets the arrays - otherwise the route would be twice as long on the second button click
@@ -171,8 +182,8 @@ var proxy = 'https://cors-anywhere.herokuapp.com/';
 
 $.getJSON(proxy + apiLinkOWM, function(data) {
 
-var boltwindangle = data.wind.deg
-var boltwindspeed = data.wind.speed
+var boltwindangle = 0//data.wind.deg
+var boltwindspeed = 3//data.wind.speed
 
 console.log(boltwindangle)
 
@@ -187,8 +198,13 @@ console.log(boltwindangle)
     var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]);
     var cyclistDistancei = 1000*getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);
     var cyclistTimei = routeTime * cyclistDistancei / (routeDistance); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
+
     var cyclistGradei = (Math.atan((arrayHeight[i]-arrayHeight[i+1])/(cyclistDistancei))*(180/Math.PI))/100  //This is calculating the slope between one point and the next based on the formular: tan(A)=a/b. - Divided with 100 cause percent
 
+ if (cyclistDistancei == 0) {cyclistGradei = 0} // Sometimes there are coordinates with 0 distance between eachother - this makes cyclistGradei return NaN, which breaks the rest of the calculations. Therefore we set cyclistGradei to 0 as there are no changes in the height
+
+console.log("arrayHeight[i]:" + arrayHeight[i] + " arrayHeight[i+1]: " + arrayHeight[i+1])
+console.log("cyclistDistancei: " + cyclistDistancei)
     var roadResistance = 0.0032
     var vwtan = boltwindspeed * Math.cos((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
     var vwnor = boltwindspeed * Math.sin((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
@@ -219,6 +235,11 @@ console.log(boltwindangle)
     var energyTotali = aerodynamicEnergyi+rollingResistanceEnergyi+wheelBearingFrictionEnergyi+potentialEnergyi
 
     testArray.push(energyTotali) //Slet
+    aeroArray.push(aerodynamicEnergyi) //Slet
+    rollResArray.push(rollingResistanceEnergyi) //Slet
+    wheelBearingArray.push(wheelBearingFrictionEnergyi) //Slet
+    potentialArray.push(potentialEnergyi) //Slet
+
 
 
     var heightStart = elevationData.elevationProfile[0].height
@@ -229,10 +250,10 @@ console.log(boltwindangle)
 
     if (slet == 0) {
       //
-      console.log("aerodynamicEnergyi: " + aerodynamicEnergyi)
-      console.log("rollingResistanceEnergyi: " + rollingResistanceEnergyi)
-      console.log("wheelBearingFrictionEnergyi: " + wheelBearingFrictionEnergyi)
-      console.log("potentialEnergyi: " + potentialEnergyi)
+      // console.log("aerodynamicEnergyi: " + aerodynamicEnergyi)
+      // console.log("rollingResistanceEnergyi: " + rollingResistanceEnergyi)
+      // console.log("wheelBearingFrictionEnergyi: " + wheelBearingFrictionEnergyi)
+      // console.log("potentialEnergyi: " + potentialEnergyi)
 
 
       // console.log("cyclistDrag: " + cyclistDrag)
@@ -240,7 +261,7 @@ console.log(boltwindangle)
       // console.log("cyclistDistancei: " + cyclistDistancei)
       // var bob =arrayHeight[i]-arrayHeight[i+1]
       // console.log("Height difference: " + bob)
-      // console.log("cyclistGradei: " + cyclistGradei)
+      console.log("cyclistGradei: " + cyclistGradei)
       // console.log("potentialEnergyi: " + potentialEnergyi)
       // console.log("potentialEnergyPower: " + potentialEnergyPower)
 
@@ -254,7 +275,7 @@ console.log(boltwindangle)
       // console.log("cyclistSpeed: " + cyclistSpeed)
       // console.log("arrayHeight[i]: " + arrayHeight[i])
 
-console.log("Alternative Potential Energy: " + alternativePotentialEnergy);
+// console.log("Alternative Potential Energy: " + alternativePotentialEnergy);
 
 
     }
@@ -263,8 +284,13 @@ console.log("Alternative Potential Energy: " + alternativePotentialEnergy);
   function getSum(total, num) { //Small function of calculate the sum of values in a array
   return total + num;
   }
-    console.log("Total Energy per streach: " + testArray);
+    //console.log("Total Energy per streach: " + testArray);
+    console.log("Routedistance: " + routeDistance)
     console.log("Total total Energy: " + testArray.reduce(getSum));
+    console.log("Total total Aero: " + aeroArray.reduce(getSum));
+    console.log("Total total RollRes: " + rollResArray.reduce(getSum));
+    console.log("Total total WheelBearing: " + wheelBearingArray.reduce(getSum));
+    console.log("Total total Potential: " + potentialArray.reduce(getSum));
 
 
 });//This is the end of windRequest
@@ -283,9 +309,11 @@ L.easyButton('fa-ruler', function() {
 
 L.easyButton('fa-calculator', function() {
 
-  var theoryWindspeed = 2
+
+
+  var theoryWindspeed = 10// prompt("theoryWindspeed", "2");
   //https://web.archive.org/web/20131212093813/http://subsite.kk.dk/sitecore/content/Subsites/CityOfCopenhagen/SubsiteFrontpage/LivingInCopenhagen/CityAndTraffic/CityOfCyclists/CycleStatistics.aspx
-  var theorycyclistSpeed =  4.3
+  var theorycyclistSpeed = 5.5//  prompt("theoryWindspeed", "4.3");
 
 for (i = 0; i < 36; i++) {
 
@@ -303,8 +331,12 @@ console.log("yawAngle " + i*10 +": " + yawAngle)
   //Power
   var aerodynamicPower = Math.pow(Va, 2) * theorycyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
 
-  console.log("Power at angle " + i*10 +": " + aerodynamicPower)
+  // console.log("Power at angle " + i*10 +": " + aerodynamicPower)
+  testArray.push(yawAngle)
+
   }
+  console.log("Windspeed: " + theoryWindspeed + " Cyclistspeed: " + theorycyclistSpeed + "Wind at different angles: " + testArray);
+
 }).addTo(mymap);
 
 var overlayMaps = {
@@ -348,7 +380,7 @@ function getRoute(lat, lng) {
 
       if (reverse == false) {
 
-        var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
+        var angle = 30//windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
       } else {
         var angle = windangle
       };
