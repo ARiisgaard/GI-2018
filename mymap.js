@@ -162,7 +162,7 @@ L.easyButton('fa-bolt', function() {
 
     $.getJSON(elevationAPI, function(elevationData) {
 
-  console.log(elevationAPI)
+  // console.log(elevationAPI)
   for (i = 0; i < routeCoordinates.length; i++)
   {
 arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
@@ -182,10 +182,10 @@ var proxy = 'https://cors-anywhere.herokuapp.com/';
 
 $.getJSON(proxy + apiLinkOWM, function(data) {
 
-var boltwindangle = 0//data.wind.deg
+var boltwindangle = 270//data.wind.deg
 var boltwindspeed = 3//data.wind.speed
 
-console.log(boltwindangle)
+console.log("Windangle"+boltwindangle)
 
 
   for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle and there are no distance from the last coordinate
@@ -203,8 +203,8 @@ console.log(boltwindangle)
 
  if (cyclistDistancei == 0) {cyclistGradei = 0} // Sometimes there are coordinates with 0 distance between eachother - this makes cyclistGradei return NaN, which breaks the rest of the calculations. Therefore we set cyclistGradei to 0 as there are no changes in the height
 
-console.log("arrayHeight[i]:" + arrayHeight[i] + " arrayHeight[i+1]: " + arrayHeight[i+1])
-console.log("cyclistDistancei: " + cyclistDistancei)
+// console.log("arrayHeight[i]:" + arrayHeight[i] + " arrayHeight[i+1]: " + arrayHeight[i+1])
+// console.log("cyclistDistancei: " + cyclistDistancei)
     var roadResistance = 0.0032
     var vwtan = boltwindspeed * Math.cos((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
     var vwnor = boltwindspeed * Math.sin((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
@@ -261,7 +261,7 @@ console.log("cyclistDistancei: " + cyclistDistancei)
       // console.log("cyclistDistancei: " + cyclistDistancei)
       // var bob =arrayHeight[i]-arrayHeight[i+1]
       // console.log("Height difference: " + bob)
-      console.log("cyclistGradei: " + cyclistGradei)
+      // console.log("cyclistGradei: " + cyclistGradei)
       // console.log("potentialEnergyi: " + potentialEnergyi)
       // console.log("potentialEnergyPower: " + potentialEnergyPower)
 
@@ -285,12 +285,14 @@ console.log("cyclistDistancei: " + cyclistDistancei)
   return total + num;
   }
     //console.log("Total Energy per streach: " + testArray);
+    console.log("Angle: " + boltwindangle + " Windspeed: " + boltwindspeed)
     console.log("Routedistance: " + routeDistance)
     console.log("Total total Energy: " + testArray.reduce(getSum));
     console.log("Total total Aero: " + aeroArray.reduce(getSum));
     console.log("Total total RollRes: " + rollResArray.reduce(getSum));
     console.log("Total total WheelBearing: " + wheelBearingArray.reduce(getSum));
     console.log("Total total Potential: " + potentialArray.reduce(getSum));
+    console.log("Alternative Potential: " + alternativePotentialEnergy);
 
 
 });//This is the end of windRequest
@@ -380,7 +382,7 @@ function getRoute(lat, lng) {
 
       if (reverse == false) {
 
-        var angle = 30//windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
+        var angle = 20 + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
       } else {
         var angle = windangle
       };
