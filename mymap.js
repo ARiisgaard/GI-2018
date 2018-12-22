@@ -199,7 +199,7 @@ console.log("Windangle"+boltwindangle)
     var cyclistDistancei = 1000*getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);
     var cyclistTimei = routeTime * cyclistDistancei / (routeDistance); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
 
-    var cyclistGradei = (Math.atan((arrayHeight[i]-arrayHeight[i+1])/(cyclistDistancei))*(180/Math.PI))/100  //This is calculating the slope between one point and the next based on the formular: tan(A)=a/b. - Divided with 100 cause percent
+    var cyclistGradei = (arrayHeight[i+1]-arrayHeight[i])/(cyclistDistancei)//Grade is calculated as height difference/distance
 
  if (cyclistDistancei == 0) {cyclistGradei = 0} // Sometimes there are coordinates with 0 distance between eachother - this makes cyclistGradei return NaN, which breaks the rest of the calculations. Therefore we set cyclistGradei to 0 as there are no changes in the height
 
@@ -292,7 +292,7 @@ console.log("Windangle"+boltwindangle)
     console.log("Total total RollRes: " + rollResArray.reduce(getSum));
     console.log("Total total WheelBearing: " + wheelBearingArray.reduce(getSum));
     console.log("Total total Potential: " + potentialArray.reduce(getSum));
-    console.log("Alternative Potential: " + alternativePotentialEnergy);
+    // console.log("Alternative Potential: " + alternativePotentialEnergy);
 
 
 });//This is the end of windRequest
@@ -382,7 +382,7 @@ function getRoute(lat, lng) {
 
       if (reverse == false) {
 
-        var angle = 20 + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
+        var angle = 240 + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
       } else {
         var angle = windangle
       };
