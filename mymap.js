@@ -13,7 +13,7 @@ var orderOfWaypoints = [];
 var numberofwaypoints = 2;
 
 
-var osm = L.tileLayer(
+var osm = L.tileLayer( //Defining what map to use in the background
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: 'Map data © \
@@ -28,15 +28,15 @@ var city = L.OWM.current({
   showWindDirection: 'deg'
 });
 
-var myIcon = L.icon({ //defines the icon for the wind location
+var myIcon = L.icon({ //defines the icon for the wind location - should also be disabled
   iconUrl: 'Images/windsock.png', //Credits:  Flaticon/Freepik
   iconSize: [30, 30],
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
-//var myLayer; //Layer with distination
-var trainIcon = L.icon({
-  iconUrl: 'https://image.flaticon.com/icons/svg/1201/1201644.svg', // change this, obviously...
+
+var trainIcon = L.icon({//Defines the icon used for the train stations
+  iconUrl: 'https://image.flaticon.com/icons/svg/1201/1201644.svg',
   iconSize: [30, 30],
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
@@ -46,7 +46,7 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
     layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
   },
-  pointToLayer: function(geoJsonPoint, latlng) { return L.marker(latlng, {icon: trainIcon})}
+  pointToLayer: function(geoJsonPoint, latlng) { return L.marker(latlng, {icon: trainIcon})} //Adds the icon to the stations
 })
 
 var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" layer
@@ -64,7 +64,7 @@ var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" laye
   // }
   });
 
-var mymap = L.map('map', {
+var mymap = L.map('map', {//Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
   center: [55.676111, 12.568333],
   zoom: 10,
   layers: [osm]
@@ -179,22 +179,21 @@ L.easyButton('fa-flask', function() {
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 //https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
-L.easyButton('fa-ruler', function() {
+L.easyButton('fa-ruler', function() {//This is the button for changing the distance
   enterDistance();
 }).addTo(mymap);
 
-var overlayMaps = {
+var overlayMaps = {//This is the layers, that are hidden, when the map loads, but is possible to enable
   "Cities": city,
   "Stations": stations,
   "Parks": parks
-}; //Adds the overlayer with weather information
+};
 
 var basemaps = {
   "OpenStreetMap": osm
 }
 
-var layerControl = L.control.layers(basemaps, overlayMaps).addTo(mymap);
-//var overlays = {"Route": control}
+var layerControl = L.control.layers(basemaps, overlayMaps).addTo(mymap); //Here it is possible to disable/enable layers
 
 L.control.scale().addTo(mymap); //adds a scalebar
 
@@ -220,10 +219,10 @@ function getRoute(lat, lng) {
 
     $.getJSON(api_address, function(data) {
 
-      var windangle = data.wind.deg
-      if (reverse == false) {
+      var windangle = data.wind.deg //Here it gets the direction of the wind from the api
+      if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
 
-        var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the wind
+        var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the winds origin
       } else {
         var angle = windangle
       };
@@ -260,53 +259,38 @@ function getRoute(lat, lng) {
 
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
+      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {//Here we connect to the server and run the findstation request based on the lat and lng of the "ideal" location
 
-      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
+        //Here we get the lat and lng from the server
         var stationLat = data.geometry.coordinates[1]
         var stationLng = data.geometry.coordinates[0]
 
-        // //The EndLocation should be changed to the coordinate of the station, when those are available
-        EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
-
-        //Here the routing begins
-    //    $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-
-//HEY!! FIX Reverse Route
+        //the lat and lng are the put together:
+        EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
 
 
-
-
-
-if (numberofwaypoints == 2) {
+if (numberofwaypoints == 2) {//This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
         finalArray = [StartLocation,
           EndLocation
         ]
 }
 
-if (reverse == true) {
+if (reverse == true) {//This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
   finalArray = finalArray.reverse()
-  console.log("finalArray: " + finalArray)
 };
 
-        calculateRoute(finalArray);
+        calculateRoute(finalArray); //Then the route gets calculated
 
       });
     });
   } else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
-    //Here the routing begins
-
-    // fullRoute = [StartLocation,
-    //   EndLocation
-    // ]
-
     calculateRoute(finalArray);
   }
 }
 
-function orderArray(coords, distances) {
+function orderArray(coords, distances) {//This function sorts the parks, that the routing is going through, so the order is based on what is the closest to the start location instead of the order of the clicks
   var sorted_coords = []
 
-  //Test
 var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
 var distancesLeft = distances.concat();
 
@@ -329,7 +313,7 @@ var distancesLeft = distances.concat();
 
 }
 
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {//This function calculates the distance between to points in km. Based on sphere geometry
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
   var dLon = deg2rad(lon2 - lon1);
@@ -342,17 +326,17 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   return d;
 }
 
-function deg2rad(deg) {
+function deg2rad(deg) {//This changes from degrees to radians
   return deg * (Math.PI / 180)
 }
 
-function calculateRoute(array) {
-  $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+function calculateRoute(array) {//This is the function, that calculates the routing between the waypoints
+  $("div.leaflet-routing-container").remove(); //Removes the previous route description before making a new one
 
 
 
   if (route) {
-    mymap.removeControl(route); //This removes the old route, if a new one is created
+    mymap.removeControl(route); //This removes the old route, before a new one is created
   }
 
   route = L.Routing.control({
