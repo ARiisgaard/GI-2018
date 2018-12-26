@@ -33,7 +33,7 @@ stations.on('click', function(e) {
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
   zoom: 10,
-  layers: [osm, stations]
+  layers: [osm]
 });
 
 var locked = false //This variable is telling the program if it should keep looking for new destinations
@@ -486,6 +486,7 @@ function calculateRoute(array) {
 }
 
 function testRoute(givenAngle){
+fakeAngle += 10
 
   StartLocation = L.latLng([55.6504670, 12.5429260]); //The start of the journey
 
@@ -539,6 +540,7 @@ var lng = 12.5429260
       });
     });
 
+
 }
 
 function calculateTestRoute(array) {
@@ -567,7 +569,7 @@ function calculateTestRoute(array) {
 }
 
 
-var fakeAngle = -10 //I set this to minus 10, since I wanted it to increase the degrees, before it started the next function - i dont know i it matters
+var fakeAngle = -10
 function energyCalculations(){
 
   arrayDistance = []; //Resets the arrays - otherwise the route would be twice as long on the second button click
@@ -612,7 +614,7 @@ var proxy = 'https://cors-anywhere.herokuapp.com/';
 $.getJSON(proxy + apiLinkOWM, function(data) {
 
 var boltwindangle = 270//data.wind.deg
-var boltwindspeed = 3//data.wind.speed
+var boltwindspeed = 1//data.wind.speed
 
 // console.log("Windangle"+boltwindangle)
 
@@ -675,7 +677,8 @@ var boltwindspeed = 3//data.wind.speed
   return total + num;
   }
     //console.log("Total Energy per streach: " + testArray);
-    console.log(" ," + fakeAngle + "," + EndLocation + "," + routeDistance + "," +testArray.reduce(getSum) + "," +aeroArray.reduce(getSum) + "," +rollResArray.reduce(getSum) + "," +wheelBearingArray.reduce(getSum) + "," +potentialArray.reduce(getSum));
+    // console.log(" ," + fakeAngle + "," + EndLocation + "," + routeDistance + "," +testArray.reduce(getSum) + "," +aeroArray.reduce(getSum) + "," +rollResArray.reduce(getSum) + "," +wheelBearingArray.reduce(getSum) + "," +potentialArray.reduce(getSum));
+    console.log(" ," + fakeAngle + "," + EndLocation + "," + testArray.reduce(getSum)/routeDistance + "," +aeroArray.reduce(getSum)/routeDistance + "," +rollResArray.reduce(getSum)/routeDistance + "," +wheelBearingArray.reduce(getSum)/routeDistance + "," +potentialArray.reduce(getSum)/routeDistance);
 
     // console.log("Angle: " + boltwindangle + " Windspeed: " + boltwindspeed)
     // console.log("Routedistance: " + routeDistance)
@@ -690,11 +693,11 @@ var boltwindspeed = 3//data.wind.speed
 });//This is the end of windRequest
 });//This is the end of the heightRequest
 if (fakeAngle < 360){
-fakeAngle += 10
 
-setTimeout(function(){
+
+setTimeout(function(){ //This tells the code to wait for 10 sec, before it runs again in a new direction - without it the elevationAPI had a difficult time keeping up
     testRoute(fakeAngle);
-}, 2000);
+}, 10000);
 
 }
 }
