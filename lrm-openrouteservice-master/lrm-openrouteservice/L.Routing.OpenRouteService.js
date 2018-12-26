@@ -30,7 +30,7 @@
 
 			options = options || {};
 			url = this.buildRouteUrl(waypoints, options);
-			console.log('url', url);
+			// console.log('url', url);
 
 			timer = setTimeout(function () {
 				timedOut = true;

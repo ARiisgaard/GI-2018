@@ -174,7 +174,7 @@ arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
 
     // console.log("arrayHeight: " + arrayHeight)
 
-console.log("Elevation Curve: " + elevationCurve)
+// console.log("Elevation Curve: " + elevationCurve)
 
 
 var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
@@ -285,6 +285,9 @@ console.log("Windangle"+boltwindangle)
   return total + num;
   }
     //console.log("Total Energy per streach: " + testArray);
+    console.log(" ," + boltwindangle + "," + routeDistance + "," +testArray.reduce(getSum) + "," +aeroArray.reduce(getSum) + "," +rollResArray.reduce(getSum) + "," +wheelBearingArray.reduce(getSum) + "," +potentialArray.reduce(getSum));
+    console.log(" ," + boltwindangle + "," + routeDistance + "," +testArray.reduce(getSum) + "," +aeroArray.reduce(getSum) + "," +rollResArray.reduce(getSum) + "," +wheelBearingArray.reduce(getSum) + "," +potentialArray.reduce(getSum));
+
     console.log("Angle: " + boltwindangle + " Windspeed: " + boltwindspeed)
     console.log("Routedistance: " + routeDistance)
     console.log("Total total Energy: " + testArray.reduce(getSum));
@@ -309,6 +312,9 @@ L.easyButton('fa-ruler', function() {
   enterDistance();
 }).addTo(mymap);
 
+L.easyButton('fa-clock', function() {
+testRoute(0);
+}).addTo(mymap);
 L.easyButton('fa-calculator', function() {
 
 
@@ -479,6 +485,219 @@ function calculateRoute(array) {
   //   }
 }
 
+function testRoute(givenAngle){
+
+  StartLocation = L.latLng([55.6504670, 12.5429260]); //The start of the journey
+
+var lat = 55.6504670
+var lng = 12.5429260
+
+    var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+
+    $.getJSON(api_address, function(data) {
+
+      windangle = data.wind.deg
+      windspeed = data.wind.speed
+
+
+      angle = givenAngle
+
+      //Du er nået her til - evt. tjek om det er relevant at bruge angle i andre sammenhænge
+
+      //  var length = 5000 //Distance traveled in meters
+
+      //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
+
+      var StartLatInRat = lat * Math.PI / 180
+      var StartLngInRat = lng * Math.PI / 180
+      var AngleInRat = angle * Math.PI / 180
+
+      var R = 6371e3; // Distance to the centre of the earth in metres
+      var end_y = Math.asin(Math.sin(StartLatInRat) * Math.cos(length / R) +
+        Math.cos(StartLatInRat) * Math.sin(length / R) * Math.cos(AngleInRat));
+      var end_x = StartLngInRat + Math.atan2(Math.sin(AngleInRat) * Math.sin(length / R) * Math.cos(StartLatInRat),
+        Math.cos(length / R) - Math.sin(StartLatInRat) * Math.sin(end_y));
+      var EndLat = end_y * 180 / Math.PI
+      var EndLng = end_x * 180 / Math.PI
+
+      //Here stops the coordinate definition
+
+      //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
+
+      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
+        var stationLat = data.geometry.coordinates[1]
+        var stationLng = data.geometry.coordinates[0]
+
+        // //The EndLocation should be changed to the coordinate of the station, when those are available
+        EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
+
+        fullRoute = [StartLocation,
+          EndLocation
+        ]
+        calculateTestRoute(fullRoute);
+
+      });
+    });
+
+}
+
+function calculateTestRoute(array) {
+  $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
+
+
+
+  if (route) {
+    mymap.removeControl(route); //This removes the old route, if a new one is created
+  }
+
+  route = L.Routing.control({
+      waypoints: array,
+      router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+    })
+    .on('routesfound', function(e) {
+      routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
+      routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
+      routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
+      $("div.leaflet-routing-container").remove();
+      energyCalculations();
+    })
+
+  route.addTo(mymap);
+
+}
+
+
+var fakeAngle = -10 //I set this to minus 10, since I wanted it to increase the degrees, before it started the next function - i dont know i it matters
+function energyCalculations(){
+
+  arrayDistance = []; //Resets the arrays - otherwise the route would be twice as long on the second button click
+  arrayAngles = [];
+  arrayHeight = [];
+  testArray = [];
+  aeroArray = [];
+  rollResArray = [];
+  wheelBearingArray = [];
+  potentialArray = [];
+  arrayHeight = [];
+
+  //This upcoming part of the function is changing the format of the route coordinates, so, they fit with the elevationAPIs demands
+    var elevationRequestCoordinates = [];
+    for (i = 0; i < routeCoordinates.length; i++) {
+      elevationRequestCoordinates.push(routeCoordinates[i].lat)
+      elevationRequestCoordinates.push(routeCoordinates[i].lng)
+    }
+
+    var elevationAPI = "http://open.mapquestapi.com/elevation/v1/profile?key=5hRZ9Xq1M67vIy42cAAsxHBepy5hBzBR&shapeFormat=raw&latLngCollection=" + elevationRequestCoordinates //routeCoordinates
+
+    $.getJSON(elevationAPI, function(elevationData) {
+
+  // console.log(elevationAPI)
+  for (i = 0; i < routeCoordinates.length; i++)
+  {
+arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
+  }
+
+
+    var elevationCurve = "http://open.mapquestapi.com/elevation/v1/chart?key=5hRZ9Xq1M67vIy42cAAsxHBepy5hBzBR&shapeFormat=raw&width=425&height=350&latLngCollection=" + elevationRequestCoordinates
+
+
+    // console.log("arrayHeight: " + arrayHeight)
+
+// console.log("Elevation Curve: " + elevationCurve)
+
+
+var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+var proxy = 'https://cors-anywhere.herokuapp.com/';
+
+$.getJSON(proxy + apiLinkOWM, function(data) {
+
+var boltwindangle = 270//data.wind.deg
+var boltwindspeed = 3//data.wind.speed
+
+// console.log("Windangle"+boltwindangle)
+
+
+  for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle and there are no distance from the last coordinate
+    // arrayAngles.push(calculateAngle(routeCoordinates[i], routeCoordinates[i + 1])); //Calculating the bearing between a point and the next point on the route - for each point
+    //
+    // //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
+    // arrayDistance.push(routeTime * (getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng) / (routeDistance / 1000)));
+
+    //Warning: arrayDistance is about time and not distance
+    var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]);
+    var cyclistDistancei = 1000*getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);
+    var cyclistTimei = routeTime * cyclistDistancei / (routeDistance); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
+
+    var cyclistGradei = (arrayHeight[i+1]-arrayHeight[i])/(cyclistDistancei)//Grade is calculated as height difference/distance
+
+ if (cyclistDistancei == 0) {cyclistGradei = 0} // Sometimes there are coordinates with 0 distance between eachother - this makes cyclistGradei return NaN, which breaks the rest of the calculations. Therefore we set cyclistGradei to 0 as there are no changes in the height
+
+// console.log("arrayHeight[i]:" + arrayHeight[i] + " arrayHeight[i+1]: " + arrayHeight[i+1])
+// console.log("cyclistDistancei: " + cyclistDistancei)
+    var roadResistance = 0.0032
+    var vwtan = boltwindspeed * Math.cos((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
+    var vwnor = boltwindspeed * Math.sin((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
+    var cyclistSpeed =  routeDistance / routeTime;
+    var Va = cyclistSpeed + vwtan;
+    var spokesDrag = 0.0044;
+    var airDensity = 1.2234;
+    var yawAngle = Math.atan(vwnor / Va) * (180 / Math.PI);
+    var cyclistDrag = dragAreaFromYaw(yawAngle);
+    var cyclistMass = 90
+    var kineticEnergyI = 0.14
+    var kineticEnergyR = 0.311
+
+    //Power
+    var aerodynamicPower = Math.pow(Va, 2) * cyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
+    var rollingResistancePower = cyclistSpeed*Math.cos(Math.atan(cyclistGradei))*roadResistance*cyclistMass*9.81
+    var wheelBearingFrictionPower = cyclistSpeed*(91+8.7*cyclistSpeed)*0.001
+    var potentialEnergyPower = cyclistSpeed*cyclistMass*9.81*Math.sin(Math.atan(cyclistGradei))
+    var kineticEnergyPower = 0.5*(cyclistMass+kineticEnergyI/Math.pow(kineticEnergyR, 2))*0 //Hvis vi siger at cyklisten har en konstant fart, så bliver denne værdi 0
+
+    //Energy
+
+    var aerodynamicEnergyi = aerodynamicPower *cyclistTimei
+    var rollingResistanceEnergyi = rollingResistancePower *cyclistTimei
+    var wheelBearingFrictionEnergyi = wheelBearingFrictionPower *cyclistTimei
+    var potentialEnergyi = potentialEnergyPower *cyclistTimei
+
+    var energyTotali = aerodynamicEnergyi+rollingResistanceEnergyi+wheelBearingFrictionEnergyi+potentialEnergyi
+
+    testArray.push(energyTotali)
+    aeroArray.push(aerodynamicEnergyi)
+    rollResArray.push(rollingResistanceEnergyi)
+    wheelBearingArray.push(wheelBearingFrictionEnergyi)
+    potentialArray.push(potentialEnergyi)
+
+  }
+
+  function getSum(total, num) { //Small function of calculate the sum of values in a array
+  return total + num;
+  }
+    //console.log("Total Energy per streach: " + testArray);
+    console.log(" ," + fakeAngle + "," + EndLocation + "," + routeDistance + "," +testArray.reduce(getSum) + "," +aeroArray.reduce(getSum) + "," +rollResArray.reduce(getSum) + "," +wheelBearingArray.reduce(getSum) + "," +potentialArray.reduce(getSum));
+
+    // console.log("Angle: " + boltwindangle + " Windspeed: " + boltwindspeed)
+    // console.log("Routedistance: " + routeDistance)
+    // console.log("Total total Energy: " + testArray.reduce(getSum));
+    // console.log("Total total Aero: " + aeroArray.reduce(getSum));
+    // console.log("Total total RollRes: " + rollResArray.reduce(getSum));
+    // console.log("Total total WheelBearing: " + wheelBearingArray.reduce(getSum));
+    // console.log("Total total Potential: " + potentialArray.reduce(getSum));
+    // console.log("Alternative Potential: " + alternativePotentialEnergy);
+
+
+});//This is the end of windRequest
+});//This is the end of the heightRequest
+if (fakeAngle < 360){
+fakeAngle += 10
+
+setTimeout(function(){
+    testRoute(fakeAngle);
+}, 2000);
+
+}
+}
 
 //This function calculate the angle between two coordinates
 function calculateAngle(punktStart, punktSlut) {
