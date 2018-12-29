@@ -11,6 +11,7 @@ var finalArray = [];
 var goThrough = [];
 var orderOfWaypoints = [];
 var numberofwaypoints = 2;
+var showPlusMinus = false;
 
 
 var osm = L.tileLayer( //Defining what map to use in the background
@@ -140,16 +141,28 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
 });
 reversebotton.addTo(mymap);
 
-function enterDistance() {
-  var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
-  if (distance != null && isNaN(distance) == false) {
-    console.log("isNaN: " + isNaN(distance))
-    length = distance * 1000
-    getRoute(StartLocation.lat, StartLocation.lng);
-  } else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
-    alert("That is not a valid input")
-    enterDistance();
-  }
+// function enterDistance() {
+//   var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
+//   if (distance != null && isNaN(distance) == false) {
+//     console.log("isNaN: " + isNaN(distance))
+//     length = distance * 1000
+//     getRoute(StartLocation.lat, StartLocation.lng);
+//   } else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
+//     alert("That is not a valid input")
+//     enterDistance();
+//   }
+// }
+
+function changeDistance() {
+if (showPlusMinus == false) {
+  longer.disable()
+  shorter.disable()
+}
+else {
+  longer.enable()
+  shorter.enable()
+}
+
 }
 
 L.easyButton('fa-flask', function() {
@@ -179,9 +192,25 @@ L.easyButton('fa-flask', function() {
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 //https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
-L.easyButton('fa-ruler', function() {//This is the button for changing the distance
-  enterDistance();
+var showLongerShorter = L.easyButton('fa-ruler', function() {//This is the button for changing the distance
+  if (showPlusMinus == false) {showPlusMinus = true}
+  else {showPlusMinus = false}
+  changeDistance();
 }).addTo(mymap);
+
+var longer = L.easyButton('fa-plus', function() {//This is the button for changing the distance
+      length += 1000
+      getRoute(StartLocation.lat, StartLocation.lng);
+});
+
+var shorter = L.easyButton('fa-minus', function() {//This is the button for changing the distance
+  length -= 1000
+  getRoute(StartLocation.lat, StartLocation.lng);
+});
+
+var distanceBar = L.easyBar([showLongerShorter, longer, shorter, ]);
+
+distanceBar.addTo(mymap);
 
 var overlayMaps = {//This is the layers, that are hidden, when the map loads, but is possible to enable
   "Cities": city,
