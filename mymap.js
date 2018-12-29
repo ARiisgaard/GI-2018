@@ -169,7 +169,9 @@ L.easyButton('fa-flask', function() {
     }
   });
 
-  $.getJSON(proxy + apiLinkDS, function(data2) {
+var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
+console.log(dsFlask)
+  $.getJSON(dsFlask, function(data2) {
     console.log(data2.hourly.data["0"].precipProbability * 100 + "% Chance of precipitation in current hour. Intensity: " + data2.hourly.data["0"].precipIntensity + " millimeters per hour")
     console.log(data2.hourly.data["1"].precipProbability * 100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
   });
@@ -216,8 +218,9 @@ function getRoute(lat, lng) {
     var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
     //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
-
-    $.getJSON(api_address, function(data) {
+    var owmFlask = "http://127.0.0.1:5000/openweathermap?lat=" + lat + "&lng=" + lng;
+    // console.log("Test1: " + owmFlask);
+    $.getJSON(owmFlask, function(data) {
 
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
       if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
