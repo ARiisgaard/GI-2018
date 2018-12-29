@@ -1,64 +1,1037 @@
 {
-"type": "FeatureCollection",
-"name": "stations",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-{ "type": "Feature", "properties": { "id": 47, "navn": "Dansh�j", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.49379262141783, 55.664547450428493 ] ] } },
-{ "type": "Feature", "properties": { "id": 48, "navn": "�lholm", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.493183893724098, 55.672159615441316 ] ] } },
-{ "type": "Feature", "properties": { "id": 49, "navn": "Dybb�lsbro", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.559858524540068, 55.664968007867195 ] ] } },
-{ "type": "Feature", "properties": { "id": 50, "navn": "Sydhavn", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.537324981698127, 55.654342245402823 ] ] } },
-{ "type": "Feature", "properties": { "id": 51, "navn": "Sj�l�r", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.526958090509339, 55.651587682328334 ] ] } },
-{ "type": "Feature", "properties": { "id": 52, "navn": "Ny Ellebjerg", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.51728415317508, 55.652302891349095 ] ] } },
-{ "type": "Feature", "properties": { "id": 53, "navn": "Friheden", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.482125585734167, 55.629102201707283 ] ] } },
-{ "type": "Feature", "properties": { "id": 54, "navn": "Aved�re", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.456322722832208, 55.625783226258001 ] ] } },
-{ "type": "Feature", "properties": { "id": 55, "navn": "Emdrup", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.541565892815964, 55.720061632809411 ] ] } },
-{ "type": "Feature", "properties": { "id": 56, "navn": "Husum", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.463788778024757, 55.709718504283849 ] ] } },
-{ "type": "Feature", "properties": { "id": 57, "navn": "N�rrebro", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.5377522643377, 55.70053346086911 ] ] } },
-{ "type": "Feature", "properties": { "id": 1, "navn": "Kastrup", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.646822177590394, 55.635821860424315 ] ] } },
-{ "type": "Feature", "properties": { "id": 2, "navn": "Langgade", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.503985639108704, 55.66718308046223 ] ] } },
-{ "type": "Feature", "properties": { "id": 3, "navn": "Peter Bangs Vej", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.503343020635267, 55.678171897375449 ] ] } },
-{ "type": "Feature", "properties": { "id": 4, "navn": "KB Hallen", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.492160770691216, 55.677912353169162 ] ] } },
-{ "type": "Feature", "properties": { "id": 5, "navn": "Vigerslev All�", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.499082899528844, 55.659733816532423 ] ] } },
-{ "type": "Feature", "properties": { "id": 6, "navn": "Flintholm", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.498358619148766, 55.685326633481523 ] ] } },
-{ "type": "Feature", "properties": { "id": 7, "navn": "Forum", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.552502528319485, 55.681836581022289 ] ] } },
-{ "type": "Feature", "properties": { "id": 8, "navn": "Frederiksberg", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.531254297000974, 55.681243004229479 ] ] } },
-{ "type": "Feature", "properties": { "id": 9, "navn": "Fasanvej (Solbjerg)", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.523531413011062, 55.681618671110911 ] ] } },
-{ "type": "Feature", "properties": { "id": 10, "navn": "Lindevang", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.513337030500862, 55.683393448185988 ] ] } },
-{ "type": "Feature", "properties": { "id": 11, "navn": "Flintholm", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.499646450888052, 55.685922490941991 ] ] } },
-{ "type": "Feature", "properties": { "id": 12, "navn": "Vanl�se", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.491907379014119, 55.687287883200241 ] ] } },
-{ "type": "Feature", "properties": { "id": 13, "navn": "Valby", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.513951781588252, 55.66380658705647 ] ] } },
-{ "type": "Feature", "properties": { "id": 14, "navn": "Hvidovre", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.47451627991452, 55.664437473365652 ] ] } },
-{ "type": "Feature", "properties": { "id": 15, "navn": "R�dovre", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.459453513287263, 55.664694113759886 ] ] } },
-{ "type": "Feature", "properties": { "id": 16, "navn": "Vanl�se", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.490777163002031, 55.687239555215825 ] ] } },
-{ "type": "Feature", "properties": { "id": 17, "navn": "�marken", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.499902223822332, 55.639827056366677 ] ] } },
-{ "type": "Feature", "properties": { "id": 18, "navn": "Carlsberg", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.536625456326755, 55.663378685843092 ] ] } },
-{ "type": "Feature", "properties": { "id": 19, "navn": "Fem�ren", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.638255680353023, 55.64528535047976 ] ] } },
-{ "type": "Feature", "properties": { "id": 20, "navn": "Amager Strand", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.631889900698601, 55.65606516201953 ] ] } },
-{ "type": "Feature", "properties": { "id": 21, "navn": "�resund", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.628732675353522, 55.661445623700182 ] ] } },
-{ "type": "Feature", "properties": { "id": 22, "navn": "Lergravsparken", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.617021454946313, 55.662269663995268 ] ] } },
-{ "type": "Feature", "properties": { "id": 23, "navn": "Amagerbro", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.602894848018204, 55.663384635871623 ] ] } },
-{ "type": "Feature", "properties": { "id": 24, "navn": "Christianshavn", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.591313426197745, 55.672141992284139 ] ] } },
-{ "type": "Feature", "properties": { "id": 25, "navn": "Kongens Nytorv", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.58517767546056, 55.679266472314147 ] ] } },
-{ "type": "Feature", "properties": { "id": 26, "navn": "N�rreport", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.571519041955515, 55.683708399107459 ] ] } },
-{ "type": "Feature", "properties": { "id": 27, "navn": "Jyllingevej", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.477272540542272, 55.690567117472895 ] ] } },
-{ "type": "Feature", "properties": { "id": 28, "navn": "Islands Brygge", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.585310049359089, 55.663547583357257 ] ] } },
-{ "type": "Feature", "properties": { "id": 29, "navn": "DR Byen (Universitetet)", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.588993504037028, 55.655765728043697 ] ] } },
-{ "type": "Feature", "properties": { "id": 30, "navn": "Sundby", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.585743984257011, 55.645202592714327 ] ] } },
-{ "type": "Feature", "properties": { "id": 31, "navn": "Bella Center", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.582917901887511, 55.638081441591638 ] ] } },
-{ "type": "Feature", "properties": { "id": 32, "navn": "�restad", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.579242054680918, 55.628714222686526 ] ] } },
-{ "type": "Feature", "properties": { "id": 33, "navn": "Vestamager", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.575573476907428, 55.619363794531594 ] ] } },
-{ "type": "Feature", "properties": { "id": 34, "navn": "Lufthavnen", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.649389204598918, 55.630527062498551 ] ] } },
-{ "type": "Feature", "properties": { "id": 35, "navn": "Islev", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.46909390173782, 55.699389891615944 ] ] } },
-{ "type": "Feature", "properties": { "id": 36, "navn": "Gr�ndal", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.515567547868768, 55.69062901673653 ] ] } },
-{ "type": "Feature", "properties": { "id": 37, "navn": "Fuglebakken", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.527019854581582, 55.695349006950671 ] ] } },
-{ "type": "Feature", "properties": { "id": 38, "navn": "Bispebjerg", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.541553831728466, 55.706252905016711 ] ] } },
-{ "type": "Feature", "properties": { "id": 39, "navn": "Ryparken", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.559424290905925, 55.715230337133299 ] ] } },
-{ "type": "Feature", "properties": { "id": 40, "navn": "Svanem�llen", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.578278638392884, 55.715696121474437 ] ] } },
-{ "type": "Feature", "properties": { "id": 41, "navn": "Hellerup", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.566720237477423, 55.731412626318019 ] ] } },
-{ "type": "Feature", "properties": { "id": 42, "navn": "Nordhavn", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.591263013489852, 55.704688994169217 ] ] } },
-{ "type": "Feature", "properties": { "id": 43, "navn": "�sterport", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.587318708870807, 55.692552113294902 ] ] } },
-{ "type": "Feature", "properties": { "id": 44, "navn": "N�rreport", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.571761714253826, 55.683300049890903 ] ] } },
-{ "type": "Feature", "properties": { "id": 45, "navn": "Vesterport", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.562511070208261, 55.675909054731981 ] ] } },
-{ "type": "Feature", "properties": { "id": 46, "navn": "K�benhavns Hovedbaneg�rd", "navnekateg": "19130", "navnekate0": "Station\/Metro" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 12.564592479491898, 55.672824971940358 ] ] } }
-]
+  "type": "FeatureCollection",
+  "name": "stations",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [{
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "navn": "Kastrup",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.646822177590394,
+            55.635821860424315
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "navn": "Langgade",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.503985639108704,
+            55.66718308046223
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 3,
+        "navn": "Peter Bangs Vej",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.503343020635267,
+            55.67817189737545
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 4,
+        "navn": "KB Hallen",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.492160770691216,
+            55.67791235316916
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 5,
+        "navn": "Vigerslev Allé",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.499082899528844,
+            55.65973381653242
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 6,
+        "navn": "Flintholm",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.498358619148766,
+            55.68532663348152
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 7,
+        "navn": "Forum",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.552502528319485,
+            55.68183658102229
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 8,
+        "navn": "Frederiksberg",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.531254297000974,
+            55.68124300422948
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 9,
+        "navn": "Fasanvej (Solbjerg)",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.523531413011062,
+            55.68161867111091
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 10,
+        "navn": "Lindevang",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.513337030500862,
+            55.68339344818599
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 11,
+        "navn": "Flintholm",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.499646450888052,
+            55.68592249094199
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 12,
+        "navn": "Vanløse",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.491907379014119,
+            55.68728788320024
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 13,
+        "navn": "Valby",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.513951781588252,
+            55.66380658705647
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 14,
+        "navn": "Hvidovre",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.47451627991452,
+            55.66443747336565
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 15,
+        "navn": "Rødovre",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.459453513287263,
+            55.664694113759886
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 16,
+        "navn": "Vanløse",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.490777163002031,
+            55.687239555215825
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 17,
+        "navn": "Åmarken",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.499902223822332,
+            55.63982705636668
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 18,
+        "navn": "Carlsberg",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.536625456326755,
+            55.66337868584309
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 19,
+        "navn": "Femøren",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.638255680353023,
+            55.64528535047976
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 20,
+        "navn": "Amager Strand",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.631889900698601,
+            55.65606516201953
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 21,
+        "navn": "Øresund",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.628732675353522,
+            55.66144562370018
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 22,
+        "navn": "Lergravsparken",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.617021454946313,
+            55.66226966399527
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 23,
+        "navn": "Amagerbro",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.602894848018204,
+            55.66338463587162
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 24,
+        "navn": "Christianshavn",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.591313426197745,
+            55.67214199228414
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 25,
+        "navn": "Kongens Nytorv",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.58517767546056,
+            55.67926647231415
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 26,
+        "navn": "Nørreport",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.571519041955515,
+            55.68370839910746
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 27,
+        "navn": "Jyllingevej",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.477272540542272,
+            55.690567117472895
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 28,
+        "navn": "Islands Brygge",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.585310049359089,
+            55.66354758335726
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 29,
+        "navn": "DR Byen (Universitetet)",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.588993504037028,
+            55.6557657280437
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 30,
+        "navn": "Sundby",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.585743984257011,
+            55.64520259271433
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 31,
+        "navn": "Bella Center",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.58291790188751,
+            55.63808144159164
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 32,
+        "navn": "Ørestad",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.579242054680918,
+            55.628714222686526
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 33,
+        "navn": "Vestamager",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.575573476907428,
+            55.619363794531594
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 34,
+        "navn": "Lufthavnen",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.649389204598918,
+            55.63052706249855
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 35,
+        "navn": "Islev",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.46909390173782,
+            55.699389891615944
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 36,
+        "navn": "Grøndal",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.515567547868768,
+            55.69062901673653
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 37,
+        "navn": "Fuglebakken",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.527019854581582,
+            55.69534900695067
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 38,
+        "navn": "Bispebjerg",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.541553831728466,
+            55.70625290501671
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 39,
+        "navn": "Ryparken",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.559424290905925,
+            55.7152303371333
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 40,
+        "navn": "Svanemøllen",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.578278638392884,
+            55.71569612147444
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 41,
+        "navn": "Hellerup",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.566720237477423,
+            55.73141262631802
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 42,
+        "navn": "Nordhavn",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.591263013489852,
+            55.70468899416922
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 43,
+        "navn": "Østerport",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.587318708870807,
+            55.6925521132949
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 44,
+        "navn": "Nørreport",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.571761714253826,
+            55.6833000498909
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 45,
+        "navn": "Vesterport",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.562511070208261,
+            55.67590905473198
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 46,
+        "navn": "Københavns Hovedbanegård",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.564592479491898,
+            55.67282497194036
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 47,
+        "navn": "Danshøj",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.49379262141783,
+            55.66454745042849
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 48,
+        "navn": "Ålholm",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.493183893724098,
+            55.672159615441316
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 49,
+        "navn": "Dybbølsbro",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.559858524540068,
+            55.664968007867195
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 50,
+        "navn": "Sydhavn",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.537324981698127,
+            55.65434224540282
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 51,
+        "navn": "Sjælør",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.52695809050934,
+            55.65158768232833
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 52,
+        "navn": "Ny Ellebjerg",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.51728415317508,
+            55.652302891349095
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 53,
+        "navn": "Friheden",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.482125585734167,
+            55.62910220170728
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 54,
+        "navn": "Avedøre",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.456322722832208,
+            55.625783226258
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 55,
+        "navn": "Emdrup",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.541565892815964,
+            55.72006163280941
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 56,
+        "navn": "Husum",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.463788778024757,
+            55.70971850428385
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 57,
+        "navn": "Nørrebro",
+        "navnekateg": "19130",
+        "navnekate0": "Station/Metro"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            12.5377522643377,
+            55.70053346086911
+          ]
+        ]
+      }
+    }
+  ]
 }
