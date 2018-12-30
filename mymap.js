@@ -8,7 +8,7 @@ var length = 5000; //This is the default distance of the trip
 var finalArray = [StartLocation, EndLocation];
 var goThrough = [];
 var orderOfWaypoints = [];
-var numberofwaypoints = 2;
+var firstTime = true;
 
 var osm = L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -30,7 +30,6 @@ var myIcon = L.icon({ //defines the icon for the wind location
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
-//var myLayer; //Layer with distination
 
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
@@ -38,27 +37,60 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
   }
 });
 
-// stations.on('click', function(e) {
-//   coords2 = [e.latlng.lat, e.latlng.lng];
-// });
+var center;
+var parks = new L.GeoJSON.AJAX("parks.geojson", {
+  onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+    layer.bindPopup("You want to go here?" + '<br/><button onclick="goHere()" >Yes</button>' + '<br/><button onclick="dontGoHere()" >No</button>') //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+    layer.on({
+      click: function(e) {
+        var findBounds = layer.getBounds();
+        console.log(findBounds)
+        center = findBounds.getCenter();
+        console.log(center)
+      }
+    })
 
-// var park1;
-
-var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" layer
-
-//fix stuff here 
-
-  // onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
-  // //  layer.bindPopup("<h2>Park:</h2>" + "You want to go here?" + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
-  // // console.log(park1)
-  // layer.on({
-  //     click: function(e){
-  //
-  //
-  //     }
-  // }
-
+  }
 });
+
+function goHere() {
+  if (finalArray.includes(center) == true) {
+    mymap.closePopup();
+    console.log("test")
+  } else {
+    goThrough.push(center);
+    orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, center.lat, center.lng))
+    console.log("orderOfWaypoints: " + orderOfWaypoints)
+    console.log("click: " + goThrough)
+    var orderedParks = orderArray(goThrough, orderOfWaypoints);
+    var parksNoUndefined = orderedParks.filter(function(el) { //There were some issue with center sometimes returning both the coordinates and undefined - this gets rid of the additional undefined
+      return el != null;
+    })
+    console.log("orderedParks: " + orderedParks)
+    var tempArray = []; //In this empty Array we are fitting all the pieces together
+    finalArray = tempArray.concat([StartLocation], parksNoUndefined, [EndLocation])
+    mymap.closePopup();
+    getRoute(StartLocation.lat, StartLocation.lng);
+  }
+}
+
+function dontGoHere() {
+  var index = finalArray.indexOf(center);
+  console.log("center: " + center)
+
+  console.log("index: " + index)
+  if (index > -1) {
+    finalArray.splice(index, 1);
+  }
+  var index2 = goThrough.indexOf(String(center))
+  console.log("index2: " + index2)
+  if (index > -1) {
+    goThrough.splice(index, 1);
+  }
+  console.log("finalArray: " + finalArray)
+  mymap.closePopup();
+  getRoute(StartLocation.lat, StartLocation.lng);
+}
 
 var mymap = L.map('map', {
   center: [55.676111, 12.568333],
@@ -67,30 +99,30 @@ var mymap = L.map('map', {
 });
 
 // Create an element to hold all your text and markup
-var container = $('<div />');
-// Delegate all event handling for the container itself and its contents to the container
-container.on('click', '.smallPolygonLink', function(e) {
-  console.log("e: " + JSON.stringify(e))
-  // coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
-  numberofwaypoints += 1
-  console.log(numberofwaypoints)
-  getRoute(StartLocation.lat, StartLocation.lng);
-});
-// Insert whatever you want into the container, using whichever approach you prefer
-container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</a>.");
-container.append($('<span class="bold">').text())
-// Insert the container into the popup
-parks.bindPopup(container[0]).on('click', function(e) {
-  parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
-  goThrough.push(parkLocation);
-  orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
-  console.log("orderOfWaypoints: " + orderOfWaypoints)
-  console.log("click: " + goThrough)
-  var orderedParks =  orderArray(goThrough, orderOfWaypoints);
-  console.log("orderedParks: " + orderedParks)
-  var tempArray = []; //In this empty Array we are fitting all the pieces together
-  finalArray = tempArray.concat([StartLocation],orderedParks,[EndLocation])
-});
+// var container = $('<div />');
+// // // Delegate all event handling for the container itself and its contents to the container
+// container.on('click', '.smallPolygonLink', function(e) {
+// //   console.log("e: " + JSON.stringify(e))
+// //   // coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
+//   numberofwaypoints += 1
+// //   console.log(numberofwaypoints)
+//   getRoute(StartLocation.lat, StartLocation.lng);
+// });
+// // Insert whatever you want into the container, using whichever approach you prefer
+// container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</a>.");
+// container.append($('<span class="bold">').text())
+// // Insert the container into the popup
+// parks.bindPopup(container[0]).on('click', function(e) {
+//   parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
+//   goThrough.push(parkLocation);
+//   orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
+//   console.log("orderOfWaypoints: " + orderOfWaypoints)
+//   console.log("click: " + goThrough)
+//   var orderedParks =  orderArray(goThrough, orderOfWaypoints);
+//   console.log("orderedParks: " + orderedParks)
+//   var tempArray = []; //In this empty Array we are fitting all the pieces together
+//   finalArray = tempArray.concat([StartLocation],orderedParks,[EndLocation])
+// });
 
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
@@ -205,15 +237,15 @@ function getRoute(lat, lng) {
 
       //Here stops the coordinate definition
 
-      var winddestination;
-      if (winddestination) {
-        mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
-        console.log("Wind remove")
-      }
-
-      var winddestination = L.marker([EndLat, EndLng], {
-        icon: myIcon
-      }).addTo(mymap);
+      // var winddestination;
+      // if (winddestination) {
+      //   mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+      //   console.log("Wind remove")
+      // }
+      //
+      // var winddestination = L.marker([EndLat, EndLng], {
+      //   icon: myIcon
+      // }).addTo(mymap);
 
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
@@ -227,10 +259,9 @@ function getRoute(lat, lng) {
         console.log(EndLocation)
         //Here the routing begins
         $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
-        console.log("finalArray" + numberofwaypoints)
-        if (numberofwaypoints == 2) {
+        if (firstTime == true) {
           finalArray = [StartLocation, EndLocation]
-          console.log("number" + numberofwaypoints)
+          firstTime = false
         }
         if (route) {
           mymap.removeControl(route); //This removes the old route, if a new one is created
@@ -267,8 +298,8 @@ function orderArray(coords, distances) {
   var sorted_coords = []
 
   //Test
-var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
-var distancesLeft = distances.concat();
+  var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
+  var distancesLeft = distances.concat();
 
 
   // keep doing this until the distances array is empty:

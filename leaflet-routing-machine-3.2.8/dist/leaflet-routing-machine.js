@@ -12646,7 +12646,7 @@ module.exports = L.Routing = {
 			itineraryClassName: '',
 			totalDistanceRoundingSensitivity: -1,
 			show: true,
-			collapsible: undefined,
+			collapsible: true,
 			collapseBtn: function(itinerary) {
 				var collapseBtn = L.DomUtil.create('span', itinerary.options.collapseBtnClass);
 				L.DomEvent.on(collapseBtn, 'click', itinerary._toggle, itinerary);
@@ -12984,12 +12984,12 @@ module.exports = L.Routing = {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],35:[function(_dereq_,module,exports){
-/* 
+/*
    NOTICE
    Since version 3.2.5, the functionality in this file is by
    default NOT used for localizing OSRM instructions.
    Instead, we rely on the module osrm-text-instructions (https://github.com/Project-OSRM/osrm-text-instructions/).
-   
+
    This file can still be used for other routing backends, or if you specify the
    stepToText option in the OSRMv1 class.
 */
@@ -13278,7 +13278,7 @@ module.exports = L.Routing = {
 
 		'es': spanish,
 		'sp': spanish,
-		
+
 		'nl': {
 			directions: {
 				N: 'noordelijke',
@@ -13705,7 +13705,7 @@ module.exports = L.Routing = {
 				seconds: 'с'
 			}
 		},
-                
+
                 'pl': {
 			directions: {
 				N: 'północ',
