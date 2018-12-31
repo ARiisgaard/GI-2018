@@ -1,0 +1,15 @@
+.DS_Store
+.externalToolBuilders/*
+.project
+*.properties
+.idea/*
+.settings/*
+buildlogs/*
+node_modules/*
+bower_components/*
+docs/*
+package-lock.json
+
+build.properties
+
+test/lib/

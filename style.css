@@ -24,3 +24,25 @@ h2{
   font-weight normal;
   display: none;
 }
+
+
+
+.modal-footer button {
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding-left: 15px;
+  padding-right: 15px;
+  background: white;
+  display: block;
+  margin: 0 auto;
+  height: 250px;
+  width: 250px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 2em;
+}

@@ -20,6 +20,8 @@ var osm = L.tileLayer( //Defining what map to use in the background
               <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
   });
 
+
+
 //This one should be disabled in the final version
 var city = L.OWM.current({
   appId: 'ee67f8f53521d94193aa7d8364b7f5d9',
@@ -69,6 +71,40 @@ var mymap = L.map('map', {//Defines the center of the map and the default zoom-l
   zoom: 10,
   layers: [osm]
 });
+
+L.easyButton( 'fa-info-circle', function(){
+infobox();
+// L.Map.Modal.SHOW => { modal: modal }
+}).addTo(mymap);
+
+function infobox(){
+mymap.fire('modal', {
+  title: 'Weather information',
+  content: '<ul>' + '<h1>Modal header</h1>' + (new Array(5)).join('<li>Content line</li>') + '</ul>',        // HTML string
+
+  closeTitle: 'close',                 // alt title of the close button
+  zIndex: 10000,                       // needs to stay on top of the things
+  transitionDuration: 300,             // expected transition duration
+
+  template: [
+    '<div class="modal-body">{content}</div>',
+    '<div class="modal-footer">',
+    '</div>'
+  ].join(''),
+  // callbacks for convenience,
+  // you can set up you handlers here for the contents
+  // onShow: function(evt){ var modal = evt.modal; ...},
+  // onHide: function(evt){ var modal = evt.modal; ...},
+
+  // change at your own risk
+  OVERLAY_CLS: 'overlay',              // overlay(backdrop) CSS class
+  MODAL_CLS: 'modal',                  // all modal blocks wrapper CSS class
+  MODAL_CONTENT_CLS: 'modal-content',  // modal window CSS class
+  INNER_CONTENT_CLS: 'modal-inner',    // inner content wrapper
+  SHOW_CLS: 'show',                    // `modal open` CSS class, here go your transitions
+  CLOSE_CLS: 'close'                   // `x` button CSS class
+});
+}
 
 // Create an element to hold all your text and markup
 var container = $('<div />');
