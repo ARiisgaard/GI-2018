@@ -6,7 +6,12 @@ import password
 
 import psycopg2
 import json
+import urllib2 #Kan slettes, hvis ikke den bruges
 #import sys
+
+# import configparser
+import requests
+# import sys
 
 
 app = Flask(__name__)
@@ -15,6 +20,37 @@ CORS(app)
 @app.route("/")
 def hello():
     return "Hello World!"
+
+@app.route("/openweathermap")
+def openweathermap():
+
+    lat = request.args.get('lat')
+    lng = request.args.get('lng')
+
+    owmKey = "ee67f8f53521d94193aa7d8364b7f5d9"
+
+    owmAddress = requests.get('http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=' + owmKey)
+
+    print(owmAddress)
+
+
+    return Response(owmAddress, content_type='application/json; charset=UTF-8')
+
+@app.route("/darksky")
+def darksky():
+
+    lat = request.args.get('lat')
+    lng = request.args.get('lng')
+
+    dsKey = "b843700cbe82111c47584343a224adcf"
+
+
+    dsAddress = requests.get("https://api.darksky.net/forecast/" + dsKey + "/" + lat +"," + lng)
+
+    print(dsAddress)
+
+
+    return Response(dsAddress, content_type='application/json; charset=UTF-8')
 
 
 @app.route("/findstation")
