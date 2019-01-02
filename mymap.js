@@ -356,8 +356,6 @@ function calculateRoute(array) {//This is the function, that calculates the rout
       }
       var ds = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
       $.getJSON(ds, function(data) {
-  console.log(data.hourly.data["0"].precipProbability * 100 + "% Chance of precipitation in current hour. Intensity: " + data2.hourly.data["0"].precipIntensity + " millimeters per hour")
-  console.log(data.hourly.data["1"].precipProbability * 100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
   var precipChanceThisHour = data.hourly.data["0"].precipProbability
   var precipChanceNextHour = data.hourly.data["1"].precipProbability
   var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
@@ -365,9 +363,15 @@ function calculateRoute(array) {//This is the function, that calculates the rout
 
   //Noget med test af - er det det ene eller det andet tidspunkt
 //Tilføj et or statement
-  if (precipChanceThisHour > 0.5) {
+  if (precipChanceThisHour > 0.5) {//Alerts the user, if there are a higher than 50 percent chance of rain
     alert("There are a " + precipChanceThisHour*100 + "% Chance of precipitation in current hour. Intensity: " + precipChanceThisHour + " millimeters per hour") )
+  } //Chance of precipitation between" + klokkeslet 1 (fra apien) +"-" + klokkelset2 (fra apien)
+//if (currentTime == en time && routeTime + currentTime == en anden time) {}
+  if (precipChanceNextHour > 0.5) {
+    alert("There are a " + precipChanceNextHour*100 + "% Chance of precipitation in next hour. Intensity: " + precipIntensityNextHour + " millimeters per hour") )
   }
+
+
 });
     }
   route.addTo(mymap);
