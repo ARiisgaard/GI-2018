@@ -11,6 +11,7 @@ var finalArray = [];
 var goThrough = [];
 var orderOfWaypoints = [];
 var numberofwaypoints = 2;
+var sunset;
 
 
 var osm = L.tileLayer( //Defining what map to use in the background
@@ -220,6 +221,7 @@ function getRoute(lat, lng) {
     $.getJSON(api_address, function(data) {
 
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
+      sunset =
       if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the winds origin
@@ -343,5 +345,12 @@ function calculateRoute(array) {//This is the function, that calculates the rout
     waypoints: array,
     router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
   })
+  .on('routesfound', function(e) {
+      routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
+      routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
+      routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
+
+var currentTime = Math.round((new Date()).getTime() / 1000);
+    }
   route.addTo(mymap);
 }
