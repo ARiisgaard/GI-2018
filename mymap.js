@@ -36,23 +36,27 @@ var myIcon = L.icon({ //defines the icon for the wind location - should also be 
   popupAnchor: [-3, -76]
 });
 
-var trainIcon = L.icon({//Defines the icon used for the train stations
+var trainIcon = L.icon({ //Defines the icon used for the train stations
   iconUrl: 'https://image.flaticon.com/icons/svg/1201/1201644.svg',
   iconSize: [30, 30],
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
-  });
+});
 
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
     layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
   },
-  pointToLayer: function(geoJsonPoint, latlng) { return L.marker(latlng, {icon: trainIcon})} //Adds the icon to the stations
+  pointToLayer: function(geoJsonPoint, latlng) {
+    return L.marker(latlng, {
+      icon: trainIcon
+    })
+  } //Adds the icon to the stations
 })
 
 var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" layer
 
-//fix stuff here
+  //fix stuff here
 
   // onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
   // //  layer.bindPopup("<h2>Park:</h2>" + "You want to go here?" + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
@@ -63,9 +67,9 @@ var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" laye
   //
   //     }
   // }
-  });
+});
 
-var mymap = L.map('map', {//Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
+var mymap = L.map('map', { //Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
   center: [55.676111, 12.568333],
   zoom: 10,
   layers: [osm]
@@ -91,10 +95,10 @@ parks.bindPopup(container[0]).on('click', function(e) {
   orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
   console.log("orderOfWaypoints: " + orderOfWaypoints)
   console.log("click: " + goThrough)
-  var orderedParks =  orderArray(goThrough, orderOfWaypoints);
+  var orderedParks = orderArray(goThrough, orderOfWaypoints);
   console.log("orderedParks: " + orderedParks)
   var tempArray = []; //In this empty Array we are fitting all the pieces together
-  finalArray = tempArray.concat([StartLocation],orderedParks,[EndLocation])
+  finalArray = tempArray.concat([StartLocation], orderedParks, [EndLocation])
 });
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
@@ -180,11 +184,11 @@ L.easyButton('fa-flask', function() {
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 //https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
-L.easyButton('fa-ruler', function() {//This is the button for changing the distance
+L.easyButton('fa-ruler', function() { //This is the button for changing the distance
   enterDistance();
 }).addTo(mymap);
 
-var overlayMaps = {//This is the layers, that are hidden, when the map loads, but is possible to enable
+var overlayMaps = { //This is the layers, that are hidden, when the map loads, but is possible to enable
   "Cities": city,
   "Stations": stations,
   "Parks": parks
@@ -222,7 +226,7 @@ function getRoute(lat, lng) {
 
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
       sunset = data.sys.sunset
-      if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
+      if (reverse == false) { //This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the winds origin
       } else {
@@ -248,7 +252,7 @@ function getRoute(lat, lng) {
       //Here stops the coordinate definition
 
 
-//This following disabled code was for showing the "ideal location" - Only use for testing
+      //This following disabled code was for showing the "ideal location" - Only use for testing
       // var winddestination;
       // if (winddestination) {
       //   mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
@@ -261,7 +265,7 @@ function getRoute(lat, lng) {
 
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
-      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {//Here we connect to the server and run the findstation request based on the lat and lng of the "ideal" location
+      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) { //Here we connect to the server and run the findstation request based on the lat and lng of the "ideal" location
 
         //Here we get the lat and lng from the server
         var stationLat = data.geometry.coordinates[1]
@@ -271,15 +275,15 @@ function getRoute(lat, lng) {
         EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
 
 
-if (numberofwaypoints == 2) {//This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
-        finalArray = [StartLocation,
-          EndLocation
-        ]
-}
+        if (numberofwaypoints == 2) { //This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
+          finalArray = [StartLocation,
+            EndLocation
+          ]
+        }
 
-if (reverse == true) {//This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
-  finalArray = finalArray.reverse()
-};
+        if (reverse == true) { //This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
+          finalArray = finalArray.reverse()
+        };
 
         calculateRoute(finalArray); //Then the route gets calculated
 
@@ -290,11 +294,11 @@ if (reverse == true) {//This swaps the order of the array, if the user has decid
   }
 }
 
-function orderArray(coords, distances) {//This function sorts the parks, that the routing is going through, so the order is based on what is the closest to the start location instead of the order of the clicks
+function orderArray(coords, distances) { //This function sorts the parks, that the routing is going through, so the order is based on what is the closest to the start location instead of the order of the clicks
   var sorted_coords = []
 
-var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
-var distancesLeft = distances.concat();
+  var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
+  var distancesLeft = distances.concat();
 
 
   // keep doing this until the distances array is empty:
@@ -315,7 +319,7 @@ var distancesLeft = distances.concat();
 
 }
 
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {//This function calculates the distance between to points in km. Based on sphere geometry
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) { //This function calculates the distance between to points in km. Based on sphere geometry
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
   var dLon = deg2rad(lon2 - lon1);
@@ -328,11 +332,11 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {//This function calc
   return d;
 }
 
-function deg2rad(deg) {//This changes from degrees to radians
+function deg2rad(deg) { //This changes from degrees to radians
   return deg * (Math.PI / 180)
 }
 
-function calculateRoute(array) {//This is the function, that calculates the routing between the waypoints
+function calculateRoute(array) { //This is the function, that calculates the routing between the waypoints
   $("div.leaflet-routing-container").remove(); //Removes the previous route description before making a new one
 
 
@@ -342,37 +346,51 @@ function calculateRoute(array) {//This is the function, that calculates the rout
   }
 
   route = L.Routing.control({
-    waypoints: array,
-    router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-  })
-  .on('routesfound', function(e) {
+      waypoints: array,
+      router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
+    })
+    .on('routesfound', function(e) {
       routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
       routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
       routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
       var currentTime = Math.round((new Date()).getTime() / 1000);
 
-      if (sunset < routeTime + currentTime) {
-        alert("Your trip will end" + Math.round((sunset - routeTime - currentTime/60)) + " minutes after sunset")
+      if (currentTime < sunset && sunset < routeTime + currentTime) {
+        alert("Your trip will end" + Math.round((sunset - routeTime - currentTime / 60)) + " minutes after sunset")
       }
       var ds = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
       $.getJSON(ds, function(data) {
-  var precipChanceThisHour = data.hourly.data["0"].precipProbability
-  var precipChanceNextHour = data.hourly.data["1"].precipProbability
-  var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
-  var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
-
-  //Noget med test af - er det det ene eller det andet tidspunkt
-//Tilføj et or statement
-  if (precipChanceThisHour > 0.5) {//Alerts the user, if there are a higher than 50 percent chance of rain
-    alert("There are a " + precipChanceThisHour*100 + "% Chance of precipitation in current hour. Intensity: " + precipChanceThisHour + " millimeters per hour") )
-  } //Chance of precipitation between" + klokkeslet 1 (fra apien) +"-" + klokkelset2 (fra apien)
-//if (currentTime == en time && routeTime + currentTime == en anden time) {}
-  if (precipChanceNextHour > 0.5) {
-    alert("There are a " + precipChanceNextHour*100 + "% Chance of precipitation in next hour. Intensity: " + precipIntensityNextHour + " millimeters per hour") )
-  }
+          var thisHour = data.hourly.data["0"].time
+          var nextHour = data.hourly.data["1"].time
+          var evenLater = data.hourly.data["2"].time
+          var precipChanceThisHour = data.hourly.data["0"].precipProbability
+          var precipChanceNextHour = data.hourly.data["1"].precipProbability
+          var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
+          var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
 
 
-});
-    }
-  route.addTo(mymap);
+          function Unix_timestamp(t) //This function converts
+          {
+          var dt = new Date(t*1000);
+          var hr = dt.getHours();
+
+          return hr;
+        }
+//if
+
+        console.log("Hey: " + Unix_timestamp(thisHour))
+          //Noget med test af - er det det ene eller det andet tidspunkt
+          //Tilføj et or statement
+          if (precipChanceThisHour > 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
+            alert("There are a " + precipChanceThisHour * 100 + "% Chance of precipitation between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipChanceThisHour + " millimeters per hour")
+        } //Chance of precipitation between" + klokkeslet 1 (fra apien) +"-" + klokkelset2 (fra apien)
+        //if (currentTime == en time && routeTime + currentTime == en anden time) {}
+        if (nextHour < routeTime + currentTime && precipChanceNextHour > 0.5) { //first part is checking if the next hour is relevant
+          alert("There are a " + precipChanceNextHour * 100 + "% Chance of precipitation between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+      }
+
+
+    });
+})
+route.addTo(mymap);
 }
