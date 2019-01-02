@@ -221,7 +221,7 @@ function getRoute(lat, lng) {
     $.getJSON(api_address, function(data) {
 
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
-      sunset =
+      sunset = data.sys.sunset
       if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the winds origin
@@ -349,8 +349,26 @@ function calculateRoute(array) {//This is the function, that calculates the rout
       routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
       routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
       routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
+      var currentTime = Math.round((new Date()).getTime() / 1000);
 
-var currentTime = Math.round((new Date()).getTime() / 1000);
+      if (sunset < routeTime + currentTime) {
+        alert("Your trip will end" + Math.round((sunset - routeTime - currentTime/60)) + " minutes after sunset")
+      }
+      var ds = "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
+      $.getJSON(ds, function(data) {
+  console.log(data.hourly.data["0"].precipProbability * 100 + "% Chance of precipitation in current hour. Intensity: " + data2.hourly.data["0"].precipIntensity + " millimeters per hour")
+  console.log(data.hourly.data["1"].precipProbability * 100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
+  var precipChanceThisHour = data.hourly.data["0"].precipProbability
+  var precipChanceNextHour = data.hourly.data["1"].precipProbability
+  var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
+  var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
+
+  //Noget med test af - er det det ene eller det andet tidspunkt
+//Tilføj et or statement
+  if (precipChanceThisHour > 0.5) {
+    alert("There are a " + precipChanceThisHour*100 + "% Chance of precipitation in current hour. Intensity: " + precipChanceThisHour + " millimeters per hour") )
+  }
+});
     }
   route.addTo(mymap);
 }
