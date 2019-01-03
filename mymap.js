@@ -11,6 +11,7 @@ var finalArray = [];
 var goThrough = [];
 var orderOfWaypoints = [];
 var numberofwaypoints = 2;
+var showPlusMinus = false;
 
 
 var osm = L.tileLayer( //Defining what map to use in the background
@@ -168,17 +169,19 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
 });
 reversebotton.addTo(mymap);
 
-function enterDistance() {
-  var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
-  if (distance != null && isNaN(distance) == false) {
-    console.log("isNaN: " + isNaN(distance))
-    length = distance * 1000
-    getRoute(StartLocation.lat, StartLocation.lng);
-  } else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
-    alert("That is not a valid input")
-    enterDistance();
-  }
-}
+// function enterDistance() {
+//   var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
+//   if (distance != null && isNaN(distance) == false) {
+//     console.log("isNaN: " + isNaN(distance))
+//     length = distance * 1000
+//     getRoute(StartLocation.lat, StartLocation.lng);
+//   } else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
+//     alert("That is not a valid input")
+//     enterDistance();
+//   }
+// }
+
+
 
 L.easyButton('fa-flask', function() {
   var proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -209,9 +212,43 @@ console.log(dsFlask)
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 //https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
-L.easyButton('fa-ruler', function() {//This is the button for changing the distance
-  enterDistance();
+function showhideDistancebuttons() {//This shows or hides the increase/decrease distance buttons 
+if (showPlusMinus == false) {
+  longer.disable()
+  shorter.disable()
+}
+else {
+  longer.enable()
+  shorter.enable()
+}
+
+}
+
+var showLongerShorter = L.easyButton('fa-ruler', function() {//This is the button for showing/hiddin the increase/decrease buttons
+  if (showPlusMinus == false) {showPlusMinus = true}
+  else {showPlusMinus = false}
+  showhideDistancebuttons();
 }).addTo(mymap);
+
+var longer = L.easyButton('fa-plus', function() {//This increases the distance with 1 km and calculates a new route
+      var oldDistance = routeDistance
+      length += 1000
+      getRoute(StartLocation.lat, StartLocation.lng);
+      // if (oldDistance == routeDistance) {
+      //   length += 1000
+      //   getRoute(StartLocation.lat, StartLocation.lng);
+      // }
+});
+
+var shorter = L.easyButton('fa-minus', function() {//This decrease the distance with 1 km and calculates a new route
+  length -= 1000
+  getRoute(StartLocation.lat, StartLocation.lng);
+});
+
+var distanceBar = L.easyBar([showLongerShorter, longer, shorter, ]); //This connects the buttons for manipuplating the distance of the route. Without this the hidden buttons look messy
+
+distanceBar.addTo(mymap);
+showhideDistancebuttons(); //This hides the distance changing buttons as default
 
 var overlayMaps = {//This is the layers, that are hidden, when the map loads, but is possible to enable
   "Cities": city,
@@ -396,6 +433,12 @@ function calculateRoute(array) {//This is the function, that calculates the rout
     return marker
   },
     router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
-  })
+  }).on('routesfound', function(e) {
+    routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
+      routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
+    });
+
+
+
   route.addTo(mymap);
 }
