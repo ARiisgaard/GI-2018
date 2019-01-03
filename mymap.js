@@ -18,7 +18,6 @@ var sunset;
 var wantWarnings = true;
 var oldDestination;
 var distanceButtonClicked;
-var testRun = 0;
 
 var osm = L.tileLayer( //Defining what map to use in the background
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -27,15 +26,15 @@ var osm = L.tileLayer( //Defining what map to use in the background
               <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
   });
 
-//This one should be disabled in the final version
+//This is the layer with weather information
 var city = L.OWM.current({
   appId: 'ee67f8f53521d94193aa7d8364b7f5d9',
-  intervall: 15,
+  intervall: 15, //updates every 15 minuttes
   lang: 'en',
   showWindDirection: 'deg'
 });
 
-var myIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+var myIcon = L.icon({ //defines the icon for the wind location -
   iconUrl: 'Images/windsock.png', //Credits:  Flaticon/Freepik
   iconSize: [30, 30],
   iconAnchor: [15, 20],
@@ -70,13 +69,6 @@ var destinationIcon = L.icon({ //defines the icon for the wind location - should
   popupAnchor: [-3, -76]
 });
 
-
-// function iconAB (i, start, n){
-//
-//
-//
-// }
-
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
     layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
@@ -90,14 +82,12 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
 
 var parks = new L.GeoJSON.AJAX("parks.geojson", {
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
-    layer.bindPopup("You want to go here?" + '<br/><button onclick="goHere()" >Yes</button>' + '<br/><button onclick="dontGoHere()" >No</button>') //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
-    layer.on({
+    layer.bindPopup("You want to go here?" + '<br/><button onclick="goHere()" >Yes</button>' + '<br/><button onclick="dontGoHere()" >No</button>') //Content of the popup. The popup includes two buttons that triggers the the two functions below
+    layer.on({//This saves the coordinates of the center of the clicked park. These coordinates are used, if one clicks one of the buttons.
       click: function(e) {
         var findBounds = layer.getBounds();
-        console.log(findBounds)
         center = findBounds.getCenter();
-        console.log(center)
-      }
+        }
     })
 
   }
@@ -118,13 +108,9 @@ function alreadyIncluded(search, array) {
 function goHere() {
   if (alreadyIncluded(center, finalArray) > -1) { //If the park already is included, then the program should just close the popup
     mymap.closePopup();
-    console.log("alreadyIncluded(center)a: " + alreadyIncluded(center, finalArray))
-  } else {
-    console.log("alreadyIncluded(center)b: " + alreadyIncluded(center, finalArray))
+      } else {
     goThrough.push(center);
     orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, center.lat, center.lng))
-    console.log("orderOfWaypoints: " + orderOfWaypoints)
-    console.log("click: " + goThrough)
     var orderedParks = orderArray(goThrough, orderOfWaypoints);
     arrayWithParks = orderedParks.filter(function(el) { //There were some issue with center sometimes returning both the coordinates and undefined - this gets rid of the additional undefined
       return el != null;
@@ -145,7 +131,6 @@ function dontGoHere() {
   var index2 = alreadyIncluded(center, goThrough);
   if (index2 > -1) {
     goThrough.splice(index2, 1); //Removes the park from the list of parks,
-    console.log("goThrough: " + goThrough)
   }
   mymap.closePopup();
   wantWarnings = true;
@@ -203,48 +188,6 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
 });
 reversebotton.addTo(mymap);
 
-// function enterDistance() {
-//   var distance = prompt("Please enter how many kilometers you would like to cycle", "5");
-//   if (distance != null && isNaN(distance) == false) {
-//     console.log("isNaN: " + isNaN(distance))
-//     length = distance * 1000
-//     getRoute(StartLocation.lat, StartLocation.lng);
-//   } else if (isNaN(distance) == true) { //If there is an incorrect input then this error message is returned. It is an else if and not an else because otherwise the cancel button woundnt work
-//     alert("That is not a valid input")
-//     enterDistance();
-//   }
-// }
-
-
-
-L.easyButton('fa-flask', function() {
-  var proxy = 'https://cors-anywhere.herokuapp.com/';
-  var apiLinkDS = "https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/55.676111,12.568333";
-  var apiLinkOWM = 'http://api.openweathermap.org/data/2.5/weather?lat=' + StartLocation.lat + '&lon=' + StartLocation.lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
-  var currentTime = Math.round((new Date()).getTime() / 1000);
-  $.getJSON(proxy + apiLinkOWM, function(data1) {
-    console.log("Sunrise: " + data1.sys.sunrise)
-    console.log("Current time: " + currentTime)
-    var minToSunset = (data1.sys.sunset - currentTime) / 60
-    var minToSunrise = (currentTime - data1.sys.sunrise) / 60
-    if (minToSunset > 0) {
-      console.log("Minuttes to sunset: " + Math.round(minToSunset))
-    } else {
-      console.log("Minuttes to sunrise: " + Math.round(minToSunrise))
-    }
-  });
-
-  var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
-  console.log(dsFlask)
-  $.getJSON(dsFlask, function(data2) {
-    console.log(data2.hourly.data["0"].precipProbability * 100 + "% Chance of precipitation in current hour. Intensity: " + data2.hourly.data["0"].precipIntensity + " millimeters per hour")
-    console.log(data2.hourly.data["1"].precipProbability * 100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
-  });
-}).addTo(mymap);
-
-
-//https://api.darksky.net/forecast/[key]/[latitude],[longitude]
-//https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
 function showhideDistancebuttons() { //This shows or hides the increase/decrease distance buttons
   if (showPlusMinus == false) {
@@ -269,7 +212,6 @@ var showLongerShorter = L.easyButton('fa-ruler', function() { //This is the butt
 var longer = L.easyButton('fa-plus', function() { //This increases the distance with 1 km and calculates a new route
   var oldDistance = routeDistance
   length += 1000
-  console.log(length)
   wantWarnings = true;
   oldDestination = EndLocation;
   distanceButtonClicked = "longer"
@@ -278,7 +220,6 @@ var longer = L.easyButton('fa-plus', function() { //This increases the distance 
 
 var shorter = L.easyButton('fa-minus', function() { //This decrease the distance with 1 km and calculates a new route
   length -= 1000
-  console.log(length)
   wantWarnings = true;
   oldDestination = EndLocation;
   distanceButtonClicked = "shorter"
@@ -291,7 +232,7 @@ distanceBar.addTo(mymap);
 showhideDistancebuttons(); //This hides the distance changing buttons as default
 
 var overlayMaps = { //This is the layers, that are hidden, when the map loads, but is possible to enable
-  "Cities": city,
+  "Weather information": city,
   "Stations": stations,
   "Parks": parks
 };
@@ -324,7 +265,7 @@ function getRoute(lat, lng) {
 
     //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
     var owmFlask = "http://127.0.0.1:5000/openweathermap?lat=" + lat + "&lng=" + lng;
-    // console.log("Test1: " + owmFlask);
+
     $.getJSON(owmFlask, function(data) {
 
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
@@ -356,16 +297,16 @@ function getRoute(lat, lng) {
       //Here stops the coordinate definition
 
 
-      //This following disabled code was for showing the "ideal location" - Only use for testing
-      var winddestination;
-      if (winddestination) {
-        mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
-        console.log("Wind remove")
-      }
+      //This following disabled code was for showing the "ideal location" - Only use for testing - Included in case that is going to be needed for the exam
 
-      var winddestination = L.marker([EndLat, EndLng], {
-        icon: myIcon
-      }).addTo(mymap);
+      // var winddestination;
+      // if (winddestination) {
+      //   mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+      // }
+      //
+      // winddestination = L.marker([EndLat, EndLng], {
+      //   icon: myIcon
+      // }).addTo(mymap);
 
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
@@ -377,20 +318,17 @@ function getRoute(lat, lng) {
 
         //the lat and lng are the put together:
         EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
-        console.log("testRun: " + testRun + " EndLocation: " + EndLocation)
 
         if (EndLocation.equals(oldDestination)) {
-          console.log("EndLocation.equals(oldDestination): " + EndLocation.equals(oldDestination))
           if (distanceButtonClicked == "shorter") {
             length -= 1000
-            console.log("shorter")
-            testRun += 1
+
           }
           if (distanceButtonClicked == "longer") {
             length += 1000
           }
           oldDestination = EndLocation
-          console.log("oldDestination: " + oldDestination + " EndLocation: " + EndLocation)
+
           getRoute(StartLocation.lat, StartLocation.lng);
           return;
         } else {
@@ -400,7 +338,7 @@ function getRoute(lat, lng) {
               EndLocation
             ]
           } else {
-            console.log("kommer her?")
+
             var tempArray = []; //In this empty Array we are fitting all the pieces together
             finalArray = tempArray.concat([StartLocation], arrayWithParks, [EndLocation])
           }
@@ -504,11 +442,13 @@ function calculateRoute(array) { //This is the function, that calculates the rou
     routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
 
     if (wantWarnings == true) { //This prevents the program from spamming - otherwise the alerts would popup every time one gets new coordinates from the gps. This way it only gives results if one makes changes to the route
+      var content1 = "";
+      var content2 = "";
+      var content3 = "";
       var currentTime = Math.round((new Date()).getTime() / 1000);
       if (currentTime < sunset && sunset < routeTime + currentTime) {
-        alert("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
-        // console.log("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
-      }
+        content1 = String("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset \n")
+        }
       var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
       $.getJSON(dsFlask, function(data) {
         var thisHour = data.hourly.data["0"].time
@@ -520,24 +460,30 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
 
 
-        function Unix_timestamp(t) //This function converts
+        function Unix_timestamp(t) //This function converts unix to hours
         {
           var dt = new Date(t * 1000);
           var hr = dt.getHours();
 
           return hr;
         }
-        //if
-        //Noget med test af - er det det ene eller det andet tidspunkt
-        //Tilføj et or statement
-        if (precipChanceThisHour > 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
-          alert("There are a " + precipChanceThisHour * 100 + "% Chance of precipitation between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipChanceThisHour + " millimeters per hour")
-        } //Chance of precipitation between" + klokkeslet 1 (fra apien) +"-" + klokkelset2 (fra apien)
-        //if (currentTime == en time && routeTime + currentTime == en anden time) {}
-        if (nextHour < routeTime + currentTime && precipChanceNextHour > 0.5) { //first part is checking if the next hour is relevant
-          alert("There are a " + precipChanceNextHour * 100 + "% Chance of precipitation between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+
+        if (precipChanceThisHour >= 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
+          content2 = String("There are a " + precipChanceThisHour * 100 + "% Chance of precipitation between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
         }
+        if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.5) { //first part is checking if the next hour is relevant
+          content3 = String("There are a " + precipChanceNextHour * 100 + "% Chance of precipitation between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+          }
+
+        var content =  content1 + content2 + content3
+        console.log(content.length)
+        if (content.length > 0) {
+        alert(content)
+        }
+
       })
+
+
       wantWarnings = false; //This disables alerts until the user changes the distance of the trip or adds/removes a park
     }
   });

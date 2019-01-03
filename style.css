@@ -6,11 +6,14 @@ html, body{
   font-family: Helvetica, sans-serif;
 }
 
+/* Size of the map */
 #map{
   width: 100%;
   height: 98%;
 }
 
+
+/* This is defining the visuals for the distance button. The one below is how it should look, when they are hidden  */
 #map .easy-button-button{
   transition-duration: .3s;
   position: relative;
@@ -20,10 +23,11 @@ html, body{
 #map .easy-button-button.disabled {
   height: 0;}
 
+/* Titel */
 h2{
   float: left
 }
-
+/* This is the defining the visuals for the popup in case of no location data */
 #hidden{
   float: left;
   margin-left: 100px;
