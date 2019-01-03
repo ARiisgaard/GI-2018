@@ -96,11 +96,11 @@ var parks = new L.GeoJSON.AJAX("parks.geojson", {
   }
 });
 
-function alreadyIncluded(search){
+function alreadyIncluded(search, array){
   var result = -1 //By default the answer is no
-for (var i = 0; i < finalArray.length; i++) {
+for (var i = 0; i < array.length; i++) {
   // compare coordinates using Leaflet's equals function:
-  if(finalArray[i].equals(search)){//checks every point and sees if it is equal the currently clicked park
+  if(array[i].equals(search)){//checks every point and sees if it is equal the currently clicked park
     result = i;
 }
 }
@@ -109,11 +109,11 @@ return result;
 }
 
 function goHere() {
-  if (alreadyIncluded(center) > -1) {//If the park already is included, then the program should just close the popup
+  if (alreadyIncluded(center, finalArray) > -1) {//If the park already is included, then the program should just close the popup
     mymap.closePopup();
-    console.log("alreadyIncluded(center)a: " + alreadyIncluded(center))
+    console.log("alreadyIncluded(center)a: " + alreadyIncluded(center, finalArray))
   } else {
-    console.log("alreadyIncluded(center)b: " + alreadyIncluded(center))
+    console.log("alreadyIncluded(center)b: " + alreadyIncluded(center, finalArray))
     goThrough.push(center);
     orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, center.lat, center.lng))
     console.log("orderOfWaypoints: " + orderOfWaypoints)
@@ -133,13 +133,14 @@ function goHere() {
 }
 
 function dontGoHere() {
-  var index = alreadyIncluded(center);
+  var index = alreadyIncluded(center, finalArray);
   if (index > -1) {
     finalArray.splice(index, 1);
   }
-  var index2 = goThrough.indexOf(String(center))
-  if (index > -1) {
-    goThrough.splice(index, 1);
+  var index2 = alreadyIncluded(center, goThrough);
+  if (index2 > -1) {
+    goThrough.splice(index2, 1); //Removes the park from the list of parks,
+    console.log("goThrough: " + goThrough)
   }
   mymap.closePopup();
   wantWarnings = true;
@@ -529,7 +530,7 @@ if (wantWarnings == true){//This prevents the program from spamming - otherwise 
           alert("There are a " + precipChanceNextHour * 100 + "% Chance of precipitation between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
       }
     })
-    wantWarnings = false;
+    wantWarnings = false; //This disables alerts until the user changes the distance of the trip or adds/removes a park
   }
     });
 
