@@ -138,9 +138,9 @@ function goHere() {
 }
 
 function dontGoHere() {
-  var index = alreadyIncluded(center, finalArray);
+  var index = alreadyIncluded(center, arrayWithParks);
   if (index > -1) {
-    finalArray.splice(index, 1);
+    arrayWithParks.splice(index, 1);
   }
   var index2 = alreadyIncluded(center, goThrough);
   if (index2 > -1) {
@@ -400,6 +400,7 @@ function getRoute(lat, lng) {
               EndLocation
             ]
           } else {
+            console.log("kommer her?")
             var tempArray = []; //In this empty Array we are fitting all the pieces together
             finalArray = tempArray.concat([StartLocation], arrayWithParks, [EndLocation])
           }
