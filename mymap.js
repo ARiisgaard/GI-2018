@@ -39,33 +39,33 @@ var myIcon = L.icon({ //defines the icon for the wind location - should also be 
   popupAnchor: [-3, -76]
 });
 
-var trainIcon = L.icon({//Defines the icon used for the train stations
+var trainIcon = L.icon({ //Defines the icon used for the train stations
   iconUrl: 'https://image.flaticon.com/icons/svg/1201/1201644.svg',
   iconSize: [30, 30],
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
-  });
+});
 
-  var startIcon = L.icon({ //defines the icon for the wind location - should also be disabled
-    iconUrl: 'Images/maps-and-flags.png', //Credits:  Flaticon/Freepik
-    iconSize: [30, 30],
-    iconAnchor: [15, 20],
-    popupAnchor: [-3, -76]
-  });
+var startIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+  iconUrl: 'Images/maps-and-flags.png', //Credits:  Flaticon/Freepik
+  iconSize: [30, 30],
+  iconAnchor: [15, 20],
+  popupAnchor: [-3, -76]
+});
 
-  var middleIcon = L.icon({ //defines the icon for the wind location - should also be disabled
-    iconUrl: 'Images/park.png', //Credits:  Flaticon/Freepik
-    iconSize: [30, 30],
-    iconAnchor: [15, 20],
-    popupAnchor: [-3, -76]
-  });
+var middleIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+  iconUrl: 'Images/park.png', //Credits:  Flaticon/Freepik
+  iconSize: [30, 30],
+  iconAnchor: [15, 20],
+  popupAnchor: [-3, -76]
+});
 
-  var destinationIcon = L.icon({ //defines the icon for the wind location - should also be disabled
-    iconUrl: 'Images/racing-flag.png', //Credits:  Flaticon/Freepik
-    iconSize: [30, 30],
-    iconAnchor: [15, 20],
-    popupAnchor: [-3, -76]
-  });
+var destinationIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+  iconUrl: 'Images/racing-flag.png', //Credits:  Flaticon/Freepik
+  iconSize: [30, 30],
+  iconAnchor: [15, 20],
+  popupAnchor: [-3, -76]
+});
 
 
 // function iconAB (i, start, n){
@@ -78,7 +78,11 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
     layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
   },
-  pointToLayer: function(geoJsonPoint, latlng) { return L.marker(latlng, {icon: trainIcon})} //Adds the icon to the stations
+  pointToLayer: function(geoJsonPoint, latlng) {
+    return L.marker(latlng, {
+      icon: trainIcon
+    })
+  } //Adds the icon to the stations
 })
 
 var parks = new L.GeoJSON.AJAX("parks.geojson", {
@@ -96,20 +100,20 @@ var parks = new L.GeoJSON.AJAX("parks.geojson", {
   }
 });
 
-function alreadyIncluded(search, array){
+function alreadyIncluded(search, array) {
   var result = -1 //By default the answer is no
-for (var i = 0; i < array.length; i++) {
-  // compare coordinates using Leaflet's equals function:
-  if(array[i].equals(search)){//checks every point and sees if it is equal the currently clicked park
-    result = i;
-}
-}
+  for (var i = 0; i < array.length; i++) {
+    // compare coordinates using Leaflet's equals function:
+    if (array[i].equals(search)) { //checks every point and sees if it is equal the currently clicked park
+      result = i;
+    }
+  }
 
-return result;
+  return result;
 }
 
 function goHere() {
-  if (alreadyIncluded(center, finalArray) > -1) {//If the park already is included, then the program should just close the popup
+  if (alreadyIncluded(center, finalArray) > -1) { //If the park already is included, then the program should just close the popup
     mymap.closePopup();
     console.log("alreadyIncluded(center)a: " + alreadyIncluded(center, finalArray))
   } else {
@@ -123,7 +127,7 @@ function goHere() {
       return el != null;
     })
     console.log("orderedParks: " + orderedParks)
-        console.log("parksNoUndefined: " + parksNoUndefined)
+    console.log("parksNoUndefined: " + parksNoUndefined)
     var tempArray = []; //In this empty Array we are fitting all the pieces together
     finalArray = tempArray.concat([StartLocation], parksNoUndefined, [EndLocation])
     mymap.closePopup();
@@ -145,9 +149,9 @@ function dontGoHere() {
   mymap.closePopup();
   wantWarnings = true;
   getRoute(StartLocation.lat, StartLocation.lng);
-  }
+}
 
-var mymap = L.map('map', {//Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
+var mymap = L.map('map', { //Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
   center: [55.676111, 12.568333],
   zoom: 10,
   layers: [osm]
@@ -254,8 +258,8 @@ L.easyButton('fa-flask', function() {
     }
   });
 
-var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
-console.log(dsFlask)
+  var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
+  console.log(dsFlask)
   $.getJSON(dsFlask, function(data2) {
     console.log(data2.hourly.data["0"].precipProbability * 100 + "% Chance of precipitation in current hour. Intensity: " + data2.hourly.data["0"].precipIntensity + " millimeters per hour")
     console.log(data2.hourly.data["1"].precipProbability * 100 + "% Chance of precipitation in next hour. Intensity: " + data2.hourly.data["1"].precipIntensity + " millimeters per hour")
@@ -266,33 +270,35 @@ console.log(dsFlask)
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 //https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
-function showhideDistancebuttons() {//This shows or hides the increase/decrease distance buttons
-if (showPlusMinus == false) {
-  longer.disable()
-  shorter.disable()
-}
-else {
-  longer.enable()
-  shorter.enable()
-}
+function showhideDistancebuttons() { //This shows or hides the increase/decrease distance buttons
+  if (showPlusMinus == false) {
+    longer.disable()
+    shorter.disable()
+  } else {
+    longer.enable()
+    shorter.enable()
+  }
 
 }
 
-var showLongerShorter = L.easyButton('fa-ruler', function() {//This is the button for showing/hiddin the increase/decrease buttons
-  if (showPlusMinus == false) {showPlusMinus = true}
-  else {showPlusMinus = false}
+var showLongerShorter = L.easyButton('fa-ruler', function() { //This is the button for showing/hiddin the increase/decrease buttons
+  if (showPlusMinus == false) {
+    showPlusMinus = true
+  } else {
+    showPlusMinus = false
+  }
   showhideDistancebuttons();
 }).addTo(mymap);
 
-var longer = L.easyButton('fa-plus', function() {//This increases the distance with 1 km and calculates a new route
-      var oldDistance = routeDistance
-      length += 1000
-      console.log(length)
-      wantWarnings = true;
-      getRoute(StartLocation.lat, StartLocation.lng);
+var longer = L.easyButton('fa-plus', function() { //This increases the distance with 1 km and calculates a new route
+  var oldDistance = routeDistance
+  length += 1000
+  console.log(length)
+  wantWarnings = true;
+  getRoute(StartLocation.lat, StartLocation.lng);
 });
 
-var shorter = L.easyButton('fa-minus', function() {//This decrease the distance with 1 km and calculates a new route
+var shorter = L.easyButton('fa-minus', function() { //This decrease the distance with 1 km and calculates a new route
   length -= 1000
   console.log(length)
   wantWarnings = true;
@@ -304,7 +310,7 @@ var distanceBar = L.easyBar([showLongerShorter, longer, shorter, ]); //This conn
 distanceBar.addTo(mymap);
 showhideDistancebuttons(); //This hides the distance changing buttons as default
 
-var overlayMaps = {//This is the layers, that are hidden, when the map loads, but is possible to enable
+var overlayMaps = { //This is the layers, that are hidden, when the map loads, but is possible to enable
   "Cities": city,
   "Stations": stations,
   "Parks": parks
@@ -342,9 +348,9 @@ function getRoute(lat, lng) {
     $.getJSON(owmFlask, function(data) {
 
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
-       sunset = data.sys.sunset //Here the time for sunset gets defined - this is not used here, but it makes more sense to do here than to call the api twice
+      sunset = data.sys.sunset //Here the time for sunset gets defined - this is not used here, but it makes more sense to do here than to call the api twice
 
-      if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
+      if (reverse == false) { //This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the winds origin
       } else {
@@ -370,7 +376,7 @@ function getRoute(lat, lng) {
       //Here stops the coordinate definition
 
 
-//This following disabled code was for showing the "ideal location" - Only use for testing
+      //This following disabled code was for showing the "ideal location" - Only use for testing
       var winddestination;
       if (winddestination) {
         mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
@@ -383,7 +389,7 @@ function getRoute(lat, lng) {
 
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
-      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {//Here we connect to the server and run the findstation request based on the lat and lng of the "ideal" location
+      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) { //Here we connect to the server and run the findstation request based on the lat and lng of the "ideal" location
 
         //Here we get the lat and lng from the server
         var stationLat = data.geometry.coordinates[1]
@@ -393,16 +399,16 @@ function getRoute(lat, lng) {
         EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
 
 
-if (firstTime == true) {//This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
-        finalArray = [StartLocation,
-          EndLocation
-        ]
-        firstTime = false;
-}
+        if (firstTime == true) { //This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
+          finalArray = [StartLocation,
+            EndLocation
+          ]
+          firstTime = false;
+        }
 
-if (reverse == true) {//This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
-  finalArray = finalArray.reverse()
-};
+        if (reverse == true) { //This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
+          finalArray = finalArray.reverse()
+        };
 
         calculateRoute(finalArray); //Then the route gets calculated
 
@@ -413,11 +419,11 @@ if (reverse == true) {//This swaps the order of the array, if the user has decid
   }
 }
 
-function orderArray(coords, distances) {//This function sorts the parks, that the routing is going through, so the order is based on what is the closest to the start location instead of the order of the clicks
+function orderArray(coords, distances) { //This function sorts the parks, that the routing is going through, so the order is based on what is the closest to the start location instead of the order of the clicks
   var sorted_coords = []
 
-var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
-var distancesLeft = distances.concat();
+  var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
+  var distancesLeft = distances.concat();
 
 
   // keep doing this until the distances array is empty:
@@ -438,7 +444,7 @@ var distancesLeft = distances.concat();
 
 }
 
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {//This function calculates the distance between to points in km. Based on sphere geometry
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) { //This function calculates the distance between to points in km. Based on sphere geometry
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
   var dLon = deg2rad(lon2 - lon1);
@@ -451,11 +457,11 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {//This function calc
   return d;
 }
 
-function deg2rad(deg) {//This changes from degrees to radians
+function deg2rad(deg) { //This changes from degrees to radians
   return deg * (Math.PI / 180)
 }
 
-function calculateRoute(array) {//This is the function, that calculates the routing between the waypoints
+function calculateRoute(array) { //This is the function, that calculates the routing between the waypoints
   $("div.leaflet-routing-container").remove(); //Removes the previous route description before making a new one
 
 
@@ -466,73 +472,75 @@ function calculateRoute(array) {//This is the function, that calculates the rout
 
   route = L.Routing.control({
     waypoints: array,
-    createMarker: function (i, start, n){
-    var marker_icon = null
-    if (i == 0) {
+    createMarker: function(i, start, n) {
+      var marker_icon = null
+      if (i == 0) {
         // This is the first marker, indicating start
         marker_icon = startIcon
-    } else if (i == n -1) {
+      } else if (i == n - 1) {
         //This is the last marker indicating destination
-        marker_icon =destinationIcon
-    } else {marker_icon =middleIcon}
-    var marker = L.marker (start.latLng, {
-                draggable: true,
-                bounceOnAdd: false,
-                bounceOnAddOptions: {
-                    duration: 1000,
-                    height: 800,
-                    function(){
-                        (bindPopup(myPopup).openOn(mymap))
-                    }
-                },
-                icon: marker_icon
-    })
-    return marker
-  },
+        marker_icon = destinationIcon
+      } else {
+        marker_icon = middleIcon
+      }
+      var marker = L.marker(start.latLng, {
+        draggable: true,
+        bounceOnAdd: false,
+        bounceOnAddOptions: {
+          duration: 1000,
+          height: 800,
+          function() {
+            (bindPopup(myPopup).openOn(mymap))
+          }
+        },
+        icon: marker_icon
+      })
+      return marker
+    },
     router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
   }).on('routesfound', function(e) {
     routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
     routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
-      routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
+    routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
 
-if (wantWarnings == true){//This prevents the program from spamming - otherwise the alerts would popup every time one gets new coordinates from the gps. This way it only gives results if one makes changes to the route
+    if (wantWarnings == true) { //This prevents the program from spamming - otherwise the alerts would popup every time one gets new coordinates from the gps. This way it only gives results if one makes changes to the route
       var currentTime = Math.round((new Date()).getTime() / 1000);
       if (currentTime < sunset && sunset < routeTime + currentTime) {
-      //  alert("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
-      console.log("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
+        //  alert("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
+        console.log("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
       }
       var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
       $.getJSON(dsFlask, function(data) {
-          var thisHour = data.hourly.data["0"].time
-          var nextHour = data.hourly.data["1"].time
-          var evenLater = data.hourly.data["2"].time
-          var precipChanceThisHour = data.hourly.data["0"].precipProbability
-          var precipChanceNextHour = data.hourly.data["1"].precipProbability
-          var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
-          var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
+        var thisHour = data.hourly.data["0"].time
+        var nextHour = data.hourly.data["1"].time
+        var evenLater = data.hourly.data["2"].time
+        var precipChanceThisHour = data.hourly.data["0"].precipProbability
+        var precipChanceNextHour = data.hourly.data["1"].precipProbability
+        var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
+        var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
 
 
-          function Unix_timestamp(t) //This function converts
-          {
-          var dt = new Date(t*1000);
+        function Unix_timestamp(t) //This function converts
+        {
+          var dt = new Date(t * 1000);
           var hr = dt.getHours();
 
           return hr;
         }
-//if
-          //Noget med test af - er det det ene eller det andet tidspunkt
-          //Tilføj et or statement
-          if (precipChanceThisHour > 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
-            alert("There are a " + precipChanceThisHour * 100 + "% Chance of precipitation between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipChanceThisHour + " millimeters per hour")
+        //if
+        //Noget med test af - er det det ene eller det andet tidspunkt
+        //Tilføj et or statement
+        if (precipChanceThisHour > 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
+          alert("There are a " + precipChanceThisHour * 100 + "% Chance of precipitation between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipChanceThisHour + " millimeters per hour")
         } //Chance of precipitation between" + klokkeslet 1 (fra apien) +"-" + klokkelset2 (fra apien)
         //if (currentTime == en time && routeTime + currentTime == en anden time) {}
         if (nextHour < routeTime + currentTime && precipChanceNextHour > 0.5) { //first part is checking if the next hour is relevant
           alert("There are a " + precipChanceNextHour * 100 + "% Chance of precipitation between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
-      }
-    })
-    wantWarnings = false; //This disables alerts until the user changes the distance of the trip or adds/removes a park
-  }
-    });
+        }
+      })
+      wantWarnings = false; //This disables alerts until the user changes the distance of the trip or adds/removes a park
+    }
+  });
 
 
 
