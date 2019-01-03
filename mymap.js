@@ -289,7 +289,7 @@ function getRoute(lat, lng) {
     // console.log("Test1: " + owmFlask);
     $.getJSON(owmFlask, function(data) {
 
-      var windangle = 270//data.wind.deg //Here it gets the direction of the wind from the api
+      var windangle = data.wind.deg //Here it gets the direction of the wind from the api
       if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the winds origin
