@@ -83,11 +83,11 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
 var parks = new L.GeoJSON.AJAX("parks.geojson", {
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
     layer.bindPopup("You want to go here?" + '<br/><button onclick="goHere()" >Yes</button>' + '<br/><button onclick="dontGoHere()" >No</button>') //Content of the popup. The popup includes two buttons that triggers the the two functions below
-    layer.on({//This saves the coordinates of the center of the clicked park. These coordinates are used, if one clicks one of the buttons.
+    layer.on({ //This saves the coordinates of the center of the clicked park. These coordinates are used, if one clicks one of the buttons.
       click: function(e) {
         var findBounds = layer.getBounds();
         center = findBounds.getCenter();
-        }
+      }
     })
 
   }
@@ -108,7 +108,7 @@ function alreadyIncluded(search, array) {
 function goHere() {
   if (alreadyIncluded(center, finalArray) > -1) { //If the park already is included, then the program should just close the popup
     mymap.closePopup();
-      } else {
+  } else {
     goThrough.push(center);
     orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, center.lat, center.lng))
     var orderedParks = orderArray(goThrough, orderOfWaypoints);
@@ -261,13 +261,9 @@ function getRoute(lat, lng) {
 
   if (locked == false) { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
 
-    var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
-
-    //var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=55.656553&lon=12.557593&appid=ee67f8f53521d94193aa7d8364b7f5d9'
     var owmFlask = "http://127.0.0.1:5000/openweathermap?lat=" + lat + "&lng=" + lng;
 
     $.getJSON(owmFlask, function(data) {
-
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
       sunset = data.sys.sunset //Here the time for sunset gets defined - this is not used here, but it makes more sense to do here than to call the api twice
 
@@ -277,8 +273,6 @@ function getRoute(lat, lng) {
       } else {
         var angle = windangle
       };
-
-      //  var length = 5000 //Distance traveled in meters
 
       //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
@@ -319,25 +313,25 @@ function getRoute(lat, lng) {
         //the lat and lng are the put together:
         EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
 
-        if (EndLocation.equals(oldDestination)) {
-          if (distanceButtonClicked == "shorter") {
+        if (EndLocation.equals(oldDestination)) { //This makes sure that using the distance buttons return a new station every time, by seeing if the previous EndLocation is the same as the current one.
+          //All of this is only triggered if distance buttons are pressed and the results are the same as before
+          if (distanceButtonClicked == "shorter") { //These if-statements checks which of the distance buttons were pressed and increase or decrease the seach distance before restarting the function
             length -= 1000
 
           }
           if (distanceButtonClicked == "longer") {
             length += 1000
           }
-          oldDestination = EndLocation
 
-          getRoute(StartLocation.lat, StartLocation.lng);
-          return;
+          getRoute(StartLocation.lat, StartLocation.lng); //This restarts the function
+          return; //This ends the function here - otherwise the rest of the function would play out as well (This way it doesnt have to draw the route every time)
         } else {
 
-          if (parksAdded == 0) { //This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
+          if (parksAdded == 0) { //This checks if any parks have been added. If it is not the case, then it defines the waypoints, that ORS should plan the routing after to only being the beginning and the end locations
             finalArray = [StartLocation,
               EndLocation
             ]
-          } else {
+          } else { //This defines the waypoints that the route is going through if parks were selected
 
             var tempArray = []; //In this empty Array we are fitting all the pieces together
             finalArray = tempArray.concat([StartLocation], arrayWithParks, [EndLocation])
@@ -410,7 +404,7 @@ function calculateRoute(array) { //This is the function, that calculates the rou
 
   route = L.Routing.control({
     waypoints: array,
-    createMarker: function(i, start, n) {
+    createMarker: function(i, start, n) { //This defines what the start, middle and end icons should look like
       var marker_icon = null
       if (i == 0) {
         // This is the first marker, indicating start
@@ -422,7 +416,7 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         marker_icon = middleIcon
       }
       var marker = L.marker(start.latLng, {
-        draggable: true,
+        draggable: false,
         bounceOnAdd: false,
         bounceOnAddOptions: {
           duration: 1000,
@@ -441,16 +435,17 @@ function calculateRoute(array) { //This is the function, that calculates the rou
     routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
     routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
 
+//The next lines are weather alerts, that triggered if there are a high risk of rain or the trip ends before sundown
     if (wantWarnings == true) { //This prevents the program from spamming - otherwise the alerts would popup every time one gets new coordinates from the gps. This way it only gives results if one makes changes to the route
-      var content1 = "";
+      var content1 = "";//These are empty, so that the alert doesnt say "undefined" if there are no need for this alert
       var content2 = "";
       var content3 = "";
-      var currentTime = Math.round((new Date()).getTime() / 1000);
-      if (currentTime < sunset && sunset < routeTime + currentTime) {
+      var currentTime = Math.round((new Date()).getTime() / 1000); //This finds the current time in unix time (seconds from jan 1970)
+      if (currentTime < sunset && sunset < routeTime + currentTime) { //The sunset alert triggers if the route starts before sunset and ends after
         content1 = String("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset \n")
-        }
+      }
       var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
-      $.getJSON(dsFlask, function(data) {
+      $.getJSON(dsFlask, function(data) {//This checks the risk and intensity of precipitation for the current hour and the next
         var thisHour = data.hourly.data["0"].time
         var nextHour = data.hourly.data["1"].time
         var evenLater = data.hourly.data["2"].time
@@ -473,12 +468,11 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         }
         if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.5) { //first part is checking if the next hour is relevant
           content3 = String("There are a " + precipChanceNextHour * 100 + "% Chance of precipitation between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
-          }
+        }
 
-        var content =  content1 + content2 + content3
-        console.log(content.length)
-        if (content.length > 0) {
-        alert(content)
+        var content = content1 + content2 + content3 //This connects the three content strings into one alert
+        if (content.length > 0) {//This makes sure that no alert is shown if there is nothing to alert about
+          alert(content)
         }
 
       })

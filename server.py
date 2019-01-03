@@ -27,7 +27,7 @@ def openweathermap():
     lat = request.args.get('lat')
     lng = request.args.get('lng')
 
-    owmKey = "ee67f8f53521d94193aa7d8364b7f5d9"
+    owmKey = "62a05daa14ce3d041c511ba34f91e936"
 
     owmAddress = requests.get('http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=' + owmKey)
 
