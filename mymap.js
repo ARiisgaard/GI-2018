@@ -10,8 +10,9 @@ var reverse = false;
 var finalArray = [];
 var goThrough = [];
 var orderOfWaypoints = [];
-var numberofwaypoints = 2;
+var firstTime = true;
 var showPlusMinus = false;
+var center;
 
 
 var osm = L.tileLayer( //Defining what map to use in the background
@@ -78,20 +79,73 @@ var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations
   pointToLayer: function(geoJsonPoint, latlng) { return L.marker(latlng, {icon: trainIcon})} //Adds the icon to the stations
 })
 
-var parks = new L.GeoJSON.AJAX("parks.geojson", { //creating the "stations" layer
+var parks = new L.GeoJSON.AJAX("parks.geojson", {
+  onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
+    layer.bindPopup("You want to go here?" + '<br/><button onclick="goHere()" >Yes</button>' + '<br/><button onclick="dontGoHere()" >No</button>') //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
+    layer.on({
+      click: function(e) {
+        var findBounds = layer.getBounds();
+        console.log(findBounds)
+        center = findBounds.getCenter();
+        console.log(center)
+      }
+    })
 
-//fix stuff here
+  }
+});
 
-  // onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
-  // //  layer.bindPopup("<h2>Park:</h2>" + "You want to go here?" + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
-  // // console.log(park1)
-  // layer.on({
-  //     click: function(e){
-  //
-  //
-  //     }
-  // }
-  });
+function alreadyIncluded(search){
+  var result = -1 //By default the answer is no
+for (var i = 0; i < finalArray.length; i++) {
+  // compare coordinates using Leaflet's equals function:
+  if(finalArray[i].equals(search)){//checks every point and sees if it is equal the currently clicked park
+    result = i;
+}
+}
+
+return result;
+}
+
+function goHere() {
+  if (alreadyIncluded(center) > -1) {//If the park already is included, then the program should just close the popup
+    mymap.closePopup();
+    console.log("alreadyIncluded(center)a: " + alreadyIncluded(center))
+  } else {
+    console.log("alreadyIncluded(center)b: " + alreadyIncluded(center))
+    goThrough.push(center);
+    orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, center.lat, center.lng))
+    console.log("orderOfWaypoints: " + orderOfWaypoints)
+    console.log("click: " + goThrough)
+    var orderedParks = orderArray(goThrough, orderOfWaypoints);
+    var parksNoUndefined = orderedParks.filter(function(el) { //There were some issue with center sometimes returning both the coordinates and undefined - this gets rid of the additional undefined
+      return el != null;
+    })
+    console.log("orderedParks: " + orderedParks)
+        console.log("parksNoUndefined: " + parksNoUndefined)
+    var tempArray = []; //In this empty Array we are fitting all the pieces together
+    finalArray = tempArray.concat([StartLocation], parksNoUndefined, [EndLocation])
+    mymap.closePopup();
+    getRoute(StartLocation.lat, StartLocation.lng);
+  }
+}
+
+function dontGoHere() {
+  var index = alreadyIncluded(center);
+  console.log("center: " + center)
+
+  console.log("index: " + index)
+  if (index > -1) {
+    finalArray.splice(index, 1);
+  }
+  var index2 = goThrough.indexOf(String(center))
+  console.log("index2: " + index2)
+  if (index > -1) {
+    goThrough.splice(index, 1);
+  }
+  console.log("finalArray: " + finalArray)
+  mymap.closePopup();
+  getRoute(StartLocation.lat, StartLocation.lng);
+}
 
 var mymap = L.map('map', {//Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
   center: [55.676111, 12.568333],
@@ -99,31 +153,31 @@ var mymap = L.map('map', {//Defines the center of the map and the default zoom-l
   layers: [osm]
 });
 
-// Create an element to hold all your text and markup
-var container = $('<div />');
-// Delegate all event handling for the container itself and its contents to the container
-container.on('click', '.smallPolygonLink', function(e) {
-  console.log("e: " + JSON.stringify(e))
-  // coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
-  numberofwaypoints += 1
-  console.log(numberofwaypoints)
-  getRoute(StartLocation.lat, StartLocation.lng);
-});
-// Insert whatever you want into the container, using whichever approach you prefer
-container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</a>.");
-container.append($('<span class="bold">').text())
-// Insert the container into the popup
-parks.bindPopup(container[0]).on('click', function(e) {
-  parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
-  goThrough.push(parkLocation);
-  orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
-  console.log("orderOfWaypoints: " + orderOfWaypoints)
-  console.log("click: " + goThrough)
-  var orderedParks =  orderArray(goThrough, orderOfWaypoints);
-  console.log("orderedParks: " + orderedParks)
-  var tempArray = []; //In this empty Array we are fitting all the pieces together
-  finalArray = tempArray.concat([StartLocation],orderedParks,[EndLocation])
-});
+// // Create an element to hold all your text and markup
+// var container = $('<div />');
+// // Delegate all event handling for the container itself and its contents to the container
+// container.on('click', '.smallPolygonLink', function(e) {
+//   console.log("e: " + JSON.stringify(e))
+//   // coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
+//   numberofwaypoints += 1
+//   console.log(numberofwaypoints)
+//   getRoute(StartLocation.lat, StartLocation.lng);
+// });
+// // Insert whatever you want into the container, using whichever approach you prefer
+// container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</a>.");
+// container.append($('<span class="bold">').text())
+// // Insert the container into the popup
+// parks.bindPopup(container[0]).on('click', function(e) {
+//   parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
+//   goThrough.push(parkLocation);
+//   orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
+//   console.log("orderOfWaypoints: " + orderOfWaypoints)
+//   console.log("click: " + goThrough)
+//   var orderedParks =  orderArray(goThrough, orderOfWaypoints);
+//   console.log("orderedParks: " + orderedParks)
+//   var tempArray = []; //In this empty Array we are fitting all the pieces together
+//   finalArray = tempArray.concat([StartLocation],orderedParks,[EndLocation])
+// });
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -339,10 +393,11 @@ function getRoute(lat, lng) {
         EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
 
 
-if (numberofwaypoints == 2) {//This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
+if (firstTime == true) {//This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
         finalArray = [StartLocation,
           EndLocation
         ]
+        firstTime = false;
 }
 
 if (reverse == true) {//This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
