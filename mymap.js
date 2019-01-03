@@ -212,7 +212,7 @@ console.log(dsFlask)
 //https://api.darksky.net/forecast/[key]/[latitude],[longitude]
 //https://api.darksky.net/forecast/b843700cbe82111c47584343a224adcf/37.8267,-122.4233
 
-function showhideDistancebuttons() {//This shows or hides the increase/decrease distance buttons 
+function showhideDistancebuttons() {//This shows or hides the increase/decrease distance buttons
 if (showPlusMinus == false) {
   longer.disable()
   shorter.disable()
@@ -233,6 +233,7 @@ var showLongerShorter = L.easyButton('fa-ruler', function() {//This is the butto
 var longer = L.easyButton('fa-plus', function() {//This increases the distance with 1 km and calculates a new route
       var oldDistance = routeDistance
       length += 1000
+      console.log(length)
       getRoute(StartLocation.lat, StartLocation.lng);
       // if (oldDistance == routeDistance) {
       //   length += 1000
@@ -242,6 +243,7 @@ var longer = L.easyButton('fa-plus', function() {//This increases the distance w
 
 var shorter = L.easyButton('fa-minus', function() {//This decrease the distance with 1 km and calculates a new route
   length -= 1000
+  console.log(length)
   getRoute(StartLocation.lat, StartLocation.lng);
 });
 
@@ -287,7 +289,7 @@ function getRoute(lat, lng) {
     // console.log("Test1: " + owmFlask);
     $.getJSON(owmFlask, function(data) {
 
-      var windangle = data.wind.deg //Here it gets the direction of the wind from the api
+      var windangle = 270//data.wind.deg //Here it gets the direction of the wind from the api
       if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the winds origin
@@ -315,15 +317,15 @@ function getRoute(lat, lng) {
 
 
 //This following disabled code was for showing the "ideal location" - Only use for testing
-      // var winddestination;
-      // if (winddestination) {
-      //   mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
-      //   console.log("Wind remove")
-      // }
-      //
-      // var winddestination = L.marker([EndLat, EndLng], {
-      //   icon: myIcon
-      // }).addTo(mymap);
+      var winddestination;
+      if (winddestination) {
+        mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
+        console.log("Wind remove")
+      }
+
+      var winddestination = L.marker([EndLat, EndLng], {
+        icon: myIcon
+      }).addTo(mymap);
 
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
