@@ -8,14 +8,17 @@ var route;
 var length = 5000; //This is the default distance of the trip
 var reverse = false;
 var finalArray = [];
+var arrayWithParks = [];
 var goThrough = [];
 var orderOfWaypoints = [];
-var firstTime = true;
+var parksAdded = 0;
 var showPlusMinus = false;
 var center;
 var sunset;
 var wantWarnings = true;
-
+var oldDestination;
+var distanceButtonClicked;
+var testRun = 0;
 
 var osm = L.tileLayer( //Defining what map to use in the background
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -123,15 +126,13 @@ function goHere() {
     console.log("orderOfWaypoints: " + orderOfWaypoints)
     console.log("click: " + goThrough)
     var orderedParks = orderArray(goThrough, orderOfWaypoints);
-    var parksNoUndefined = orderedParks.filter(function(el) { //There were some issue with center sometimes returning both the coordinates and undefined - this gets rid of the additional undefined
+    arrayWithParks = orderedParks.filter(function(el) { //There were some issue with center sometimes returning both the coordinates and undefined - this gets rid of the additional undefined
       return el != null;
     })
-    console.log("orderedParks: " + orderedParks)
-    console.log("parksNoUndefined: " + parksNoUndefined)
-    var tempArray = []; //In this empty Array we are fitting all the pieces together
-    finalArray = tempArray.concat([StartLocation], parksNoUndefined, [EndLocation])
+
     mymap.closePopup();
     wantWarnings = true;
+    parksAdded += 1;
     getRoute(StartLocation.lat, StartLocation.lng);
   }
 }
@@ -148,6 +149,7 @@ function dontGoHere() {
   }
   mymap.closePopup();
   wantWarnings = true;
+  parksAdded -= 1;
   getRoute(StartLocation.lat, StartLocation.lng);
 }
 
@@ -156,32 +158,6 @@ var mymap = L.map('map', { //Defines the center of the map and the default zoom-
   zoom: 10,
   layers: [osm]
 });
-
-// // Create an element to hold all your text and markup
-// var container = $('<div />');
-// // Delegate all event handling for the container itself and its contents to the container
-// container.on('click', '.smallPolygonLink', function(e) {
-//   console.log("e: " + JSON.stringify(e))
-//   // coords2 = L.latLng([e.latlng.lat, e.latlng.lng])
-//   numberofwaypoints += 1
-//   console.log(numberofwaypoints)
-//   getRoute(StartLocation.lat, StartLocation.lng);
-// });
-// // Insert whatever you want into the container, using whichever approach you prefer
-// container.html("You want to go here?: <a href='#' class='smallPolygonLink'>Yes</a>.");
-// container.append($('<span class="bold">').text())
-// // Insert the container into the popup
-// parks.bindPopup(container[0]).on('click', function(e) {
-//   parkLocation = L.latLng([e.latlng.lat, e.latlng.lng])
-//   goThrough.push(parkLocation);
-//   orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, e.latlng.lat, e.latlng.lng))
-//   console.log("orderOfWaypoints: " + orderOfWaypoints)
-//   console.log("click: " + goThrough)
-//   var orderedParks =  orderArray(goThrough, orderOfWaypoints);
-//   console.log("orderedParks: " + orderedParks)
-//   var tempArray = []; //In this empty Array we are fitting all the pieces together
-//   finalArray = tempArray.concat([StartLocation],orderedParks,[EndLocation])
-// });
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -295,6 +271,8 @@ var longer = L.easyButton('fa-plus', function() { //This increases the distance 
   length += 1000
   console.log(length)
   wantWarnings = true;
+  oldDestination = EndLocation;
+  distanceButtonClicked = "longer"
   getRoute(StartLocation.lat, StartLocation.lng);
 });
 
@@ -302,6 +280,8 @@ var shorter = L.easyButton('fa-minus', function() { //This decrease the distance
   length -= 1000
   console.log(length)
   wantWarnings = true;
+  oldDestination = EndLocation;
+  distanceButtonClicked = "shorter"
   getRoute(StartLocation.lat, StartLocation.lng);
 });
 
@@ -397,21 +377,40 @@ function getRoute(lat, lng) {
 
         //the lat and lng are the put together:
         EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
+        console.log("testRun: " + testRun + " EndLocation: " + EndLocation)
+
+        if (EndLocation.equals(oldDestination)) {
+          console.log("EndLocation.equals(oldDestination): " + EndLocation.equals(oldDestination))
+          if (distanceButtonClicked == "shorter") {
+            length -= 1000
+            console.log("shorter")
+            testRun += 1
+          }
+          if (distanceButtonClicked == "longer") {
+            length += 1000
+          }
+          oldDestination = EndLocation
+          console.log("oldDestination: " + oldDestination + " EndLocation: " + EndLocation)
+          getRoute(StartLocation.lat, StartLocation.lng);
+          return;
+        } else {
+
+          if (parksAdded == 0) { //This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
+            finalArray = [StartLocation,
+              EndLocation
+            ]
+          } else {
+            var tempArray = []; //In this empty Array we are fitting all the pieces together
+            finalArray = tempArray.concat([StartLocation], arrayWithParks, [EndLocation])
+          }
 
 
-        if (firstTime == true) { //This checks if any parks have been added. If it is not the case, then it defines the waypoint, that ORS should plan the routing after to only being the beginning and the end locations
-          finalArray = [StartLocation,
-            EndLocation
-          ]
-          firstTime = false;
+          if (reverse == true) { //This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
+            finalArray = finalArray.reverse()
+          };
+
+          calculateRoute(finalArray); //Then the route gets calculated
         }
-
-        if (reverse == true) { //This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
-          finalArray = finalArray.reverse()
-        };
-
-        calculateRoute(finalArray); //Then the route gets calculated
-
       });
     });
   } else { //If the user has decided to lock the destination this following code will run instead of the looking for a destination
@@ -506,8 +505,8 @@ function calculateRoute(array) { //This is the function, that calculates the rou
     if (wantWarnings == true) { //This prevents the program from spamming - otherwise the alerts would popup every time one gets new coordinates from the gps. This way it only gives results if one makes changes to the route
       var currentTime = Math.round((new Date()).getTime() / 1000);
       if (currentTime < sunset && sunset < routeTime + currentTime) {
-        //  alert("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
-        console.log("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
+        alert("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
+        // console.log("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
       }
       var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
       $.getJSON(dsFlask, function(data) {
