@@ -6,6 +6,65 @@ html, body{
   font-family: Helvetica, sans-serif;
 }
 
+
+#image {
+  display:none;
+}
+
+#arrow {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 1;
+}
+
+#box {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 5;
+  border: 1px;
+}
+
+#div1 {
+  display: none;
+  width: 280px;
+  height: 70px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 5;
+  border: 1px;
+  border-radius: 5px;
+  background: #73AD21;
+  padding: 20px;
+}
+
+#div4 {
+  display: none;
+  width: 280px;
+  height: 70px;
+  position:absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index:5;
+  border: 1px;
+  background: white;
+  border-radius: 5px;
+  background: #73AD21;
+  padding: 20px;
+}
+
+#cloud {
+position:absolute;
+bottom: 0px;
+right: 101px;
+z-index: 4;
+width:100px;
+height:100px;
+}
 myCanvas {
     border:0px;
     z-index: 1;
@@ -13,6 +72,8 @@ myCanvas {
     right: 50px;
     color: red;
     position: relative;
+    height: 100px;
+    width: 100px;
 }
 
 #map{

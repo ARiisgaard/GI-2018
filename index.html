@@ -61,33 +61,21 @@
 
   <script src="mymap.js"></script>
 
-  <img id="image" src="Images\left-arrow.png" style="display:none;"> </img>
+  <img id="image" src="Images\left-arrow.png" > </img>
   <!-- <canvas id="myCanvas" width="100" height="100"> </canvas> -->
 
-  <div id='arrow' style="position:absolute; bottom:0px; right:0px; z-index:1">
-    <canvas id='myCanvas' width='100' height='100'>
-    </canvas>
-    <div style="width: 100px;
-         height: 100px;
-         position:absolute; bottom: 0px; right: 0px; z-index:5; border: 1px black;" onmouseover="document.getElementById('div1').style.display = 'block';">
-      <div id="div1" style="display: none; width: 280px; height: 70px;
-            position:absolute; bottom: 0px; right: 0px; z-index:5; border: 1px;background: white;
-             border-radius: 5px;
-  background: #73AD21;padding: 20px;
-  " onmouseout="document.getElementById('div1').style.display = 'none';">
-        Wind speed
-        <span <p id="div2"> </span> m/s <br> The wind direction is: <span id="div3"> </span> degrees </p>
+  <div id='arrow'>
+    <canvas id='myCanvas'> </canvas>
+    <div id= 'box' onmouseover="document.getElementById('div1').style.display = 'block';">
+      <div id='div1' onmouseout="document.getElementById('div1').style.display = 'none';">
+        <ul>
+        <li> Wind speed: <span id = 'div2'> m/s </li>
+        <li> The wind direction is: <span id= 'div3'>  </li>
+        </ul>
       </div>
     </div>
-  <img id = 'cloud' src="Images\cloud.png"
-   style= "position:absolute; bottom: 0px; right: 101px; z-index: 4; width:100px;height:100px;" onmouseover= "document.getElementById('div4').style.display = 'block';">
-</img>
-   <div id="div4" style="display: none; width: 280px; height: 70px;
-         position:absolute; bottom: 0px; right: 0px; z-index:5; border: 1px;background: white;
-          border-radius: 5px;
-background: #73AD21;padding: 20px;
-" onmouseout="document.getElementById('div4').style.display = 'none';">
-</div>
+  <img id = 'cloud' src="Images\cloud.png" onmouseover= "document.getElementById('div4').style.display = 'block';"></img>
+   <div id="div4"onmouseout="document.getElementById('div4').style.display = 'none';"></div>
 </div>
 </body>
 
