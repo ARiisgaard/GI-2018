@@ -42,6 +42,34 @@ var trainIcon = L.icon({//Defines the icon used for the train stations
   popupAnchor: [-3, -76]
   });
 
+  var startIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+    iconUrl: 'Images/maps-and-flags.png', //Credits:  Flaticon/Freepik
+    iconSize: [30, 30],
+    iconAnchor: [15, 20],
+    popupAnchor: [-3, -76]
+  });
+
+  var middleIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+    iconUrl: 'Images/park.png', //Credits:  Flaticon/Freepik
+    iconSize: [30, 30],
+    iconAnchor: [15, 20],
+    popupAnchor: [-3, -76]
+  });
+
+  var destinationIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+    iconUrl: 'Images/racing-flag.png', //Credits:  Flaticon/Freepik
+    iconSize: [30, 30],
+    iconAnchor: [15, 20],
+    popupAnchor: [-3, -76]
+  });
+
+
+// function iconAB (i, start, n){
+//
+//
+//
+// }
+
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
     layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
@@ -344,6 +372,29 @@ function calculateRoute(array) {//This is the function, that calculates the rout
 
   route = L.Routing.control({
     waypoints: array,
+    createMarker: function (i, start, n){
+    var marker_icon = null
+    if (i == 0) {
+        // This is the first marker, indicating start
+        marker_icon = startIcon
+    } else if (i == n -1) {
+        //This is the last marker indicating destination
+        marker_icon =destinationIcon
+    } else {marker_icon =middleIcon}
+    var marker = L.marker (start.latLng, {
+                draggable: true,
+                bounceOnAdd: false,
+                bounceOnAddOptions: {
+                    duration: 1000,
+                    height: 800,
+                    function(){
+                        (bindPopup(myPopup).openOn(mymap))
+                    }
+                },
+                icon: marker_icon
+    })
+    return marker
+  },
     router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
   })
   route.addTo(mymap);
