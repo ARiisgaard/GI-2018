@@ -53,19 +53,34 @@ var parks = new L.GeoJSON.AJAX("parks.geojson", {
   }
 });
 
+
+function alreadyIncluded(search){
+  var result = -1 //By default the answer is no
+for (var i = 0; i < finalArray.length; i++) {
+  // compare coordinates using Leaflet's equals function:
+  if(finalArray[i].equals(search)){//checks every point and sees if it is equal the currently clicked park
+    result = i;
+}
+}
+
+return result;
+}
+
 function goHere() {
-  if (finalArray.includes(center) == true) {
+  if (alreadyIncluded(center) > -1) {//If the park already is included, then the program should just close the popup
     mymap.closePopup();
-    console.log("test")
+    console.log("alreadyIncluded(center)a: " + alreadyIncluded(center))
   } else {
+    console.log("alreadyIncluded(center)b: " + alreadyIncluded(center))
     goThrough.push(center);
     orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, center.lat, center.lng))
     console.log("orderOfWaypoints: " + orderOfWaypoints)
     console.log("click: " + goThrough)
     var orderedParks = orderArray(goThrough, orderOfWaypoints);
     var parksNoUndefined = orderedParks.filter(function(el) { //There were some issue with center sometimes returning both the coordinates and undefined - this gets rid of the additional undefined
+      alert("I'm am filtering!!!")
       return el != null;
-    })
+    }) //Dobbelt check om parksNoUndefined stadig er nødvendig
     console.log("orderedParks: " + orderedParks)
     var tempArray = []; //In this empty Array we are fitting all the pieces together
     finalArray = tempArray.concat([StartLocation], parksNoUndefined, [EndLocation])
@@ -75,7 +90,7 @@ function goHere() {
 }
 
 function dontGoHere() {
-  var index = finalArray.indexOf(center);
+  var index = alreadyIncluded(center);
   console.log("center: " + center)
 
   console.log("index: " + index)
