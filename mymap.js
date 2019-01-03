@@ -13,6 +13,8 @@ var orderOfWaypoints = [];
 var firstTime = true;
 var showPlusMinus = false;
 var center;
+var sunset;
+var wantWarnings = true;
 
 
 var osm = L.tileLayer( //Defining what map to use in the background
@@ -125,27 +127,24 @@ function goHere() {
     var tempArray = []; //In this empty Array we are fitting all the pieces together
     finalArray = tempArray.concat([StartLocation], parksNoUndefined, [EndLocation])
     mymap.closePopup();
+    wantWarnings = true;
     getRoute(StartLocation.lat, StartLocation.lng);
   }
 }
 
 function dontGoHere() {
   var index = alreadyIncluded(center);
-  console.log("center: " + center)
-
-  console.log("index: " + index)
   if (index > -1) {
     finalArray.splice(index, 1);
   }
   var index2 = goThrough.indexOf(String(center))
-  console.log("index2: " + index2)
   if (index > -1) {
     goThrough.splice(index, 1);
   }
-  console.log("finalArray: " + finalArray)
   mymap.closePopup();
+  wantWarnings = true;
   getRoute(StartLocation.lat, StartLocation.lng);
-}
+  }
 
 var mymap = L.map('map', {//Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
   center: [55.676111, 12.568333],
@@ -288,16 +287,14 @@ var longer = L.easyButton('fa-plus', function() {//This increases the distance w
       var oldDistance = routeDistance
       length += 1000
       console.log(length)
+      wantWarnings = true;
       getRoute(StartLocation.lat, StartLocation.lng);
-      // if (oldDistance == routeDistance) {
-      //   length += 1000
-      //   getRoute(StartLocation.lat, StartLocation.lng);
-      // }
 });
 
 var shorter = L.easyButton('fa-minus', function() {//This decrease the distance with 1 km and calculates a new route
   length -= 1000
   console.log(length)
+  wantWarnings = true;
   getRoute(StartLocation.lat, StartLocation.lng);
 });
 
@@ -344,6 +341,8 @@ function getRoute(lat, lng) {
     $.getJSON(owmFlask, function(data) {
 
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
+       sunset = data.sys.sunset //Here the time for sunset gets defined - this is not used here, but it makes more sense to do here than to call the api twice
+
       if (reverse == false) {//This checks if the reverse botton has been clicked - if it is the case, then it will look for a station in the opposite direction and then further down in the code swap the start and end location
 
         var angle = windangle + 180 //The direction that the bicylclist is going to travel the opposite way of the winds origin
@@ -491,8 +490,47 @@ function calculateRoute(array) {//This is the function, that calculates the rout
   },
     router: new L.Routing.openrouteservice('5b3ce3597851110001cf6248cc3ff0efc5c54f8591b049453e9138cf') //This line is telling the program that it should use ORS to calculate the route. The string is our personal api_key
   }).on('routesfound', function(e) {
+    routeCoordinates = e.routes[0].coordinates //Saves the coordinates for Later
     routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
       routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
+
+if (wantWarnings == true){//This prevents the program from spamming - otherwise the alerts would popup every time one gets new coordinates from the gps. This way it only gives results if one makes changes to the route
+      var currentTime = Math.round((new Date()).getTime() / 1000);
+      if (currentTime < sunset && sunset < routeTime + currentTime) {
+      //  alert("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
+      console.log("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset")
+      }
+      var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
+      $.getJSON(dsFlask, function(data) {
+          var thisHour = data.hourly.data["0"].time
+          var nextHour = data.hourly.data["1"].time
+          var evenLater = data.hourly.data["2"].time
+          var precipChanceThisHour = data.hourly.data["0"].precipProbability
+          var precipChanceNextHour = data.hourly.data["1"].precipProbability
+          var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
+          var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
+
+
+          function Unix_timestamp(t) //This function converts
+          {
+          var dt = new Date(t*1000);
+          var hr = dt.getHours();
+
+          return hr;
+        }
+//if
+          //Noget med test af - er det det ene eller det andet tidspunkt
+          //Tilføj et or statement
+          if (precipChanceThisHour > 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
+            alert("There are a " + precipChanceThisHour * 100 + "% Chance of precipitation between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipChanceThisHour + " millimeters per hour")
+        } //Chance of precipitation between" + klokkeslet 1 (fra apien) +"-" + klokkelset2 (fra apien)
+        //if (currentTime == en time && routeTime + currentTime == en anden time) {}
+        if (nextHour < routeTime + currentTime && precipChanceNextHour > 0.5) { //first part is checking if the next hour is relevant
+          alert("There are a " + precipChanceNextHour * 100 + "% Chance of precipitation between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+      }
+    })
+    wantWarnings = false;
+  }
     });
 
 
