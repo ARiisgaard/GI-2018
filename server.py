@@ -18,7 +18,7 @@ CORS(app)
 def hello():
     return "Hello World!"
 
-@app.route("/openweathermap")
+@app.route("/openweathermap") #This makes a request at openweathermap for weather information at the given coordinates
 def openweathermap():
 
     lat = request.args.get('lat')
@@ -33,7 +33,7 @@ def openweathermap():
 
     return Response(owmAddress, content_type='application/json; charset=UTF-8')
 
-@app.route("/darksky")
+@app.route("/darksky") #This makes a request at darksky for weather information at the given coordinates
 def darksky():
 
     lat = request.args.get('lat')
