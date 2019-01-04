@@ -23,10 +23,6 @@ html, body{
 #map .easy-button-button.disabled {
   height: 0;}
 
-/* Titel */
-h2{
-  float: left
-}
 /* This is the defining the visuals for the popup in case of no location data */
 #hidden{
   float: left;

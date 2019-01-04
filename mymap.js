@@ -121,7 +121,7 @@ function goHere() {
     mymap.closePopup();
     wantWarnings = true; //Since this would increase the duration of the trip the should again check if there are any warnings to give in regards to rain/sundown
     parksAdded += 1;
-    getRoute(StartLocation.lat, StartLocation.lng);
+    findIdealLocation(StartLocation.lat, StartLocation.lng);
   }
 }
 
@@ -136,7 +136,7 @@ function dontGoHere() {
   }
   mymap.closePopup();
   parksAdded -= 1;
-  getRoute(StartLocation.lat, StartLocation.lng);
+  findIdealLocation(StartLocation.lat, StartLocation.lng);
 }
 
 var mymap = L.map('map', { //Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
@@ -173,7 +173,7 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
     title: 'Train first',
     onClick: function(control) {
       reverse = true;
-      getRoute(StartLocation.lat, StartLocation.lng);
+      findIdealLocation(StartLocation.lat, StartLocation.lng);
       control.state('OtherWay');
     }
   }, {
@@ -181,7 +181,7 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
     stateName: 'OtherWay',
     onClick: function(control) {
       reverse = false;
-      getRoute(StartLocation.lat, StartLocation.lng);
+      findIdealLocation(StartLocation.lat, StartLocation.lng);
       control.state('OneWay');
     },
     title: 'Bike first'
@@ -215,7 +215,7 @@ var longer = L.easyButton('fa-plus', function() { //This increases the distance 
   wantWarnings = true;
   oldDestination = EndLocation;
   distanceButtonClicked = "longer"
-  getRoute(StartLocation.lat, StartLocation.lng);
+  findIdealLocation(StartLocation.lat, StartLocation.lng);
 });
 
 var shorter = L.easyButton('fa-minus', function() { //This decrease the distance with 1 km and calculates a new route
@@ -223,7 +223,7 @@ var shorter = L.easyButton('fa-minus', function() { //This decrease the distance
   wantWarnings = true;
   oldDestination = EndLocation;
   distanceButtonClicked = "shorter"
-  getRoute(StartLocation.lat, StartLocation.lng);
+  findIdealLocation(StartLocation.lat, StartLocation.lng);
 });
 
 var distanceBar = L.easyBar([showLongerShorter, longer, shorter, ]); //This connects the buttons for manipuplating the distance of the route. Without this the hidden buttons look messy
@@ -249,13 +249,13 @@ mymap.locate({ //This is the code for finding the users location
   setView: false, //Zooms to the location of the user - disabled since there are going to be zoomed on the map instead
   watch: true //Makes the program keep track of the user location. So this code wont just run once, but will keep running every now and then
 }).on('locationfound', function(e) {
-  getRoute(e.latitude, e.longitude);
+  findIdealLocation(e.latitude, e.longitude);
 }).on('locationerror', function(e) { //If the gps is unaccessable it will calculate a route from the university and give an error message
-  getRoute(55.6504670, 12.5429260);
+  findIdealLocation(55.6504670, 12.5429260);
   $("span#hidden").show(500);
 });
 
-function getRoute(lat, lng) {
+function findIdealLocation(lat, lng) {
 
   StartLocation = L.latLng([lat, lng]); //The start of the journey
 
@@ -324,7 +324,7 @@ function getRoute(lat, lng) {
             length += 1000
           }
 
-          getRoute(StartLocation.lat, StartLocation.lng); //This restarts the function
+          findIdealLocation(StartLocation.lat, StartLocation.lng); //This restarts the function
           return; //This ends the function here - otherwise the rest of the function would play out as well (This way it doesnt have to draw the route every time)
         } else {
 
