@@ -18,6 +18,7 @@ var sunset;
 var wantWarnings = true;
 var oldDestination;
 var distanceButtonClicked;
+var tempDS;
 
 var osm = L.tileLayer( //Defining what map to use in the background
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -31,7 +32,7 @@ var city = L.OWM.current({
   appId: 'ee67f8f53521d94193aa7d8364b7f5d9',
   intervall: 15, //updates every 15 minuttes
   lang: 'en',
-  showWindDirection: 'deg'
+  showWindDirection: 'both'
 });
 
 var myIcon = L.icon({ //defines the icon for the wind location -
@@ -453,7 +454,9 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         var precipChanceNextHour = data.hourly.data["1"].precipProbability
         var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
         var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
-
+        var tempThisHour = (data.hourly.data["0"].temperature - 32)*5/9 //This finds the temperature converted from fahrenheit to celcius
+        var tempNextHour = (data.hourly.data["1"].temperature - 32)*5/9
+        console.log(tempThisHour)
 
         function Unix_timestamp(t) //This function converts unix to hours
         {
@@ -464,10 +467,14 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         }
 
         if (precipChanceThisHour >= 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
-          content2 = String("There are a " + precipChanceThisHour * 100 + "% Chance of precipitation between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
+          var precipTypeThisHour = "rain"
+          if (tempThisHour < 0) {precipTypeThisHour = "snow"}
+          content2 = String("There are a " + precipChanceThisHour * 100 + "% Chance of " + precipTypeThisHour +" between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
         }
         if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.5) { //first part is checking if the next hour is relevant
-          content3 = String("There are a " + precipChanceNextHour * 100 + "% Chance of precipitation between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+          var precipTypeNextHour = "rain"
+          if (tempNextHour < 0) {precipTypeNextHour = "snow"}
+          content3 = String("There are a " + precipChanceNextHour * 100 + "% Chance of " + precipTypeNextHour +" between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
         }
 
         var content = content1 + content2 + content3 //This connects the three content strings into one alert

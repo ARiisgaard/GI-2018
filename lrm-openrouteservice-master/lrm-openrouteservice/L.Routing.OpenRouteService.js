@@ -163,7 +163,7 @@
 				instructions: true,
 				instructions_format: 'text',
 				geometry_format: 'geojson',
-				preference: 'recommended',
+				preference: 'shortest',
 				units: 'm',
 				profile: 'cycling-regular',
 				api_key: this._apiKey
