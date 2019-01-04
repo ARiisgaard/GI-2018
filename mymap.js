@@ -15,10 +15,9 @@ var parksAdded = 0;
 var showPlusMinus = false;
 var center;
 var sunset;
-var wantWarnings = true;
+var wantWarnings = true; //This makes warnings if there are a risk of rain/sundown during the trip.
 var oldDestination;
 var distanceButtonClicked;
-var tempDS;
 
 var osm = L.tileLayer( //Defining what map to use in the background
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -94,6 +93,7 @@ var parks = new L.GeoJSON.AJAX("parks.geojson", {
   }
 });
 
+// This function checks if a clicked park already has been clicked
 function alreadyIncluded(search, array) {
   var result = -1 //By default the answer is no
   for (var i = 0; i < array.length; i++) {
@@ -118,7 +118,7 @@ function goHere() {
     })
 
     mymap.closePopup();
-    wantWarnings = true;
+    wantWarnings = true; //Since this would increase the duration of the trip the should again check if there are any warnings to give in regards to rain/sundown
     parksAdded += 1;
     getRoute(StartLocation.lat, StartLocation.lng);
   }
@@ -134,7 +134,6 @@ function dontGoHere() {
     goThrough.splice(index2, 1); //Removes the park from the list of parks,
   }
   mymap.closePopup();
-  wantWarnings = true;
   parksAdded -= 1;
   getRoute(StartLocation.lat, StartLocation.lng);
 }
@@ -467,14 +466,14 @@ function calculateRoute(array) { //This is the function, that calculates the rou
 
         if (precipChanceThisHour >= 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
           var precipTypeThisHour = "rain"
-          if (tempThisHour < 0) {
+          if (tempThisHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeThisHour = "snow"
           }
           content2 = String("There are a " + precipChanceThisHour * 100 + "% Chance of " + precipTypeThisHour + " between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
         }
         if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.5) { //first part is checking if the next hour is relevant
           var precipTypeNextHour = "rain"
-          if (tempNextHour < 0) {
+          if (tempNextHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeNextHour = "snow"
           }
           content3 = String("There are a " + precipChanceNextHour * 100 + "% Chance of " + precipTypeNextHour + " between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
