@@ -31,7 +31,8 @@ var weatherinfobox = L.OWM.current({
   appId: 'ee67f8f53521d94193aa7d8364b7f5d9',
   intervall: 15, //updates every 15 minuttes
   lang: 'en',
-  showWindDirection: 'both'
+  showWindDirection: 'both',
+  showWindSpeed: 'speed'
 });
 
 var myIcon = L.icon({ //defines the icon for the wind location -
