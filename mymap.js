@@ -436,9 +436,9 @@ function calculateRoute(array) { //This is the function, that calculates the rou
     routeTime = e.routes[0].summary.totalTime //Saves the total time of the trip
     routeDistance = e.routes[0].summary.totalDistance //Saves the total distance
 
-//The next lines are weather alerts, that triggered if there are a high risk of rain or the trip ends before sundown
+    //The next lines are weather alerts, that triggered if there are a high risk of rain or the trip ends before sundown
     if (wantWarnings == true) { //This prevents the program from spamming - otherwise the alerts would popup every time one gets new coordinates from the gps. This way it only gives results if one makes changes to the route
-      var content1 = "";//These are empty, so that the alert doesnt say "undefined" if there are no need for this alert
+      var content1 = ""; //These are empty, so that the alert doesnt say "undefined" if there are no need for this alert
       var content2 = "";
       var content3 = "";
       var currentTime = Math.round((new Date()).getTime() / 1000); //This finds the current time in unix time (seconds from jan 1970)
@@ -446,7 +446,7 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         content1 = String("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset \n")
       }
       var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
-      $.getJSON(dsFlask, function(data) {//This checks the risk and intensity of precipitation for the current hour and the next
+      $.getJSON(dsFlask, function(data) { //This checks the risk and intensity of precipitation for the current hour and the next
         var thisHour = data.hourly.data["0"].time
         var nextHour = data.hourly.data["1"].time
         var evenLater = data.hourly.data["2"].time
@@ -454,9 +454,8 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         var precipChanceNextHour = data.hourly.data["1"].precipProbability
         var precipIntensityThisHour = data.hourly.data["0"].precipIntensity
         var precipIntensityNextHour = data.hourly.data["1"].precipIntensity
-        var tempThisHour = (data.hourly.data["0"].temperature - 32)*5/9 //This finds the temperature converted from fahrenheit to celcius
-        var tempNextHour = (data.hourly.data["1"].temperature - 32)*5/9
-        console.log(tempThisHour)
+        var tempThisHour = (data.hourly.data["0"].temperature - 32) * 5 / 9 //This finds the temperature converted from fahrenheit to celcius
+        var tempNextHour = (data.hourly.data["1"].temperature - 32) * 5 / 9
 
         function Unix_timestamp(t) //This function converts unix to hours
         {
@@ -468,17 +467,21 @@ function calculateRoute(array) { //This is the function, that calculates the rou
 
         if (precipChanceThisHour >= 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
           var precipTypeThisHour = "rain"
-          if (tempThisHour < 0) {precipTypeThisHour = "snow"}
-          content2 = String("There are a " + precipChanceThisHour * 100 + "% Chance of " + precipTypeThisHour +" between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
+          if (tempThisHour < 0) {
+            precipTypeThisHour = "snow"
+          }
+          content2 = String("There are a " + precipChanceThisHour * 100 + "% Chance of " + precipTypeThisHour + " between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
         }
         if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.5) { //first part is checking if the next hour is relevant
           var precipTypeNextHour = "rain"
-          if (tempNextHour < 0) {precipTypeNextHour = "snow"}
-          content3 = String("There are a " + precipChanceNextHour * 100 + "% Chance of " + precipTypeNextHour +" between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+          if (tempNextHour < 0) {
+            precipTypeNextHour = "snow"
+          }
+          content3 = String("There are a " + precipChanceNextHour * 100 + "% Chance of " + precipTypeNextHour + " between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
         }
 
         var content = content1 + content2 + content3 //This connects the three content strings into one alert
-        if (content.length > 0) {//This makes sure that no alert is shown if there is nothing to alert about
+        if (content.length > 0) { //This makes sure that no alert is shown if there is nothing to alert about
           alert(content)
         }
 
