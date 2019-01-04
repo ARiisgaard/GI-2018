@@ -27,7 +27,7 @@ var osm = L.tileLayer( //Defining what map to use in the background
   });
 
 //This is the layer with weather information
-var city = L.OWM.current({
+var weatherinfobox = L.OWM.current({
   appId: 'ee67f8f53521d94193aa7d8364b7f5d9',
   intervall: 15, //updates every 15 minuttes
   lang: 'en',
@@ -210,7 +210,6 @@ var showLongerShorter = L.easyButton('fa-ruler', function() { //This is the butt
 }).addTo(mymap);
 
 var longer = L.easyButton('fa-plus', function() { //This increases the distance with 1 km and calculates a new route
-  var oldDistance = routeDistance
   length += 1000
   wantWarnings = true;
   oldDestination = EndLocation;
@@ -232,7 +231,7 @@ distanceBar.addTo(mymap);
 showhideDistancebuttons(); //This hides the distance changing buttons as default
 
 var overlayMaps = { //This is the layers, that are hidden, when the map loads, but is possible to enable
-  "Weather information": city,
+  "Weather information": weatherinfobox,
   "Stations": stations,
   "Parks": parks
 };
@@ -264,6 +263,7 @@ function getRoute(lat, lng) {
     var owmFlask = "http://127.0.0.1:5000/openweathermap?lat=" + lat + "&lng=" + lng;
 
     $.getJSON(owmFlask, function(data) {
+      console.log(owmFlask)
       var windangle = data.wind.deg //Here it gets the direction of the wind from the api
       sunset = data.sys.sunset //Here the time for sunset gets defined - this is not used here, but it makes more sense to do here than to call the api twice
 
