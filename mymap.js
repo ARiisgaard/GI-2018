@@ -519,12 +519,37 @@ function calculateRoute(array) { //This is the function, that calculates the rou
 
 
 var fakeAngle = 0;//This is a variable used for the clock, to see which angles it has checked.
+var buttonPressed;
+var energyCalcWindAngle;
+var energyCalcWindSpeed;
 
+L.easyButton('fa-bolt', function() { //Clicking this button will calculate the energy needed for the trip
+  buttonPressed = "bolt"
 
+  var owmFlask = "http://127.0.0.1:5000/openweathermap?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
+  $.getJSON(owmFlask, function(data) {
 
+    energyCalcWindAngle = data.wind.deg
+    energyCalcWindSpeed = data.wind.speed
+
+  energyCalculations();
+})
+}).addTo(mymap);
 
 L.easyButton('fa-clock', function() {
+  buttonPressed = "clock"
+
+  energyCalcWindAngle = 270
+  energyCalcWindSpeed = 3
+
 mymap.stopLocate()//This stops the other locate function
+mymap.options.minZoom = 12; //This changes the zoom level, so the entire clock area can be seen
+mymap.options.maxZoom = 12;
+
+if (route) {
+  mymap.removeControl(route); //This removes the old route, before a new one is created
+}
+
 testRoute(0);
 }).addTo(mymap);
 
@@ -675,11 +700,6 @@ arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
 
 
 // These are the fictive weather conditions that the energy calculations are based on
-var boltwindangle = 270 //degrees
-var boltwindspeed = 3 //m/s
-
-
-
 
   for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle and there are no distance from the last coordinate
 
@@ -694,8 +714,8 @@ var boltwindspeed = 3 //m/s
 
 //The following lines are the equations from the appendix converted to javascript
     var roadResistance = 0.0032
-    var vwtan = boltwindspeed * Math.cos((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
-    var vwnor = boltwindspeed * Math.sin((cyclistAnglei - boltwindangle)* (Math.PI / 180) );
+    var vwtan = energyCalcWindSpeed * Math.cos((cyclistAnglei - energyCalcWindAngle)* (Math.PI / 180) );
+    var vwnor = energyCalcWindSpeed * Math.sin((cyclistAnglei - energyCalcWindAngle)* (Math.PI / 180) );
     var cyclistSpeed =  routeDistance / routeTime;
     var Va = cyclistSpeed + vwtan;
     var spokesDrag = 0.0044;
@@ -736,10 +756,10 @@ var boltwindspeed = 3 //m/s
   return total + num;
   }
 
+
+if (buttonPressed == "clock"){
   //The results then get send to the console. The " ," in the beginning is nessercery for being able to copy the values over in Excel, since copying multiple values from the console will replace the first value with "mymap.js:(number)"
     console.log(" ," + fakeAngle + "," + EndLocation + "," + testArray.reduce(getSum)/routeDistance + "," +aeroArray.reduce(getSum)/routeDistance + "," +rollResArray.reduce(getSum)/routeDistance + "," +wheelBearingArray.reduce(getSum)/routeDistance + "," +potentialArray.reduce(getSum)/routeDistance);
-
-
     fakeAngle += 10 //This increases the angle, so that when the function runs again it will look for results 10 degrees to the right of before
     if (fakeAngle < 360){ //This checks if the clock has gone a full round. If not it will restart the function
 
@@ -748,7 +768,18 @@ var boltwindspeed = 3 //m/s
         testRoute(fakeAngle);
     }, 2000);
 
-  } else {fakeAngle = 0;}//This resets the clock, so the function can run again - otherwise it would run once and then stop
+  } else {
+    fakeAngle = 0;
+  }//This resets the clock, so the function can run again - otherwise it would run once and then stop
+} else if (buttonPressed == "bolt"){
+  alert("Energy used on the trip: \n \n Total Energy: " + (testArray.reduce(getSum)/1000).toFixed(2) +
+   " kJ \n Aerodynamic Energy: " + (aeroArray.reduce(getSum)/1000).toFixed(2) +
+  " kJ \n Rolling Resistance  Energy: " + (rollResArray.reduce(getSum)/1000).toFixed(2) +
+  " kJ \n Wheel Bearing Friction Energy: " + (wheelBearingArray.reduce(getSum)/1000).toFixed(2) +
+  " kJ \n Potential Energy: " + (potentialArray.reduce(getSum)/1000).toFixed(2) + " kJ"
+)
+
+}
 
 
 });//This is the end of the heightRequest
