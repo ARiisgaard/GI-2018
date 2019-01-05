@@ -2,8 +2,8 @@
 //Most of these will be explained, when they are used instead of here.
 
 var locked = false //This variable is telling the program if it should keep looking for new destinations
-var EndLocation; //This is variable containing the coordinats of the destination
-var StartLocation;
+var endLocation; //This is variable containing the coordinats of the destination
+var startLocation;
 var route;
 var length = 5000; //This is the default distance of the trip
 var triesChangingLength = 0;
@@ -113,7 +113,7 @@ function goHere() {
     mymap.closePopup();
   } else {
     goThrough.push(center);
-    orderOfWaypoints.push(getDistanceFromLatLonInKm(StartLocation.lat, StartLocation.lng, center.lat, center.lng))
+    orderOfWaypoints.push(getDistanceFromLatLonInKm(startLocation.lat, startLocation.lng, center.lat, center.lng))
     var orderedParks = orderArray(goThrough, orderOfWaypoints);
     arrayWithParks = orderedParks.filter(function(el) { //There were some issue with center sometimes returning both the coordinates and undefined - this gets rid of the additional undefined
       return el != null;
@@ -122,7 +122,7 @@ function goHere() {
     mymap.closePopup();
     wantWarnings = true; //Since this would increase the duration of the trip the should again check if there are any warnings to give in regards to rain/sundown
     parksAdded += 1;
-    findIdealLocation(StartLocation.lat, StartLocation.lng);
+    findIdealLocation(startLocation.lat, startLocation.lng);
   }
 }
 
@@ -137,7 +137,7 @@ function dontGoHere() {
   }
   mymap.closePopup();
   parksAdded -= 1;
-  findIdealLocation(StartLocation.lat, StartLocation.lng);
+  findIdealLocation(startLocation.lat, startLocation.lng);
 }
 
 var mymap = L.map('map', { //Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
@@ -174,7 +174,7 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
     title: 'Train first',
     onClick: function(control) {
       reverse = true;
-      findIdealLocation(StartLocation.lat, StartLocation.lng);
+      findIdealLocation(startLocation.lat, startLocation.lng);
       control.state('OtherWay');
     }
   }, {
@@ -182,7 +182,7 @@ var reversebotton = L.easyButton({ //With a click of this button the user can lo
     stateName: 'OtherWay',
     onClick: function(control) {
       reverse = false;
-      findIdealLocation(StartLocation.lat, StartLocation.lng);
+      findIdealLocation(startLocation.lat, startLocation.lng);
       control.state('OneWay');
     },
     title: 'Bike first'
@@ -214,17 +214,17 @@ var showLongerShorter = L.easyButton('fa-ruler', function() { //This is the butt
 var longer = L.easyButton('fa-plus', function() { //This increases the distance with 1 km and calculates a new route
   length += 1000
   wantWarnings = true;
-  oldDestination = EndLocation;
+  oldDestination = endLocation;
   distanceButtonClicked = "longer"
-  findIdealLocation(StartLocation.lat, StartLocation.lng);
+  findIdealLocation(startLocation.lat, startLocation.lng);
 });
 
 var shorter = L.easyButton('fa-minus', function() { //This decrease the distance with 1 km and calculates a new route
   length -= 1000
   wantWarnings = true;
-  oldDestination = EndLocation;
+  oldDestination = endLocation;
   distanceButtonClicked = "shorter"
-  findIdealLocation(StartLocation.lat, StartLocation.lng);
+  findIdealLocation(startLocation.lat, startLocation.lng);
 });
 
 var distanceBar = L.easyBar([showLongerShorter, longer, shorter, ]); //This connects the buttons for manipuplating the distance of the route. Without this the hidden buttons look messy
@@ -258,7 +258,7 @@ mymap.locate({ //This is the code for finding the users location
 
 function findIdealLocation(lat, lng) {
 
-  StartLocation = L.latLng([lat, lng]); //The start of the journey
+  startLocation = L.latLng([lat, lng]); //The start of the journey
 
   if (locked == false) { //This (combined with the else statement further down) prevents the program from look for a new destination, when the user has picked a destination.
 
@@ -277,17 +277,17 @@ function findIdealLocation(lat, lng) {
 
       //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
-      var StartLatInRat = lat * Math.PI / 180
-      var StartLngInRat = lng * Math.PI / 180
-      var AngleInRat = angle * Math.PI / 180
+      var startLatInRat = lat * Math.PI / 180
+      var startLngInRat = lng * Math.PI / 180
+      var angleInRat = angle * Math.PI / 180
 
-      var R = 6371e3; // Distance to the centre of the earth in metres
-      var end_y = Math.asin(Math.sin(StartLatInRat) * Math.cos(length / R) +
-        Math.cos(StartLatInRat) * Math.sin(length / R) * Math.cos(AngleInRat));
-      var end_x = StartLngInRat + Math.atan2(Math.sin(AngleInRat) * Math.sin(length / R) * Math.cos(StartLatInRat),
-        Math.cos(length / R) - Math.sin(StartLatInRat) * Math.sin(end_y));
-      var EndLat = end_y * 180 / Math.PI
-      var EndLng = end_x * 180 / Math.PI
+      var radiusEarth = 6371e3; // Distance to the centre of the earth in metres
+      var end_y = Math.asin(Math.sin(startLatInRat) * Math.cos(length / radiusEarth) +
+        Math.cos(startLatInRat) * Math.sin(length / radiusEarth) * Math.cos(angleInRat));
+      var end_x = startLngInRat + Math.atan2(Math.sin(angleInRat) * Math.sin(length / radiusEarth) * Math.cos(startLatInRat),
+        Math.cos(length / radiusEarth) - Math.sin(startLatInRat) * Math.sin(end_y));
+      var endLat = end_y * 180 / Math.PI
+      var endLng = end_x * 180 / Math.PI
 
       //Here stops the coordinate definition
 
@@ -299,23 +299,23 @@ function findIdealLocation(lat, lng) {
       //   mymap.removeLayer(winddestination); //This removes the old winddestination marker, if the program makes another one
       // }
       //
-      // winddestination = L.marker([EndLat, EndLng], {
+      // winddestination = L.marker([endLat, endLng], {
       //   icon: myIcon
       // }).addTo(mymap);
 
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
-      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) { //Here we connect to the server and run the findstation request based on the lat and lng of the "ideal" location
+      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + endLat + "&lng=" + endLng, function(data) { //Here we connect to the server and run the findstation request based on the lat and lng of the "ideal" location
 
         //Here we get the lat and lng from the server
         var stationLat = data.geometry.coordinates[1]
         var stationLng = data.geometry.coordinates[0]
 
         //the lat and lng are the put together:
-        EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
+        endLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
 
 
-        if (EndLocation.equals(oldDestination)) { //This makes sure that using the distance buttons return a new station every time, by seeing if the previous EndLocation is the same as the current one.
+        if (endLocation.equals(oldDestination)) { //This makes sure that using the distance buttons return a new station every time, by seeing if the previous endLocation is the same as the current one.
           //All of this is only triggered if distance buttons are pressed and the results are the same as before
           triesChangingLength += 1
           if (distanceButtonClicked == "shorter") { //These if-statements checks which of the distance buttons were pressed and increase or decrease the seach distance before restarting the function
@@ -327,24 +327,24 @@ function findIdealLocation(lat, lng) {
           }
 
           if (triesChangingLength < 5) {//This prevents an endless loop, if the program is unable to find a new station
-          findIdealLocation(StartLocation.lat, StartLocation.lng); //This restarts the function
+          findIdealLocation(startLocation.lat, startLocation.lng); //This restarts the function
           return; //This ends the function here - otherwise the rest of the function would play out as well (This way it doesnt have to draw the route every time)
 } else {
   console.log("Unable to find a station further away")
   oldDestination = null; //This ensures that endLocation =/= oldDestination on the next run through
-  findIdealLocation(StartLocation.lat, StartLocation.lng); //This restarts the function one last time
+  findIdealLocation(startLocation.lat, startLocation.lng); //This restarts the function one last time
   return;
 }
         } else {
           triesChangingLength = 0; //This resets the number of tries
           if (parksAdded == 0) { //This checks if any parks have been added. If it is not the case, then it defines the waypoints, that ORS should plan the routing after to only being the beginning and the end locations
-            finalArray = [StartLocation,
-              EndLocation
+            finalArray = [startLocation,
+              endLocation
             ]
           } else { //This defines the waypoints that the route is going through if parks were selected
 
             var tempArray = []; //In this empty Array we are fitting all the pieces together
-            finalArray = tempArray.concat([StartLocation], arrayWithParks, [EndLocation])
+            finalArray = tempArray.concat([startLocation], arrayWithParks, [endLocation])
           }
 
 
@@ -387,7 +387,7 @@ function orderArray(coords, distances) { //This function sorts the parks, that t
 }
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) { //This function calculates the distance between to points in km. Based on sphere geometry
-  var R = 6371; // Radius of the earth in km
+  var radiusEarth = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
   var dLon = deg2rad(lon2 - lon1);
   var a =
@@ -395,7 +395,7 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) { //This function cal
     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
     Math.sin(dLon / 2) * Math.sin(dLon / 2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c; // Distance in km
+  var d = radiusEarth * c; // Distance in km
   return d;
 }
 
@@ -454,7 +454,7 @@ function calculateRoute(array) { //This is the function, that calculates the rou
       if (currentTime < sunset && sunset < routeTime + currentTime) { //The sunset alert triggers if the route starts before sunset and ends after
         content1 = String("Your trip will end " + Math.round((-(sunset - routeTime - currentTime) / 60)) + " minutes after sunset \n")
       }
-      var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
+      var dsFlask = "http://127.0.0.1:5000/darksky?lat=" + startLocation.lat + "&lng=" + startLocation.lng;
       $.getJSON(dsFlask, function(data) { //This checks the risk and intensity of precipitation for the current hour and the next
         var thisHour = data.hourly.data["0"].time
         var nextHour = data.hourly.data["1"].time
@@ -518,7 +518,7 @@ function calculateRoute(array) { //This is the function, that calculates the rou
 
 
 
-var fakeAngle = 0;//This is a variable used for the clock, to see which angles it has checked.
+var clockAngle = 0;//This is a variable used for the clock, to see which angles it has checked.
 var buttonPressed;
 var energyCalcWindAngle;
 var energyCalcWindSpeed;
@@ -526,7 +526,7 @@ var energyCalcWindSpeed;
 L.easyButton('fa-bolt', function() { //Clicking this button will calculate the energy needed for the trip
   buttonPressed = "bolt"
 
-  var owmFlask = "http://127.0.0.1:5000/openweathermap?lat=" + StartLocation.lat + "&lng=" + StartLocation.lng;
+  var owmFlask = "http://127.0.0.1:5000/openweathermap?lat=" + startLocation.lat + "&lng=" + startLocation.lng;
   $.getJSON(owmFlask, function(data) {
 
     energyCalcWindAngle = data.wind.deg
@@ -550,14 +550,14 @@ if (route) {
   mymap.removeControl(route); //This removes the old route, before a new one is created
 }
 
-testRoute(0);
+clockRoute(0);
 }).addTo(mymap);
 
 
-function testRoute(givenAngle){
+function clockRoute(givenAngle){
 
 
-  StartLocation = L.latLng([55.6504670, 12.5429260]); //The start of the journey
+  startLocation = L.latLng([55.6504670, 12.5429260]); //The start of the journey
 
 var lat = 55.6504670
 var lng = 12.5429260
@@ -578,33 +578,33 @@ var lng = 12.5429260
 
       //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
-      var StartLatInRat = lat * Math.PI / 180
-      var StartLngInRat = lng * Math.PI / 180
-      var AngleInRat = angle * Math.PI / 180
+      var startLatInRat = lat * Math.PI / 180
+      var startLngInRat = lng * Math.PI / 180
+      var angleInRat = angle * Math.PI / 180
 
-      var R = 6371e3; // Distance to the centre of the earth in metres
-      var end_y = Math.asin(Math.sin(StartLatInRat) * Math.cos(length / R) +
-        Math.cos(StartLatInRat) * Math.sin(length / R) * Math.cos(AngleInRat));
-      var end_x = StartLngInRat + Math.atan2(Math.sin(AngleInRat) * Math.sin(length / R) * Math.cos(StartLatInRat),
-        Math.cos(length / R) - Math.sin(StartLatInRat) * Math.sin(end_y));
-      var EndLat = end_y * 180 / Math.PI
-      var EndLng = end_x * 180 / Math.PI
+      var radiusEarth = 6371e3; // Distance to the centre of the earth in metres
+      var end_y = Math.asin(Math.sin(startLatInRat) * Math.cos(length / radiusEarth) +
+        Math.cos(startLatInRat) * Math.sin(length / radiusEarth) * Math.cos(angleInRat));
+      var end_x = startLngInRat + Math.atan2(Math.sin(angleInRat) * Math.sin(length / radiusEarth) * Math.cos(startLatInRat),
+        Math.cos(length / radiusEarth) - Math.sin(startLatInRat) * Math.sin(end_y));
+      var endLat = end_y * 180 / Math.PI
+      var endLng = end_x * 180 / Math.PI
 
       //Here stops the coordinate definition
 
       //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
 
-      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + EndLat + "&lng=" + EndLng, function(data) {
+      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + endLat + "&lng=" + endLng, function(data) {
         var stationLat = data.geometry.coordinates[1]
         var stationLng = data.geometry.coordinates[0]
 
-        // //The EndLocation should be changed to the coordinate of the station, when those are available
-        EndLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
+        // //The endLocation should be changed to the coordinate of the station, when those are available
+        endLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
-        fullRoute = [StartLocation,
-          EndLocation
+        fullRoute = [startLocation,
+          endLocation
         ]
-        calculateTestRoute(fullRoute);
+        calculateClockRoute(fullRoute);
 
       });
     });
@@ -612,7 +612,7 @@ var lng = 12.5429260
 
 }
 
-function calculateTestRoute(array) {
+function calculateClockRoute(array) {
   $("div.leaflet-routing-container").remove(); //Removes the previous route describtion before making a new one
 
 
@@ -671,7 +671,7 @@ function energyCalculations(){
   arrayDistance = [];
   arrayAngles = [];
   arrayHeight = [];
-  testArray = [];
+  totalEnergyArray = [];
   aeroArray = [];
   rollResArray = [];
   wheelBearingArray = [];
@@ -717,17 +717,17 @@ arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
     var vwtan = energyCalcWindSpeed * Math.cos((cyclistAnglei - energyCalcWindAngle)* (Math.PI / 180) );
     var vwnor = energyCalcWindSpeed * Math.sin((cyclistAnglei - energyCalcWindAngle)* (Math.PI / 180) );
     var cyclistSpeed =  routeDistance / routeTime;
-    var Va = cyclistSpeed + vwtan;
+    var v_a = cyclistSpeed + vwtan;
     var spokesDrag = 0.0044;
     var airDensity = 1.2234;
-    var yawAngle = Math.atan(vwnor / Va) * (180 / Math.PI);
+    var yawAngle = Math.atan(vwnor / v_a) * (180 / Math.PI);
     var cyclistDrag = dragAreaFromYaw(yawAngle);
     var cyclistMass = 90
     var kineticEnergyI = 0.14
     var kineticEnergyR = 0.311
 
     //Power
-    var aerodynamicPower = Math.pow(Va, 2) * cyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
+    var aerodynamicPower = Math.pow(v_a, 2) * cyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
     var rollingResistancePower = cyclistSpeed*Math.cos(Math.atan(cyclistGradei))*roadResistance*cyclistMass*9.81
     var wheelBearingFrictionPower = cyclistSpeed*(91+8.7*cyclistSpeed)*0.001
     var potentialEnergyPower = cyclistSpeed*cyclistMass*9.81*Math.sin(Math.atan(cyclistGradei))
@@ -744,7 +744,7 @@ arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
     var energyTotali = aerodynamicEnergyi+rollingResistanceEnergyi+wheelBearingFrictionEnergyi+potentialEnergyi
 
 //These result then get collected in the arrays below
-    testArray.push(energyTotali)
+    totalEnergyArray.push(energyTotali)
     aeroArray.push(aerodynamicEnergyi)
     rollResArray.push(rollingResistanceEnergyi)
     wheelBearingArray.push(wheelBearingFrictionEnergyi)
@@ -759,20 +759,20 @@ arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
 
 if (buttonPressed == "clock"){
   //The results then get send to the console. The " ," in the beginning is nessercery for being able to copy the values over in Excel, since copying multiple values from the console will replace the first value with "mymap.js:(number)"
-    console.log(" ," + fakeAngle + "," + EndLocation + "," + testArray.reduce(getSum)/routeDistance + "," +aeroArray.reduce(getSum)/routeDistance + "," +rollResArray.reduce(getSum)/routeDistance + "," +wheelBearingArray.reduce(getSum)/routeDistance + "," +potentialArray.reduce(getSum)/routeDistance);
-    fakeAngle += 10 //This increases the angle, so that when the function runs again it will look for results 10 degrees to the right of before
-    if (fakeAngle < 360){ //This checks if the clock has gone a full round. If not it will restart the function
+    console.log(" ," + clockAngle + "," + endLocation + "," + totalEnergyArray.reduce(getSum)/routeDistance + "," +aeroArray.reduce(getSum)/routeDistance + "," +rollResArray.reduce(getSum)/routeDistance + "," +wheelBearingArray.reduce(getSum)/routeDistance + "," +potentialArray.reduce(getSum)/routeDistance);
+    clockAngle += 10 //This increases the angle, so that when the function runs again it will look for results 10 degrees to the right of before
+    if (clockAngle < 360){ //This checks if the clock has gone a full round. If not it will restart the function
 
 
     setTimeout(function(){ //This tells the code to wait for 2 sec, before it runs again in a new direction - the routing machine sometimes had a difficult time keeping up otherwise
-        testRoute(fakeAngle);
+        clockRoute(clockAngle);
     }, 2000);
 
   } else {
-    fakeAngle = 0;
+    clockAngle = 0;
   }//This resets the clock, so the function can run again - otherwise it would run once and then stop
 } else if (buttonPressed == "bolt"){
-  alert("Energy used on the trip: \n \n Total Energy: " + (testArray.reduce(getSum)/1000).toFixed(2) +
+  alert("Energy used on the trip: \n \n Total Energy: " + (totalEnergyArray.reduce(getSum)/1000).toFixed(2) +
    " kJ \n Aerodynamic Energy: " + (aeroArray.reduce(getSum)/1000).toFixed(2) +
   " kJ \n Rolling Resistance  Energy: " + (rollResArray.reduce(getSum)/1000).toFixed(2) +
   " kJ \n Wheel Bearing Friction Energy: " + (wheelBearingArray.reduce(getSum)/1000).toFixed(2) +
@@ -803,7 +803,7 @@ function calculateAngle(punktStart, punktSlut) {
 
 //This function calculates the distance between to coordinates
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-  var R = 6371; // Radius of the earth in km
+  var radiusEarth = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2 - lat1); // deg2rad below
   var dLon = deg2rad(lon2 - lon1);
   var a =
@@ -811,7 +811,7 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
     Math.sin(dLon / 2) * Math.sin(dLon / 2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  var d = R * c; // Distance in km
+  var d = radiusEarth * c; // Distance in km
   return d;
 }
 
