@@ -71,6 +71,9 @@ var destinationIcon = L.icon({ //defines the icon for the wind location - should
   popupAnchor: [-3, -76]
 });
 
+//Here the credits for the icons are added to the map
+mymap.attributionControl.addAttribution('<abbr title="Icons made by Freepik and Icon Pond from www.flaticon.com">Icons</abbr>');
+
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
     layer.bindPopup("<h2>Station:</h2>" + " " + feature.properties.navn + "<br>") //tells what to say in the popup. Has to use data from each feature depending on 'navn'.
@@ -199,7 +202,6 @@ function showhideDistancebuttons() { //This shows or hides the increase/decrease
     longer.enable()
     shorter.enable()
   }
-
 }
 
 var showLongerShorter = L.easyButton('fa-ruler', function() { //This is the button for showing/hiddin the increase/decrease buttons
@@ -276,7 +278,6 @@ function findIdealLocation(lat, lng) {
       };
 
       //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
-
       var startLatInRat = lat * Math.PI / 180
       var startLngInRat = lng * Math.PI / 180
       var angleInRat = angle * Math.PI / 180
@@ -314,7 +315,6 @@ function findIdealLocation(lat, lng) {
         //the lat and lng are the put together:
         endLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination
 
-
         if (endLocation.equals(oldDestination)) { //This makes sure that using the distance buttons return a new station every time, by seeing if the previous endLocation is the same as the current one.
           //All of this is only triggered if distance buttons are pressed and the results are the same as before
           triesChangingLength += 1
@@ -326,15 +326,15 @@ function findIdealLocation(lat, lng) {
             length += 1000
           }
 
-          if (triesChangingLength < 5) {//This prevents an endless loop, if the program is unable to find a new station
-          findIdealLocation(startLocation.lat, startLocation.lng); //This restarts the function
-          return; //This ends the function here - otherwise the rest of the function would play out as well (This way it doesnt have to draw the route every time)
-} else {
-  console.log("Unable to find a station further away")
-  oldDestination = null; //This ensures that endLocation =/= oldDestination on the next run through
-  findIdealLocation(startLocation.lat, startLocation.lng); //This restarts the function one last time
-  return;
-}
+          if (triesChangingLength < 5) { //This prevents an endless loop, if the program is unable to find a new station
+            findIdealLocation(startLocation.lat, startLocation.lng); //This restarts the function
+            return; //This ends the function here - otherwise the rest of the function would play out as well (This way it doesnt have to draw the route every time)
+          } else {
+            console.log("Unable to find a station further away")
+            oldDestination = null; //This ensures that endLocation =/= oldDestination on the next run through
+            findIdealLocation(startLocation.lat, startLocation.lng); //This restarts the function one last time
+            return;
+          }
         } else {
           triesChangingLength = 0; //This resets the number of tries
           if (parksAdded == 0) { //This checks if any parks have been added. If it is not the case, then it defines the waypoints, that ORS should plan the routing after to only being the beginning and the end locations
@@ -346,7 +346,6 @@ function findIdealLocation(lat, lng) {
             var tempArray = []; //In this empty Array we are fitting all the pieces together
             finalArray = tempArray.concat([startLocation], arrayWithParks, [endLocation])
           }
-
 
           if (reverse == true) { //This swaps the order of the array, if the user has decided to take the train first (so the journey starts at a train station and ends at their current location)
             finalArray = finalArray.reverse()
@@ -367,7 +366,6 @@ function orderArray(coords, distances) { //This function sorts the parks, that t
   var coordsLeft = coords.concat(); //This is basicly the same as coordsLeft = coords, but that doesn't work the same way with arrays, so we have to do it this way. If we dont the program would have made coordsLeft a reference to coords instead of just making a copy. This is an issue, since we need to remove values from coordsLeft, but coords has to remain untouched - else it will be impossible to have muliple parks.
   var distancesLeft = distances.concat();
 
-
   // keep doing this until the distances array is empty:
   while (distancesLeft.length > 0) {
 
@@ -381,9 +379,7 @@ function orderArray(coords, distances) { //This function sorts the parks, that t
     coordsLeft.splice(i, 1);
     distancesLeft.splice(i, 1);
   }
-
   return (sorted_coords);
-
 }
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) { //This function calculates the distance between to points in km. Based on sphere geometry
@@ -405,8 +401,6 @@ function deg2rad(deg) { //This changes from degrees to radians
 
 function calculateRoute(array) { //This is the function, that calculates the routing between the waypoints
   $("div.leaflet-routing-container").remove(); //Removes the previous route description before making a new one
-
-
 
   if (route) {
     mymap.removeControl(route); //This removes the old route, before a new one is created
@@ -493,32 +487,21 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         if (content.length > 0) { //This makes sure that no alert is shown if there is nothing to alert about
           alert(content)
         }
-
       })
-
-
       wantWarnings = false; //This disables alerts until the user changes the distance of the trip or adds/removes a park
     }
   });
-
-
-
   route.addTo(mymap);
 }
+
+
 
 
 //The next lines of code are connected to the 5 ECTS extra
 
 
 
-
-
-
-
-
-
-
-var clockAngle = 0;//This is a variable used for the clock, to see which angles it has checked.
+var clockAngle = 0; //This is a variable used for the clock, to see which angles it has checked.
 var buttonPressed;
 var energyCalcWindAngle;
 var energyCalcWindSpeed;
@@ -532,8 +515,8 @@ L.easyButton('fa-bolt', function() { //Clicking this button will calculate the e
     energyCalcWindAngle = data.wind.deg
     energyCalcWindSpeed = data.wind.speed
 
-  energyCalculations();
-})
+    energyCalculations();
+  })
 }).addTo(mymap);
 
 L.easyButton('fa-clock', function() {
@@ -542,72 +525,72 @@ L.easyButton('fa-clock', function() {
   energyCalcWindAngle = 270
   energyCalcWindSpeed = 3
 
-mymap.stopLocate()//This stops the other locate function
-mymap.options.minZoom = 12; //This changes the zoom level, so the entire clock area can be seen
-mymap.options.maxZoom = 12;
+  mymap.stopLocate() //This stops the other locate function
+  mymap.options.minZoom = 12; //This changes the zoom level, so the entire clock area can be seen
+  mymap.options.maxZoom = 12;
 
-if (route) {
-  mymap.removeControl(route); //This removes the old route, before a new one is created
-}
+  if (route) {
+    mymap.removeControl(route); //This removes the old route, before a new one is created
+  }
 
-clockRoute(0);
+  clockRoute(0);
 }).addTo(mymap);
 
 
-function clockRoute(givenAngle){
+function clockRoute(givenAngle) {
 
 
   startLocation = L.latLng([55.6504670, 12.5429260]); //The start of the journey
 
-var lat = 55.6504670
-var lng = 12.5429260
+  var lat = 55.6504670
+  var lng = 12.5429260
 
-    var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
+  var api_address = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lng + '&appid=ee67f8f53521d94193aa7d8364b7f5d9'
 
-    $.getJSON(api_address, function(data) {
+  $.getJSON(api_address, function(data) {
 
-      windangle = data.wind.deg
-      windspeed = data.wind.speed
+    windangle = data.wind.deg
+    windspeed = data.wind.speed
 
 
-      angle = givenAngle
+    angle = givenAngle
 
-      //Du er nået her til - evt. tjek om det er relevant at bruge angle i andre sammenhænge
+    //Du er nået her til - evt. tjek om det er relevant at bruge angle i andre sammenhænge
 
-      //  var length = 5000 //Distance traveled in meters
+    //  var length = 5000 //Distance traveled in meters
 
-      //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
+    //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
-      var startLatInRat = lat * Math.PI / 180
-      var startLngInRat = lng * Math.PI / 180
-      var angleInRat = angle * Math.PI / 180
+    var startLatInRat = lat * Math.PI / 180
+    var startLngInRat = lng * Math.PI / 180
+    var angleInRat = angle * Math.PI / 180
 
-      var radiusEarth = 6371e3; // Distance to the centre of the earth in metres
-      var end_y = Math.asin(Math.sin(startLatInRat) * Math.cos(length / radiusEarth) +
-        Math.cos(startLatInRat) * Math.sin(length / radiusEarth) * Math.cos(angleInRat));
-      var end_x = startLngInRat + Math.atan2(Math.sin(angleInRat) * Math.sin(length / radiusEarth) * Math.cos(startLatInRat),
-        Math.cos(length / radiusEarth) - Math.sin(startLatInRat) * Math.sin(end_y));
-      var endLat = end_y * 180 / Math.PI
-      var endLng = end_x * 180 / Math.PI
+    var radiusEarth = 6371e3; // Distance to the centre of the earth in metres
+    var end_y = Math.asin(Math.sin(startLatInRat) * Math.cos(length / radiusEarth) +
+      Math.cos(startLatInRat) * Math.sin(length / radiusEarth) * Math.cos(angleInRat));
+    var end_x = startLngInRat + Math.atan2(Math.sin(angleInRat) * Math.sin(length / radiusEarth) * Math.cos(startLatInRat),
+      Math.cos(length / radiusEarth) - Math.sin(startLatInRat) * Math.sin(end_y));
+    var endLat = end_y * 180 / Math.PI
+    var endLng = end_x * 180 / Math.PI
 
-      //Here stops the coordinate definition
+    //Here stops the coordinate definition
 
-      //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
+    //The next couple of lines are the code used to connect to server, that is attatched to the pgAdmin database
 
-      $.getJSON("http://127.0.0.1:5000/findstation?lat=" + endLat + "&lng=" + endLng, function(data) {
-        var stationLat = data.geometry.coordinates[1]
-        var stationLng = data.geometry.coordinates[0]
+    $.getJSON("http://127.0.0.1:5000/findstation?lat=" + endLat + "&lng=" + endLng, function(data) {
+      var stationLat = data.geometry.coordinates[1]
+      var stationLng = data.geometry.coordinates[0]
 
-        // //The endLocation should be changed to the coordinate of the station, when those are available
-        endLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
+      // //The endLocation should be changed to the coordinate of the station, when those are available
+      endLocation = L.latLng(stationLat, stationLng) //This line defines the location of the destination - currently it is only defined by going in the direction with the least wind. Later it is going to be replaced with the station the closest to said location
 
-        fullRoute = [startLocation,
-          endLocation
-        ]
-        calculateClockRoute(fullRoute);
+      fullRoute = [startLocation,
+        endLocation
+      ]
+      calculateClockRoute(fullRoute);
 
-      });
     });
+  });
 
 
 }
@@ -665,9 +648,9 @@ function calculateClockRoute(array) {
 
 
 
-function energyCalculations(){
+function energyCalculations() {
 
-//Resets the arrays - otherwise the route would be twice as long on the second button click
+  //Resets the arrays - otherwise the route would be twice as long on the second button click
   arrayDistance = [];
   arrayAngles = [];
   arrayHeight = [];
@@ -679,110 +662,111 @@ function energyCalculations(){
   arrayHeight = [];
 
   //This upcoming part of the function is changing the format of the route coordinates, so they fit with the elevationAPIs format
-    var elevationRequestCoordinates = [];
-    for (i = 0; i < routeCoordinates.length; i++) {
-      elevationRequestCoordinates.push(routeCoordinates[i].lat)
-      elevationRequestCoordinates.push(routeCoordinates[i].lng)
-    }
-
-    var elevationAPI = "http://open.mapquestapi.com/elevation/v1/profile?key=5hRZ9Xq1M67vIy42cAAsxHBepy5hBzBR&shapeFormat=raw&latLngCollection=" + elevationRequestCoordinates //routeCoordinates
-
-    $.getJSON(elevationAPI, function(elevationData) {
-
-  for (i = 0; i < routeCoordinates.length; i++)
-  {
-arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
+  var elevationRequestCoordinates = [];
+  for (i = 0; i < routeCoordinates.length; i++) {
+    elevationRequestCoordinates.push(routeCoordinates[i].lat)
+    elevationRequestCoordinates.push(routeCoordinates[i].lng)
   }
+
+  var elevationAPI = "http://open.mapquestapi.com/elevation/v1/profile?key=5hRZ9Xq1M67vIy42cAAsxHBepy5hBzBR&shapeFormat=raw&latLngCollection=" + elevationRequestCoordinates //routeCoordinates
+
+  $.getJSON(elevationAPI, function(elevationData) {
+
+    for (i = 0; i < routeCoordinates.length; i++) {
+      arrayHeight.push(JSON.stringify(elevationData.elevationProfile[i].height))
+    }
 
 
     var elevationCurve = "http://open.mapquestapi.com/elevation/v1/chart?key=5hRZ9Xq1M67vIy42cAAsxHBepy5hBzBR&shapeFormat=raw&width=425&height=350&latLngCollection=" + elevationRequestCoordinates
 
 
 
-// These are the fictive weather conditions that the energy calculations are based on
+    // These are the fictive weather conditions that the energy calculations are based on
 
-  for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle and there are no distance from the last coordinate
+    for (i = 0; i < routeCoordinates.length - 1; i++) { //Goes through each coordinate except the last since this one has no angle and there are no distance from the last coordinate
 
-    var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]); //The direction of the cyclist gets calculated in every coordinate set
-    var cyclistDistancei = 1000*getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng);//Distance between coordinate sets
-    var cyclistTimei = routeTime * cyclistDistancei / (routeDistance); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
+      var cyclistAnglei = calculateAngle(routeCoordinates[i], routeCoordinates[i + 1]); //The direction of the cyclist gets calculated in every coordinate set
+      var cyclistDistancei = 1000 * getDistanceFromLatLonInKm(routeCoordinates[i].lat, routeCoordinates[i].lng, routeCoordinates[i + 1].lat, routeCoordinates[i + 1].lng); //Distance between coordinate sets
+      var cyclistTimei = routeTime * cyclistDistancei / (routeDistance); //Calculates the time spend between each coordinates by multiplying the total time with the percentage of the total trip for the distance between each coordinate (distance between point/total distance)
 
-    var cyclistGradei = (arrayHeight[i+1]-arrayHeight[i])/(cyclistDistancei)//Grade is calculated as height difference/distance
+      var cyclistGradei = (arrayHeight[i + 1] - arrayHeight[i]) / (cyclistDistancei) //Grade is calculated as height difference/distance
 
- if (cyclistDistancei == 0) {cyclistGradei = 0} // Sometimes there are coordinates with 0 distance between eachother - this makes cyclistGradei return NaN, which breaks the rest of the calculations. Therefore we set cyclistGradei to 0 as there are no changes in the height
-
-
-//The following lines are the equations from the appendix converted to javascript
-    var roadResistance = 0.0032
-    var vwtan = energyCalcWindSpeed * Math.cos((cyclistAnglei - energyCalcWindAngle)* (Math.PI / 180) );
-    var vwnor = energyCalcWindSpeed * Math.sin((cyclistAnglei - energyCalcWindAngle)* (Math.PI / 180) );
-    var cyclistSpeed =  routeDistance / routeTime;
-    var v_a = cyclistSpeed + vwtan;
-    var spokesDrag = 0.0044;
-    var airDensity = 1.2234;
-    var yawAngle = Math.atan(vwnor / v_a) * (180 / Math.PI);
-    var cyclistDrag = dragAreaFromYaw(yawAngle);
-    var cyclistMass = 90
-    var kineticEnergyI = 0.14
-    var kineticEnergyR = 0.311
-
-    //Power
-    var aerodynamicPower = Math.pow(v_a, 2) * cyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
-    var rollingResistancePower = cyclistSpeed*Math.cos(Math.atan(cyclistGradei))*roadResistance*cyclistMass*9.81
-    var wheelBearingFrictionPower = cyclistSpeed*(91+8.7*cyclistSpeed)*0.001
-    var potentialEnergyPower = cyclistSpeed*cyclistMass*9.81*Math.sin(Math.atan(cyclistGradei))
-    var kineticEnergyPower = 0.5*(cyclistMass+kineticEnergyI/Math.pow(kineticEnergyR, 2))*0 //This value becomes 0, and isn't included further down
-
-    //Energy
-//Because there isn't the same distance between the sets of coordinates it is nessercery to convert the effects from before to energy using the time spend between each set of coordinates.
-
-    var aerodynamicEnergyi = aerodynamicPower *cyclistTimei
-    var rollingResistanceEnergyi = rollingResistancePower *cyclistTimei
-    var wheelBearingFrictionEnergyi = wheelBearingFrictionPower *cyclistTimei
-    var potentialEnergyi = potentialEnergyPower *cyclistTimei
-
-    var energyTotali = aerodynamicEnergyi+rollingResistanceEnergyi+wheelBearingFrictionEnergyi+potentialEnergyi
-
-//These result then get collected in the arrays below
-    totalEnergyArray.push(energyTotali)
-    aeroArray.push(aerodynamicEnergyi)
-    rollResArray.push(rollingResistanceEnergyi)
-    wheelBearingArray.push(wheelBearingFrictionEnergyi)
-    potentialArray.push(potentialEnergyi)
-
-  }
-
-  function getSum(total, num) { //Small function of calculate the sum of values in a array
-  return total + num;
-  }
+      if (cyclistDistancei == 0) {
+        cyclistGradei = 0
+      } // Sometimes there are coordinates with 0 distance between eachother - this makes cyclistGradei return NaN, which breaks the rest of the calculations. Therefore we set cyclistGradei to 0 as there are no changes in the height
 
 
-if (buttonPressed == "clock"){
-  //The results then get send to the console. The " ," in the beginning is nessercery for being able to copy the values over in Excel, since copying multiple values from the console will replace the first value with "mymap.js:(number)"
-    console.log(" ," + clockAngle + "," + endLocation + "," + totalEnergyArray.reduce(getSum)/routeDistance + "," +aeroArray.reduce(getSum)/routeDistance + "," +rollResArray.reduce(getSum)/routeDistance + "," +wheelBearingArray.reduce(getSum)/routeDistance + "," +potentialArray.reduce(getSum)/routeDistance);
-    clockAngle += 10 //This increases the angle, so that when the function runs again it will look for results 10 degrees to the right of before
-    if (clockAngle < 360){ //This checks if the clock has gone a full round. If not it will restart the function
+      //The following lines are the equations from the appendix converted to javascript
+      var roadResistance = 0.0032
+      var vwtan = energyCalcWindSpeed * Math.cos((cyclistAnglei - energyCalcWindAngle) * (Math.PI / 180));
+      var vwnor = energyCalcWindSpeed * Math.sin((cyclistAnglei - energyCalcWindAngle) * (Math.PI / 180));
+      var cyclistSpeed = routeDistance / routeTime;
+      var v_a = cyclistSpeed + vwtan;
+      var spokesDrag = 0.0044;
+      var airDensity = 1.2234;
+      var yawAngle = Math.atan(vwnor / v_a) * (180 / Math.PI);
+      var cyclistDrag = dragAreaFromYaw(yawAngle);
+      var cyclistMass = 90
+      var kineticEnergyI = 0.14
+      var kineticEnergyR = 0.311
+
+      //Power
+      var aerodynamicPower = Math.pow(v_a, 2) * cyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
+      var rollingResistancePower = cyclistSpeed * Math.cos(Math.atan(cyclistGradei)) * roadResistance * cyclistMass * 9.81
+      var wheelBearingFrictionPower = cyclistSpeed * (91 + 8.7 * cyclistSpeed) * 0.001
+      var potentialEnergyPower = cyclistSpeed * cyclistMass * 9.81 * Math.sin(Math.atan(cyclistGradei))
+      var kineticEnergyPower = 0.5 * (cyclistMass + kineticEnergyI / Math.pow(kineticEnergyR, 2)) * 0 //This value becomes 0, and isn't included further down
+
+      //Energy
+      //Because there isn't the same distance between the sets of coordinates it is nessercery to convert the effects from before to energy using the time spend between each set of coordinates.
+
+      var aerodynamicEnergyi = aerodynamicPower * cyclistTimei
+      var rollingResistanceEnergyi = rollingResistancePower * cyclistTimei
+      var wheelBearingFrictionEnergyi = wheelBearingFrictionPower * cyclistTimei
+      var potentialEnergyi = potentialEnergyPower * cyclistTimei
+
+      var energyTotali = aerodynamicEnergyi + rollingResistanceEnergyi + wheelBearingFrictionEnergyi + potentialEnergyi
+
+      //These result then get collected in the arrays below
+      totalEnergyArray.push(energyTotali)
+      aeroArray.push(aerodynamicEnergyi)
+      rollResArray.push(rollingResistanceEnergyi)
+      wheelBearingArray.push(wheelBearingFrictionEnergyi)
+      potentialArray.push(potentialEnergyi)
+
+    }
+
+    function getSum(total, num) { //Small function of calculate the sum of values in a array
+      return total + num;
+    }
 
 
-    setTimeout(function(){ //This tells the code to wait for 2 sec, before it runs again in a new direction - the routing machine sometimes had a difficult time keeping up otherwise
-        clockRoute(clockAngle);
-    }, 2000);
-
-  } else {
-    clockAngle = 0;
-  }//This resets the clock, so the function can run again - otherwise it would run once and then stop
-} else if (buttonPressed == "bolt"){
-  alert("Energy used on the trip: \n \n Total Energy: " + (totalEnergyArray.reduce(getSum)/1000).toFixed(2) +
-   " kJ \n Aerodynamic Energy: " + (aeroArray.reduce(getSum)/1000).toFixed(2) +
-  " kJ \n Rolling Resistance  Energy: " + (rollResArray.reduce(getSum)/1000).toFixed(2) +
-  " kJ \n Wheel Bearing Friction Energy: " + (wheelBearingArray.reduce(getSum)/1000).toFixed(2) +
-  " kJ \n Potential Energy: " + (potentialArray.reduce(getSum)/1000).toFixed(2) + " kJ"
-)
-
-}
+    if (buttonPressed == "clock") {
+      //The results then get send to the console. The " ," in the beginning is nessercery for being able to copy the values over in Excel, since copying multiple values from the console will replace the first value with "mymap.js:(number)"
+      console.log(" ," + clockAngle + "," + endLocation + "," + totalEnergyArray.reduce(getSum) / routeDistance + "," + aeroArray.reduce(getSum) / routeDistance + "," + rollResArray.reduce(getSum) / routeDistance + "," + wheelBearingArray.reduce(getSum) / routeDistance + "," + potentialArray.reduce(getSum) / routeDistance);
+      clockAngle += 10 //This increases the angle, so that when the function runs again it will look for results 10 degrees to the right of before
+      if (clockAngle < 360) { //This checks if the clock has gone a full round. If not it will restart the function
 
 
-});//This is the end of the heightRequest
+        setTimeout(function() { //This tells the code to wait for 2 sec, before it runs again in a new direction - the routing machine sometimes had a difficult time keeping up otherwise
+          clockRoute(clockAngle);
+        }, 2000);
+
+      } else {
+        clockAngle = 0;
+      } //This resets the clock, so the function can run again - otherwise it would run once and then stop
+    } else if (buttonPressed == "bolt") {
+      alert("Energy used on the trip: \n \n Total Energy: " + (totalEnergyArray.reduce(getSum) / 1000).toFixed(2) +
+        " kJ \n Aerodynamic Energy: " + (aeroArray.reduce(getSum) / 1000).toFixed(2) +
+        " kJ \n Rolling Resistance  Energy: " + (rollResArray.reduce(getSum) / 1000).toFixed(2) +
+        " kJ \n Wheel Bearing Friction Energy: " + (wheelBearingArray.reduce(getSum) / 1000).toFixed(2) +
+        " kJ \n Potential Energy: " + (potentialArray.reduce(getSum) / 1000).toFixed(2) + " kJ"
+      )
+
+    }
+
+
+  }); //This is the end of the heightRequest
 
 
 }
@@ -815,7 +799,7 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   return d;
 }
 
-function deg2rad(deg) {//This is a converter from degrees to rad
+function deg2rad(deg) { //This is a converter from degrees to rad
   return deg * (Math.PI / 180)
 }
 
@@ -823,32 +807,31 @@ function deg2rad(deg) {//This is a converter from degrees to rad
 function dragAreaFromYaw(yaw) {
   var positiveYaw = Math.abs(yaw) //Changes the value to a positive number. Without this we would have to make the if else code below twice as long - one for when the wind comes from the right side (positive values) and one for values on the left side (negative values)
 
-//These are the drag areas for the yaw angle
-var yaw0 = 0.34;
-var yaw15 = 0.36;
-var yaw30 = 0.34;
-var yaw45 = 0.28;
-var yaw60 = 0.21;
-var yaw75 = 0.13;
-var yaw90 = 0.04;
+  //These are the drag areas for the yaw angle
+  var yaw0 = 0.34;
+  var yaw15 = 0.36;
+  var yaw30 = 0.34;
+  var yaw45 = 0.28;
+  var yaw60 = 0.21;
+  var yaw75 = 0.13;
+  var yaw90 = 0.04;
 
-//This is (drag per degree in that interval)*(number of degree from last known value)+(drag at last known value)
-if (positiveYaw == 0) {
-  var dragArea = yaw0
-}
-  else if (positiveYaw > 0 && positiveYaw < 15) {
-  var dragArea = ((yaw15 - yaw0) / 15) * (positiveYaw - 0) + yaw0
-} else if (positiveYaw > 15 && positiveYaw < 30) {
-  var dragArea = ((yaw30 - yaw15) / 15) * (positiveYaw - 15) + yaw15
-} else if (positiveYaw > 30 && positiveYaw < 45) {
-  var dragArea = ((yaw45 - yaw30) / 15) * (positiveYaw - 30) + yaw30
-} else if (positiveYaw > 45 && positiveYaw < 60) {
-  var dragArea = ((yaw60 - yaw45) / 15) * (positiveYaw - 45) + yaw45
-} else if (positiveYaw > 60 && positiveYaw < 75) {
-  var dragArea = ((yaw75 - yaw60) / 15) * (positiveYaw - 60) + yaw60
-} else if (positiveYaw > 75 && positiveYaw < 90) {
-  var dragArea = ((yaw90 - yaw75) / 15) * (positiveYaw - 75) + yaw75
-} else console.log("Yaw is too big!!!!")//This shouldn't technical be possible - so if it happens some calculates went wrong
+  //This is (drag per degree in that interval)*(number of degree from last known value)+(drag at last known value)
+  if (positiveYaw == 0) {
+    var dragArea = yaw0
+  } else if (positiveYaw > 0 && positiveYaw < 15) {
+    var dragArea = ((yaw15 - yaw0) / 15) * (positiveYaw - 0) + yaw0
+  } else if (positiveYaw > 15 && positiveYaw < 30) {
+    var dragArea = ((yaw30 - yaw15) / 15) * (positiveYaw - 15) + yaw15
+  } else if (positiveYaw > 30 && positiveYaw < 45) {
+    var dragArea = ((yaw45 - yaw30) / 15) * (positiveYaw - 30) + yaw30
+  } else if (positiveYaw > 45 && positiveYaw < 60) {
+    var dragArea = ((yaw60 - yaw45) / 15) * (positiveYaw - 45) + yaw45
+  } else if (positiveYaw > 60 && positiveYaw < 75) {
+    var dragArea = ((yaw75 - yaw60) / 15) * (positiveYaw - 60) + yaw60
+  } else if (positiveYaw > 75 && positiveYaw < 90) {
+    var dragArea = ((yaw90 - yaw75) / 15) * (positiveYaw - 75) + yaw75
+  } else console.log("Yaw is too big!!!!") //This shouldn't technical be possible - so if it happens some calculates went wrong
 
   return dragArea
 }
