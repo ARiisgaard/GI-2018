@@ -27,6 +27,12 @@ var osm = L.tileLayer( //Defining what map to use in the background
               <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
   });
 
+  var mymap = L.map('map', { //Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
+    center: [55.676111, 12.568333],
+    zoom: 10,
+    layers: [osm]
+  });
+
 //This is the layer with weather information
 var weatherinfobox = L.OWM.current({
   appId: 'ee67f8f53521d94193aa7d8364b7f5d9',
@@ -72,7 +78,7 @@ var destinationIcon = L.icon({ //defines the icon for the wind location - should
 });
 
 //Here the credits for the icons are added to the map
-mymap.attributionControl.addAttribution('<abbr title="Icons made by Freepik and Icon Pond from www.flaticon.com">Icons</abbr>');
+mymap.attributionControl.addAttribution('<abbr title="Train-, Start- and Finish \n icons made by Freepik \n Park icon made by Pond \n from www.flaticon.com">Icons</abbr>');
 
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
@@ -142,12 +148,6 @@ function dontGoHere() {
   parksAdded -= 1;
   findIdealLocation(startLocation.lat, startLocation.lng);
 }
-
-var mymap = L.map('map', { //Defines the center of the map and the default zoom-level. Largely irrelevant, since it will zoom to the route immediately after
-  center: [55.676111, 12.568333],
-  zoom: 10,
-  layers: [osm]
-});
 
 var toggle = L.easyButton({ //With a click of this button the user can lock in the final destination. The button can be clicked again to start looking for new stations
   states: [{
@@ -330,7 +330,7 @@ function findIdealLocation(lat, lng) {
             findIdealLocation(startLocation.lat, startLocation.lng); //This restarts the function
             return; //This ends the function here - otherwise the rest of the function would play out as well (This way it doesnt have to draw the route every time)
           } else {
-            console.log("Unable to find a station further away")
+            alert("Unable to find a station further away")
             oldDestination = null; //This ensures that endLocation =/= oldDestination on the next run through
             findIdealLocation(startLocation.lat, startLocation.lng); //This restarts the function one last time
             return;
