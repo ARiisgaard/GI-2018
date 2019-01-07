@@ -709,13 +709,14 @@ function energyCalculations() {
       var cyclistMass = 90
       var kineticEnergyI = 0.14
       var kineticEnergyR = 0.311
+      var chainEfficiency = 0.97698
 
       //Power
-      var aerodynamicPower = Math.pow(v_a, 2) * cyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag)
-      var rollingResistancePower = cyclistSpeed * Math.cos(Math.atan(cyclistGradei)) * roadResistance * cyclistMass * 9.81
-      var wheelBearingFrictionPower = cyclistSpeed * (91 + 8.7 * cyclistSpeed) * 0.001
-      var potentialEnergyPower = cyclistSpeed * cyclistMass * 9.81 * Math.sin(Math.atan(cyclistGradei))
-      var kineticEnergyPower = 0.5 * (cyclistMass + kineticEnergyI / Math.pow(kineticEnergyR, 2)) * 0 //This value becomes 0, and isn't included further down
+      var aerodynamicPower = (Math.pow(v_a, 2) * cyclistSpeed * 0.5 * airDensity * (cyclistDrag + spokesDrag))/chainEfficiency
+      var rollingResistancePower = (cyclistSpeed * Math.cos(Math.atan(cyclistGradei)) * roadResistance * cyclistMass * 9.81)/chainEfficiency
+      var wheelBearingFrictionPower = (cyclistSpeed * (91 + 8.7 * cyclistSpeed) * 0.001)/chainEfficiency
+      var potentialEnergyPower = (cyclistSpeed * cyclistMass * 9.81 * Math.sin(Math.atan(cyclistGradei)))/chainEfficiency
+      var kineticEnergyPower = (0.5 * (cyclistMass + kineticEnergyI / Math.pow(kineticEnergyR, 2)) * 0)/chainEfficiency //This value becomes 0, and isn't included further down
 
       //Energy
       //Because there isn't the same distance between the sets of coordinates it is nessercery to convert the effects from before to energy using the time spend between each set of coordinates.
