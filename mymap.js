@@ -468,14 +468,14 @@ function calculateRoute(array) { //This is the function, that calculates the rou
           return hr;
         }
 
-        if (precipChanceThisHour >= 0.5) { //Alerts the user, if there are a higher than 50 percent chance of rain
+        if (precipChanceThisHour >= 0.3) { //Alerts the user, if there are a higher than 30 percent chance of rain
           var precipTypeThisHour = "rain"
           if (tempThisHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeThisHour = "snow"
           }
           content2 = String("There are a " + precipChanceThisHour * 100 + "% Chance of " + precipTypeThisHour + " between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
         }
-        if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.5) { //first part is checking if the next hour is relevant
+        if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.3) { //first part is checking if the next hour is relevant
           var precipTypeNextHour = "rain"
           if (tempNextHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeNextHour = "snow"
