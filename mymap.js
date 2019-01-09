@@ -42,35 +42,35 @@ var weatherinfobox = L.OWM.current({
   showWindSpeed: 'speed'
 });
 
-var myIcon = L.icon({ //defines the icon for the wind location -
-  iconUrl: 'Images/windsock.png', //Credits:  Flaticon/Freepik
-  iconSize: [30, 30],
-  iconAnchor: [15, 20],
-  popupAnchor: [-3, -76]
-});
+// var myIcon = L.icon({ //defines the icon for the wind location -
+//   iconUrl: 'Images/windsock.png', //Credits:  Flaticon/Freepik
+//   iconSize: [30, 30],
+//   iconAnchor: [15, 20],
+//   popupAnchor: [-3, -76]
+// });
 
 var trainIcon = L.icon({ //Defines the icon used for the train stations
-  iconUrl: 'https://image.flaticon.com/icons/svg/1201/1201644.svg',
+  iconUrl: 'https://image.flaticon.com/icons/svg/1201/1201644.svg', //Credits:  Flaticon/IconPond
   iconSize: [30, 30],
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
 
-var startIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+var startIcon = L.icon({ //defines the icon for the starting location
   iconUrl: 'Images/maps-and-flags.png', //Credits:  Flaticon/Freepik
   iconSize: [30, 30],
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
 
-var middleIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+var middleIcon = L.icon({ //defines the icon for the parks
   iconUrl: 'Images/park.png', //Credits:  Flaticon/Freepik
   iconSize: [30, 30],
   iconAnchor: [15, 20],
   popupAnchor: [-3, -76]
 });
 
-var destinationIcon = L.icon({ //defines the icon for the wind location - should also be disabled
+var destinationIcon = L.icon({ //defines the icon for the end location
   iconUrl: 'Images/racing-flag.png', //Credits:  Flaticon/Freepik
   iconSize: [30, 30],
   iconAnchor: [15, 20],
@@ -78,7 +78,7 @@ var destinationIcon = L.icon({ //defines the icon for the wind location - should
 });
 
 //Here the credits for the icons are added to the map
-mymap.attributionControl.addAttribution('<abbr title="Train-, Start- and Finish \n icons made by Freepik \n Park icon made by Pond \n from www.flaticon.com">Icons</abbr>');
+mymap.attributionControl.addAttribution('<abbr title="Train-, Start- and Finish \n icons made by Freepik \n Park icon made by Icon Pond \n from www.flaticon.com">Icons</abbr>');
 
 var stations = new L.GeoJSON.AJAX("stations.geojson", { //creating the "stations" layer
   onEachFeature: function(feature, layer, ) { //creating popup, when clicking on features.
@@ -204,7 +204,7 @@ function showhideDistancebuttons() { //This shows or hides the increase/decrease
   }
 }
 
-var showLongerShorter = L.easyButton('fa-ruler', function() { //This is the button for showing/hiddin the increase/decrease buttons
+var showLongerShorter = L.easyButton('fa-ruler', function() { //This is the button for showing/hiding the increase/decrease buttons
   if (showPlusMinus == false) {
     showPlusMinus = true
   } else {
@@ -554,10 +554,6 @@ function clockRoute(givenAngle) {
 
 
     angle = givenAngle
-
-    //Du er nået her til - evt. tjek om det er relevant at bruge angle i andre sammenhænge
-
-    //  var length = 5000 //Distance traveled in meters
 
     //The following 10ish lines are defining the coordinates used to find the direction. The math behind it can be found here: http://www.movable-type.co.uk/scripts/latlong.html
 
