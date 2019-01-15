@@ -17,6 +17,7 @@ var showPlusMinus = false;
 var center;
 var sunset;
 var wantWarnings = true; //This makes warnings if there are a risk of rain/sundown during the trip.
+var warned = false;
 var oldDestination;
 var distanceButtonClicked;
 
@@ -129,7 +130,10 @@ function goHere() {
     })
 
     mymap.closePopup();
-    wantWarnings = true; //Since this would increase the duration of the trip the should again check if there are any warnings to give in regards to rain/sundown
+    if (warned == false)
+    {
+      wantWarnings = true; //Since this would increase the duration of the trip the should again check if there are any warnings to give in regards to rain/sundown
+    }
     parksAdded += 1;
     findIdealLocation(startLocation.lat, startLocation.lng);
   }
@@ -215,7 +219,10 @@ var showLongerShorter = L.easyButton('fa-ruler', function() { //This is the butt
 
 var longer = L.easyButton('fa-plus', function() { //This increases the distance with 1 km and calculates a new route
   length += 1000
-  wantWarnings = true;
+  if (warned == false)
+  {
+    wantWarnings = true; //Since this would increase the duration of the trip the should again check if there are any warnings to give in regards to rain/sundown
+  }
   oldDestination = endLocation;
   distanceButtonClicked = "longer"
   findIdealLocation(startLocation.lat, startLocation.lng);
@@ -223,7 +230,6 @@ var longer = L.easyButton('fa-plus', function() { //This increases the distance 
 
 var shorter = L.easyButton('fa-minus', function() { //This decrease the distance with 1 km and calculates a new route
   length -= 1000
-  wantWarnings = true;
   oldDestination = endLocation;
   distanceButtonClicked = "shorter"
   findIdealLocation(startLocation.lat, startLocation.lng);
@@ -489,6 +495,7 @@ function calculateRoute(array) { //This is the function, that calculates the rou
         }
       })
       wantWarnings = false; //This disables alerts until the user changes the distance of the trip or adds/removes a park
+      warned = true; // This prevents the user from getting spammed every time they change the route, if they already have been warned
     }
   });
   route.addTo(mymap);
