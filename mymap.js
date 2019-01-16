@@ -508,7 +508,9 @@ function calculateRoute(array) { //This is the function, that calculates the rou
 
 
 
-var clockAngle = 0; //This is a variable used for the clock, to see which angles it has checked.
+var clockAngle = 90; //This is a variable used for the clock, to see which angles it has checked.
+var angleReturned = 0;
+var halfwayThere = false;
 var buttonPressed;
 var energyCalcWindAngle;
 var energyCalcWindSpeed;
@@ -540,7 +542,7 @@ L.easyButton('fa-clock', function() {
     mymap.removeControl(route); //This removes the old route, before a new one is created
   }
 
-  clockRoute(0);
+  clockRoute(90);
 }).addTo(mymap);
 
 
@@ -747,9 +749,23 @@ function energyCalculations() {
 
     if (buttonPressed == "clock") {
       //The results then get send to the console. The " ," in the beginning is nessercery for being able to copy the values over in Excel, since copying multiple values from the console will replace the first value with "mymap.js:(number)"
-      console.log(" ," + clockAngle + "," + endLocation + "," + totalEnergyArray.reduce(getSum) / routeDistance + "," + aeroArray.reduce(getSum) / routeDistance + "," + rollResArray.reduce(getSum) / routeDistance + "," + wheelBearingArray.reduce(getSum) / routeDistance + "," + potentialArray.reduce(getSum) / routeDistance);
+
+
+      console.log(" ," + angleReturned + "," + endLocation + "," + totalEnergyArray.reduce(getSum) / routeDistance + "," + aeroArray.reduce(getSum) / routeDistance + "," + rollResArray.reduce(getSum) / routeDistance + "," + wheelBearingArray.reduce(getSum) / routeDistance + "," + potentialArray.reduce(getSum) / routeDistance);
+
+if (angleReturned < 180) {
+  angleReturned += 10
+}
+else {
+  if (halfwayThere == true){angleReturned -= 10}
+else
+  {angleReturned = -170
+    halfwayThere = true
+  }
+}
+
       clockAngle += 10 //This increases the angle, so that when the function runs again it will look for results 10 degrees to the right of before
-      if (clockAngle < 360) { //This checks if the clock has gone a full round. If not it will restart the function
+      if (clockAngle < 360 + 90) { //This checks if the clock has gone a full round. If not it will restart the function
 
 
         setTimeout(function() { //This tells the code to wait for 2 sec, before it runs again in a new direction - the routing machine sometimes had a difficult time keeping up otherwise
@@ -757,7 +773,7 @@ function energyCalculations() {
         }, 2000);
 
       } else {
-        clockAngle = 0;
+        clockAngle = 0 + 90;
       } //This resets the clock, so the function can run again - otherwise it would run once and then stop
     } else if (buttonPressed == "bolt") {
       alert("Energy used on the trip: \n \n Total Energy: " + (totalEnergyArray.reduce(getSum) / 1000).toFixed(2) +
