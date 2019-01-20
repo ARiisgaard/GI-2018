@@ -479,14 +479,14 @@ function calculateRoute(array) { //This is the function, that calculates the rou
           if (tempThisHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeThisHour = "snow"
           }
-          content2 = String("There are a " + precipChanceThisHour * 100 + "% Chance of " + precipTypeThisHour + " between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
+          content2 = String("There is " + precipChanceThisHour * 100 + "% Chance of " + precipTypeThisHour + " between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
         }
         if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.25) { //first part is checking if the next hour is relevant
           var precipTypeNextHour = "rain"
           if (tempNextHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeNextHour = "snow"
           }
-          content3 = String("There are a " + precipChanceNextHour * 100 + "% Chance of " + precipTypeNextHour + " between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+          content3 = String("There is " + precipChanceNextHour * 100 + "% Chance of " + precipTypeNextHour + " between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
         }
 
         var content = content1 + content2 + content3 //This connects the three content strings into one alert
