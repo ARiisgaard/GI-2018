@@ -474,19 +474,19 @@ function calculateRoute(array) { //This is the function, that calculates the rou
           return hr;
         }
 
-        if (precipChanceThisHour >= 0.25) { //Alerts the user, if there are a higher than 25 percent chance of rain
+        if (precipChanceThisHour >= 0.0) { //Alerts the user, if there are a higher than 25 percent chance of rain
           var precipTypeThisHour = "rain"
           if (tempThisHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeThisHour = "snow"
           }
-          content2 = String("There is " + precipChanceThisHour * 100 + "% Chance of " + precipTypeThisHour + " between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
+          content2 = String("There is " + Math.round(precipChanceThisHour * 100) + "% Chance of " + precipTypeThisHour + " between " + Unix_timestamp(thisHour) + "-" + Unix_timestamp(nextHour) + ". Intensity: " + precipIntensityThisHour + " millimeters per hour\n")
         }
-        if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.25) { //first part is checking if the next hour is relevant
+        if (nextHour < routeTime + currentTime && precipChanceNextHour >= 0.0) { //first part is checking if the next hour is relevant
           var precipTypeNextHour = "rain"
           if (tempNextHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeNextHour = "snow"
           }
-          content3 = String("There is " + precipChanceNextHour * 100 + "% Chance of " + precipTypeNextHour + " between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+          content3 = String("There is " + precipChanceNextHour.toFixed(2) * 100 + "% Chance of " + precipTypeNextHour + " between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
         }
 
         var content = content1 + content2 + content3 //This connects the three content strings into one alert
@@ -770,7 +770,7 @@ else
 
         setTimeout(function() { //This tells the code to wait for 2 sec, before it runs again in a new direction - the routing machine sometimes had a difficult time keeping up otherwise
           clockRoute(clockAngle);
-        }, 2000);
+        }, 500);
 
       } else {
         clockAngle = 0 + 90;
