@@ -486,7 +486,7 @@ function calculateRoute(array) { //This is the function, that calculates the rou
           if (tempNextHour < 0) { //This changes rain to snow in the message below if the temperature are below 0
             precipTypeNextHour = "snow"
           }
-          content3 = String("There is " + precipChanceNextHour.toFixed(2) * 100 + "% Chance of " + precipTypeNextHour + " between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
+          content3 = String("There is " + Math.round(precipChanceNextHour * 100) + "% Chance of " + precipTypeNextHour + " between " + Unix_timestamp(nextHour) + "-" + Unix_timestamp(evenLater) + ". Intensity: " + precipIntensityNextHour + " millimeters per hour")
         }
 
         var content = content1 + content2 + content3 //This connects the three content strings into one alert
